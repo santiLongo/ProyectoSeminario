@@ -29,10 +29,10 @@ namespace ProyectoSeminario.Controllers
                     Longitud = longitud,
                     IdLocalizador = sistemaGps.Id,
                 };
-
-                sistemaGps.agregarCoordenada(coordenada);
-
-                return Ok(sistemaGps);
+                
+                context.Coordenadas.Add(coordenada);
+                context.SaveChanges();
+                return Ok(coordenada);
             }
 
             return BadRequest("Problema con la coordenada");
