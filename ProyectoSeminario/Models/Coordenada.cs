@@ -23,13 +23,8 @@ namespace ProyectoSeminario.Models
         [Column("fecha")]
         public DateTime FechaYHora { get; set; } = DateTime.Now;
         [Column("movimiento")]
-        public bool Movimiento { get; set; } = false;
+        public bool Movimiento { get; set; } = true;
         [ForeignKey("id_localizador")]
         public int IdLocalizador { get; set; }
-
-        private bool enMovimiento()
-        {
-            return true;
-        }
     }
 }
