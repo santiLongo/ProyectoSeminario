@@ -13,6 +13,7 @@ namespace ProyectoSeminario.Services
         public DbSet<UsuarioDAO> Usuarios { get; set; }
         public DbSet<VehiculoDAO> Vehiculos { get; set; }
         public DbSet<SistemaGpsDAO> Localizadores { get; set; }
+        public DbSet<Coordenada> Coordenadas { get; set; }
 
         //Configuracion de la Base de Datos
         protected override void OnConfiguring(DbContextOptionsBuilder options)
