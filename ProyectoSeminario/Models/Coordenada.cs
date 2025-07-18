@@ -6,6 +6,7 @@ namespace ProyectoSeminario.Models
 {
 
     //Clase de acceso a la base de datos. Tadvia falta hacer la base de datos no relacional
+    [Table("coordenada")]
     public class Coordenada
     {
         [Key]
