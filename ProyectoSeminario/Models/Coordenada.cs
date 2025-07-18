@@ -11,9 +11,17 @@ namespace ProyectoSeminario.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Column("latitud")]
         public string? Latitud { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Column("longitud")]
         public string? Longitud { get; set; }
+        [Column("fecha")]
         public DateTime FechaYHora { get; set; } = DateTime.Now;
+        [Column("movimiento")]
         public bool Movimiento { get; set; } = false;
         [ForeignKey("id_localizador")]
         public int IdLocalizador { get; set; }
