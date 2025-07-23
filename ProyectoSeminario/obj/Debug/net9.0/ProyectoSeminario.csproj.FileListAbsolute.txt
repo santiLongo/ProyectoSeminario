@@ -174,3 +174,4 @@ C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\Proyecto
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\ProyectoSeminario.csproj.AssemblyReference.cache
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\ProyectoSeminario.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\Proyecto.DBA90591.Up2Date
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\ProyectoSeminario.sourcelink.json

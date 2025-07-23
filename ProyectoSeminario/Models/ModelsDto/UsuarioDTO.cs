@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ProyectoSeminario.Models
+namespace ProyectoSeminario.ModelsDtos
 {
 
     //Clase destinada a enviar la informacion necesaria para el usuario
