@@ -7,6 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Conexion a la base de datos
+builder.Services.AddDbContext<AppDbContext>(opciones => 
+                                            opciones.UseMySql(builder.Configuration.GetConnectionString("ConectionMySql"),
+                                                new MySqlServerVersion(new Version(9, 3, 0)));
+
 // Agregacion de Swagger 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
