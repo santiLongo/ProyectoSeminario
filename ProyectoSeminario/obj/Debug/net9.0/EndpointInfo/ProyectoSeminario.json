@@ -1,0 +1,413 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "ProyectoSeminario",
+    "version": "1.0"
+  },
+  "paths": {
+    "/SistemaGPS/nuevaCoordenada": {
+      "get": {
+        "tags": [
+          "SistemaGPS"
+        ],
+        "parameters": [
+          {
+            "name": "nro_localizador",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "latitud",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "longitud",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SistemaGpsDAO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SistemaGpsDAO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SistemaGpsDAO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inicio/iniciarSesion": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioLoginDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioLoginDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioLoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/inicio/RegistrarUsuario": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vehiculos": {
+      "get": {
+        "tags": [
+          "Vehiculo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Vehiculo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearVehiculoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearVehiculoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearVehiculoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vehiculos/{vehiculoId}": {
+      "get": {
+        "tags": [
+          "Vehiculo"
+        ],
+        "operationId": "GetVehiculo",
+        "parameters": [
+          {
+            "name": "idVehiculo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "vehiculoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vehiculos/GetVehiculoPorUsuario": {
+      "get": {
+        "tags": [
+          "Vehiculo"
+        ],
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vehiculos/{idVehiculo}": {
+      "delete": {
+        "tags": [
+          "Vehiculo"
+        ],
+        "operationId": "BorrarVehiculo",
+        "parameters": [
+          {
+            "name": "idVehiculo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vehiculos/ActualizarVehiculo": {
+      "patch": {
+        "tags": [
+          "Vehiculo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehiculoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehiculoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehiculoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CrearUsuarioDTO": {
+        "required": [
+          "mail",
+          "password",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "mail": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string"
+          },
+          "role": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearVehiculoDTO": {
+        "required": [
+          "idLocalizador",
+          "idUsuario",
+          "marca",
+          "modelo",
+          "patente"
+        ],
+        "type": "object",
+        "properties": {
+          "patente": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "marca": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "modelo": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idLocalizador": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SistemaGpsDAO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nroLocalizador": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioLoginDTO": {
+        "required": [
+          "mail",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "mail": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VehiculoDTO": {
+        "required": [
+          "id",
+          "idLocalizador",
+          "idUsuario",
+          "marca",
+          "modelo",
+          "patente"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "patente": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          },
+          "marca": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "modelo": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idLocalizador": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

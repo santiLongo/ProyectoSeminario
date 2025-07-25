@@ -11,13 +11,20 @@ namespace ProyectoSeminario.Controllers
     public class SistemaGPSController : ControllerBase
     {
 
+        private readonly AppDbContext _context;
+
+        public SistemaGPSController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         [Route("nuevaCoordenada")]
         public ActionResult<SistemaGpsDAO> nuevaCoordenada(string nro_localizador, string latitud, string longitud)
         {
-            var context = new AppDb();
+            
 
-            SistemaGpsDAO sistemaGps = context.Localizadores
+            SistemaGpsDAO sistemaGps = _context.Localizadores
             .Where(l => l.NroLocalizador == nro_localizador)
             .FirstOrDefault();
 
@@ -30,8 +37,8 @@ namespace ProyectoSeminario.Controllers
                     IdLocalizador = sistemaGps.Id,
                 };
                 
-                context.Coordenadas.Add(coordenada);
-                context.SaveChanges();
+                _context.Coordenadas.Add(coordenada);
+                _context.SaveChanges();
                 return Ok(coordenada);
             }
 

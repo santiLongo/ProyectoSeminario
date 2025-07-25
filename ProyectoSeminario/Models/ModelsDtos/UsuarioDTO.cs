@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ProyectoSeminario.ModelsDtos
+namespace ProyectoSeminario.Models.ModelsDtos
 {
 
     //Clase destinada a enviar la informacion necesaria para el usuario
@@ -8,10 +8,8 @@ namespace ProyectoSeminario.ModelsDtos
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string? Mail { get; set; }
+        public string Mail { get; set; }
 
-        public List<VehiculoDTO> Vehiculos { get; set; } = new();
+        public string Role { get; set; }
     }
 }

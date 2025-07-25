@@ -2,7 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoSeminario.Services;
 using ProyectoSeminario.Models;
-using ProyectoSeminario.ModelsDtos;
+using ProyectoSeminario.Models.ModelsDtos;
+using ProyectoSeminario.Repository.IRepository;
 
 namespace ProyectoSeminario.Controllers
 {
@@ -10,56 +11,45 @@ namespace ProyectoSeminario.Controllers
     [Route("inicio")]
     public class UsuarioController : ControllerBase
     {
-
-        [HttpGet]
-        [Route("iniciarSesion")]
-        public ActionResult<UsuarioDTO> iniciarSesion(string mail, string password)
+        private readonly IRepositoryUsuario _usuarioRepo;
+        public UsuarioController(IRepositoryUsuario usuarioRepo)
         {
-            using var context = new AppDb();
+            _usuarioRepo = usuarioRepo;
+        }
 
-            var usuarioDb = context.Usuarios
-                .Include(u => u.UserVehiculos)
-                .FirstOrDefault(u => u.Mail == mail);
-
-            if (usuarioDb != null && BCrypt.Net.BCrypt.Verify(password, usuarioDb.Password))
+        [HttpPost("iniciarSesion")]
+        public async Task<IActionResult> iniciarSesion([FromBody] UsuarioLoginDTO usuarioLoginDTO)
+        {
+            if (usuarioLoginDTO.Mail == null && usuarioLoginDTO.Password == null)
             {
-                var user = new UsuarioDTO
-                {
-                    Id = usuarioDb.Id,
-                    Mail = usuarioDb.Mail,
-                };
+                return BadRequest("Ninguno de los campos debe estar vacio");
+            }
 
-                foreach (var v in usuarioDb.UserVehiculos)
-                {
-                    user.Vehiculos.Add(new VehiculoDTO
-                    {
-                        Id = v.Id,
-                        Patente = v.Patente,
-                        Marca = v.Marca,
-                        Modelo = v.Modelo,
-                    });
-                }
-                return Ok(user);
+            var usuario = await _usuarioRepo.Login(usuarioLoginDTO);
+
+            if(usuario != null)
+            {
+                return Ok(usuario);
             }
 
             return Unauthorized("Credenciales inválidas");
         }
 
-        [HttpPost]
-        [Route("registrarUsuario")]
-        public async Task<IActionResult> registrarUsuario(string mail, string password)
+        [HttpPost("RegistrarUsuario")]
+        public async Task<IActionResult> RegistrarUsuario([FromBody] CrearUsuarioDTO crearUsuarioDTO)
         {
-            using var context = new AppDb();
 
-            if (context.Usuarios.Any(u => u.Mail != mail))
+            if(crearUsuarioDTO.Mail == null && crearUsuarioDTO.Password == null)
             {
-                var usuario = new UsuarioDAO(mail, BCrypt.Net.BCrypt.HashPassword(password));
-                context.Usuarios.Add(usuario);
-                context.SaveChanges();
-                return Ok(usuario);
+                return BadRequest("Ninguno de los campos debe estar vacio");
             }
-            
-            return BadRequest("Ya existe un usuario con ese mail.");
+
+            if (_usuarioRepo.IsUniqueMail(crearUsuarioDTO.Mail))
+            {
+                return BadRequest("Ya existe un usuario con ese mail.");
+            }
+
+            return Ok(await _usuarioRepo.Registro(crearUsuarioDTO));
             
         }
     }

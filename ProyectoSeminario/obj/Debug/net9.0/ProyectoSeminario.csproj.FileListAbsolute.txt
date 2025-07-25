@@ -175,3 +175,11 @@ C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\Proyecto
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\ProyectoSeminario.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\Proyecto.DBA90591.Up2Date
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\ProyectoSeminario.sourcelink.json
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

@@ -1,6 +1,8 @@
 using ProyectoSeminario.Services;
+using ProyectoSeminario.Repository;
+using ProyectoSeminario.Repository.IRepository;
+using ProyectoSeminario.Mappers;
 using Microsoft.EntityFrameworkCore;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //Conexion a la base de datos
-builder.Services.AddDbContext<AppDbContext>(opciones => 
-                                            opciones.UseMySql(builder.Configuration.GetConnectionString("ConectionMySql"),
-                                                new MySqlServerVersion(new Version(9, 3, 0)));
+builder.Services.AddDbContext<AppDbContext>(opciones =>
+                                            opciones.UseMySql(builder.Configuration.GetConnectionString("ConnectionMySql"),
+                                                new MySqlServerVersion(new Version(9, 3, 0))));
+
+//Agregamos los Repositorios
+builder.Services.AddScoped<IRepositoryVehiculo, RepositoryVehiculo>();
+builder.Services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
+
+//Agregamos el AutoMapper
+builder.Services.AddAutoMapper(typeof(Mapper));
 
 // Agregacion de Swagger 
 builder.Services.AddEndpointsApiExplorer();
@@ -26,13 +35,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-
     // Habilitacion de Swagger
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
 app.UseAuthorization();

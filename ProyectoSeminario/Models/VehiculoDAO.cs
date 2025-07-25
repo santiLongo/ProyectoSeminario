@@ -18,28 +18,27 @@ namespace ProyectoSeminario.Models
         [Required]
         [StringLength(10)]
         [Column("patente")]
-        public string? Patente { get; set; }
+        public string Patente { get; set; }
 
         //Marca del vehiculo
         [Required]
         [StringLength(20)]
         [Column("marca")]
-        public string? Marca { get; set; }
-
+        public string Marca { get; set; }
 
         //Modelo del vehiculo
         [Required]
         [StringLength(20)]
         [Column("modelo")]
-        public string? Modelo { get; set; }
+        public string Modelo { get; set; }
 
         //Id del usuario, no puede ser nulo
-        [ForeignKey("id_usuario")]
-        public UsuarioDAO? usuario { get; set; }
+        [Column("id_usuario")]
+        public int IdUsuario { get; set; }
 
         //Id del localizador asociado, no puede ser nulo y debe ser unico
-        [ForeignKey("id_localizador")]
-        public SistemaGpsDAO? Gps { get; set; }
+        [Column("id_localizador")]
+        public int IdLocalizador { get; set; }
     }
 
 }

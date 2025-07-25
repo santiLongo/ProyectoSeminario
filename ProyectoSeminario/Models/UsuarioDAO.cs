@@ -18,35 +18,21 @@ namespace ProyectoSeminario.Models
         [Required]
         [StringLength(100)]
         [Column("mail")]
-        public string? Mail { get; set; }
+        public string Mail { get; set; }
 
         //Password del usuario
         [Required]
         [StringLength(30)]
         [Column("password")]
-        public string? Password { get; set; }
+        public string Password { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        [Column("role")]
+        public string Role { get; set; }
 
         // Relcaion Uno a Muchos. "usuario" es el nombre de la propiedad asociada
-        [InverseProperty("usuario")]
-        public List<VehiculoDAO> UserVehiculos { get; set; } = new();
-
-        //Constructor de la clase. Se utilizara a la hora de crear uno
-        public UsuarioDAO(string mail, string password)
-        {
-            Mail = mail;
-            Password = password;
-        }
-
-        //Metodo encargado de agregar un vehiculo a la lista de los usuarios
-        public void agregarVehiculo(VehiculoDAO vehiculo)
-        {
-            UserVehiculos.Add(vehiculo);
-        }
-
-        //Metodo que permite eliminar un vehiculo de la lista de los usuarios
-        public void eliminarVehiculo(VehiculoDAO vehiculo)
-        {
-            UserVehiculos.Remove(vehiculo);
-        }
+        //[InverseProperty("usuario")]
+        //public List<VehiculoDAO> UserVehiculos { get; set; } = new
     }
 }

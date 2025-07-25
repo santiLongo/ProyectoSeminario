@@ -24,7 +24,7 @@ namespace ProyectoSeminario.Models
         public DateTime FechaYHora { get; set; } = DateTime.Now;
         [Column("movimiento")]
         public bool Movimiento { get; set; } = true;
-        [ForeignKey("id_localizador")]
+        [Column("id_localizador")]
         public int IdLocalizador { get; set; }
     }
 }

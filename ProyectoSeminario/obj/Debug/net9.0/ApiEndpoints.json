@@ -1,0 +1,167 @@
+[
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.UsuarioController",
+    "Method": "iniciarSesion",
+    "RelativePath": "inicio/iniciarSesion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioLoginDTO",
+        "Type": "ProyectoSeminario.Models.ModelsDtos.UsuarioLoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.UsuarioController",
+    "Method": "RegistrarUsuario",
+    "RelativePath": "inicio/RegistrarUsuario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "crearUsuarioDTO",
+        "Type": "ProyectoSeminario.Models.ModelsDtos.CrearUsuarioDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.SistemaGPSController",
+    "Method": "nuevaCoordenada",
+    "RelativePath": "SistemaGPS/nuevaCoordenada",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nro_localizador",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "latitud",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "longitud",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ProyectoSeminario.Models.SistemaGpsDAO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "GetVehiculos",
+    "RelativePath": "vehiculos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "CrearVehiculo",
+    "RelativePath": "vehiculos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "crearVehiculoDTO",
+        "Type": "ProyectoSeminario.Models.ModelsDtos.CrearVehiculoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "BorrarVehiculo",
+    "RelativePath": "vehiculos/{idVehiculo}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idVehiculo",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "BorrarVehiculo"
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "GetVehiculo",
+    "RelativePath": "vehiculos/{vehiculoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idVehiculo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "vehiculoId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "GetVehiculo"
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "ActualizarVehiculo",
+    "RelativePath": "vehiculos/ActualizarVehiculo",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vehiculoDTO",
+        "Type": "ProyectoSeminario.Models.ModelsDtos.VehiculoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "GetVehiculoPorUsuario",
+    "RelativePath": "vehiculos/GetVehiculoPorUsuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

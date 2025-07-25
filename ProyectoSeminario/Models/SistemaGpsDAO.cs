@@ -19,24 +19,6 @@ namespace ProyectoSeminario.Models
         public string? NroLocalizador { get; set; }
 
         //Historial de coordenadas de los vehiculos
-        public List<Coordenada> Historial { get; set; } = new List<Coordenada>();
-
-        //Agrega una coordenada al Historial.
-        public void agregarCoordenada(Coordenada coordenada)
-        {
-            Historial.Add(coordenada);
-        }
-
-        //Toma todas las coordenadas del Historial y calcula cual fue la distancia que recorrio
-        public double distanciaRecorrida()
-        {
-            return 1.1;
-        }
-
-        //Devuelva la ultima coordenada del Historial, que se asume que es la poscion actual
-        public Coordenada ubicacionActual()
-        {
-            return this.Historial.Last();
-        }
+        //public List<Coordenada> Historial { get; set; } = new List<Coordenada
     }
 }

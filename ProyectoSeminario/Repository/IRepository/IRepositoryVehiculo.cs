@@ -1,17 +1,17 @@
 using ProyectoSeminario.Models;
-using ProyectoSeminario.ModelsDtos;
+using ProyectoSeminario.Models.ModelsDtos;
 
-namespace ProyectoSeminario.IRepository
+namespace ProyectoSeminario.Repository.IRepository
 {
     public interface IRepositoryVehiculo
     {
         ICollection<VehiculoDTO> GetVehiculos();
-        ICollection<VehiculoDTO> GetVehiculosPorUsuario(int usuarioId);
-        VehiculoDTO GetVehiculo(int vehiculosId);
-        bool ExisteVehiculo(int id);
-        bool CrearVehiculo(VehiculoDAO categoria);
-        bool ActualizarVehiculo(VehiculoDAO categoria);
-        bool BorrarVehiculo(VehiculoDAO categoria);
+        ICollection<VehiculoDTO> GetVehiculosPorUsuario(int idUsuario);
+        VehiculoDAO GetVehiculo(int vehiculosId);
+        bool ExisteVehiculo(int idVehiculo);
+        bool CrearVehiculo(CrearVehiculoDTO crearVehiculoDTO);
+        bool ActualizarVehiculo(VehiculoDTO vehiculoDTO);
+        bool BorrarVehiculo(VehiculoDAO vehiculo);
         bool Guardar();
     }
 }
