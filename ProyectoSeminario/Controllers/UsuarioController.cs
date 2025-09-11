@@ -8,7 +8,7 @@ using ProyectoSeminario.Repository.IRepository;
 namespace ProyectoSeminario.Controllers
 {
     [ApiController]
-    [Route("inicio")]
+    [Route("api/inicio")]
     public class UsuarioController : ControllerBase
     {
         private readonly IRepositoryUsuario _usuarioRepo;

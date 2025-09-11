@@ -8,7 +8,7 @@ using ProyectoSeminario.Models.ModelsDtos;
 namespace ProyectoSeminario.Controllers
 {
     [ApiController]
-    [Route("vehiculos")]
+    [Route("api/vehiculos")]
     public class VehiculoController : ControllerBase
     {
 

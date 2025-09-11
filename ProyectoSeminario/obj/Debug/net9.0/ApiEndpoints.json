@@ -2,7 +2,7 @@
   {
     "ContainingType": "ProyectoSeminario.Controllers.UsuarioController",
     "Method": "iniciarSesion",
-    "RelativePath": "inicio/iniciarSesion",
+    "RelativePath": "api/inicio/iniciarSesion",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +18,7 @@
   {
     "ContainingType": "ProyectoSeminario.Controllers.UsuarioController",
     "Method": "RegistrarUsuario",
-    "RelativePath": "inicio/RegistrarUsuario",
+    "RelativePath": "api/inicio/RegistrarUsuario",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -27,6 +27,103 @@
         "Name": "crearUsuarioDTO",
         "Type": "ProyectoSeminario.Models.ModelsDtos.CrearUsuarioDTO",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "GetVehiculos",
+    "RelativePath": "api/vehiculos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "CrearVehiculo",
+    "RelativePath": "api/vehiculos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "crearVehiculoDTO",
+        "Type": "ProyectoSeminario.Models.ModelsDtos.CrearVehiculoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "BorrarVehiculo",
+    "RelativePath": "api/vehiculos/{idVehiculo}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idVehiculo",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "BorrarVehiculo"
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "GetVehiculo",
+    "RelativePath": "api/vehiculos/{vehiculoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idVehiculo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "vehiculoId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "GetVehiculo"
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "ActualizarVehiculo",
+    "RelativePath": "api/vehiculos/ActualizarVehiculo",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vehiculoDTO",
+        "Type": "ProyectoSeminario.Models.ModelsDtos.VehiculoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
+    "Method": "GetVehiculoPorUsuario",
+    "RelativePath": "api/vehiculos/GetVehiculoPorUsuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -66,102 +163,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
-    "Method": "GetVehiculos",
-    "RelativePath": "vehiculos",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
-    "Method": "CrearVehiculo",
-    "RelativePath": "vehiculos",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "crearVehiculoDTO",
-        "Type": "ProyectoSeminario.Models.ModelsDtos.CrearVehiculoDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
-    "Method": "BorrarVehiculo",
-    "RelativePath": "vehiculos/{idVehiculo}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idVehiculo",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [],
-    "EndpointName": "BorrarVehiculo"
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
-    "Method": "GetVehiculo",
-    "RelativePath": "vehiculos/{vehiculoId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idVehiculo",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "vehiculoId",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [],
-    "EndpointName": "GetVehiculo"
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
-    "Method": "ActualizarVehiculo",
-    "RelativePath": "vehiculos/ActualizarVehiculo",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "vehiculoDTO",
-        "Type": "ProyectoSeminario.Models.ModelsDtos.VehiculoDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.VehiculoController",
-    "Method": "GetVehiculoPorUsuario",
-    "RelativePath": "vehiculos/GetVehiculoPorUsuario",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idUsuario",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
   }
 ]

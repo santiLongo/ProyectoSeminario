@@ -52,14 +52,20 @@ namespace ProyectoSeminario.Repository
 
             var manejadoToken = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(claveJWT);
+            var expiration = DateTime.UtcNow.AddDays(7);
+
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Role, usuario.Role)
+                    new Claim(ClaimTypes.Role, usuario.Role),
+                    new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, usuario.Mail),
+                    new Claim(JwtRegisteredClaimNames.Exp,
+                        new DateTimeOffset(expiration).ToUnixTimeSeconds().ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = expiration,
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
