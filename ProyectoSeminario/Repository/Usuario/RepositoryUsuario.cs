@@ -2,14 +2,14 @@
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
-using ProyectoSeminario.Models;
-using ProyectoSeminario.Models.ModelsDtos;
-using ProyectoSeminario.Repository.IRepository;
 using ProyectoSeminario.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using ProyectoSeminario.Models.Usuario;
+using ProyectoSeminario.Models.Usuario.ModelsDtos;
+using ProyectoSeminario.Repository.Usuario.IRepository;
 
-namespace ProyectoSeminario.Repository
+namespace ProyectoSeminario.Repository.Usuario
 {
     public class RepositoryUsuario : IRepositoryUsuario
     {

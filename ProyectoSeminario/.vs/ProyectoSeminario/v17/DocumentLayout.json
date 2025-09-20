@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\repository\\vehiculo\\repositoryvehiculo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:repository\\vehiculo\\repositoryvehiculo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\repository\\usuario\\repositoryusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:repository\\usuario\\repositoryusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\models\\vehiculo\\vehiculodao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:models\\vehiculo\\vehiculodao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\models\\modelsdtos\\vehiculodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:models\\modelsdtos\\vehiculodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\controllers\\sistemagpscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:controllers\\sistemagpscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,33 +49,67 @@
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RepositoryVehiculo.cs",
+              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Repository\\Vehiculo\\RepositoryVehiculo.cs",
+              "RelativeDocumentMoniker": "Repository\\Vehiculo\\RepositoryVehiculo.cs",
+              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Repository\\Vehiculo\\RepositoryVehiculo.cs",
+              "RelativeToolTip": "Repository\\Vehiculo\\RepositoryVehiculo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T12:55:49.966Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "VehiculoDTO.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Models\\ModelsDtos\\VehiculoDTO.cs",
-              "RelativeDocumentMoniker": "Models\\ModelsDtos\\VehiculoDTO.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Models\\ModelsDtos\\VehiculoDTO.cs",
-              "RelativeToolTip": "Models\\ModelsDtos\\VehiculoDTO.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAcwBsAAAAuAAAAAAAAAA==",
+              "Title": "RepositoryUsuario.cs",
+              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Repository\\Usuario\\RepositoryUsuario.cs",
+              "RelativeDocumentMoniker": "Repository\\Usuario\\RepositoryUsuario.cs",
+              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Repository\\Usuario\\RepositoryUsuario.cs",
+              "RelativeToolTip": "Repository\\Usuario\\RepositoryUsuario.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T00:21:16.845Z"
+              "WhenOpened": "2025-09-18T12:55:19.833Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "VehiculoDAO.cs",
+              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Models\\Vehiculo\\VehiculoDAO.cs",
+              "RelativeDocumentMoniker": "Models\\Vehiculo\\VehiculoDAO.cs",
+              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Models\\Vehiculo\\VehiculoDAO.cs",
+              "RelativeToolTip": "Models\\Vehiculo\\VehiculoDAO.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T02:53:57.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "VehiculoController.cs",
               "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\VehiculoController.cs",
               "RelativeDocumentMoniker": "Controllers\\VehiculoController.cs",
               "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\VehiculoController.cs",
               "RelativeToolTip": "Controllers\\VehiculoController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAACgAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T22:28:00.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-18T02:53:47.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SistemaGpsController.cs",
+              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\SistemaGpsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SistemaGpsController.cs",
+              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\SistemaGpsController.cs",
+              "RelativeToolTip": "Controllers\\SistemaGpsController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwC4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T23:58:24.107Z"
             }
           ]
         }

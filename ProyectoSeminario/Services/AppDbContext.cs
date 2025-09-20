@@ -1,5 +1,8 @@
-using ProyectoSeminario.Models;
 using Microsoft.EntityFrameworkCore;
+using ProyectoSeminario.Models.Usuario;
+using ProyectoSeminario.Models.Vehiculo;
+using ProyectoSeminario.Models.Coordenada;
+using ProyectoSeminario.Models.SistemaGps;
 
 
 namespace ProyectoSeminario.Services

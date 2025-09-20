@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProyectoSeminario.Models.ModelsDtos
+namespace ProyectoSeminario.Models.Vehiculo.ModelsDtos
 {
     //Clase destinada a enviar la informacion necesaria de los vehiculos
     public class VehiculoDTO

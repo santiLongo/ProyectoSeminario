@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations; // [Key]
 using System.ComponentModel.DataAnnotations.Schema; // [Table], [Column]
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSeminario.Models
+namespace ProyectoSeminario.Models.Vehiculo
 {
 
     //Clase de acceso a la Base de Datos

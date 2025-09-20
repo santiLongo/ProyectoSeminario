@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations; // [Key]
 using System.ComponentModel.DataAnnotations.Schema; // [Table], [Column]
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSeminario.Models
+namespace ProyectoSeminario.Models.Usuario
 {
     //Clase de acceso a la Base de Datos
     [Table("usuario")]

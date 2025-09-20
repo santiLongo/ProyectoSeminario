@@ -1,4 +1,4 @@
-﻿namespace ProyectoSeminario.Models.ModelsDtos
+﻿namespace ProyectoSeminario.Models.Usuario.ModelsDtos
 {
     public class UsuarioLoginTokenDTO
     {

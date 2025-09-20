@@ -1,7 +1,7 @@
-﻿using ProyectoSeminario.Models;
-using ProyectoSeminario.Models.ModelsDtos;
+﻿using ProyectoSeminario.Models.Usuario;
+using ProyectoSeminario.Models.Usuario.ModelsDtos;
 
-namespace ProyectoSeminario.Repository.IRepository
+namespace ProyectoSeminario.Repository.Usuario.IRepository
 {
     public interface IRepositoryUsuario
     {

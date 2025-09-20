@@ -1,6 +1,8 @@
-using ProyectoSeminario.Models;
 using AutoMapper;
-using ProyectoSeminario.Models.ModelsDtos;
+using ProyectoSeminario.Models.Usuario;
+using ProyectoSeminario.Models.Usuario.ModelsDtos;
+using ProyectoSeminario.Models.Vehiculo.ModelsDtos;
+using ProyectoSeminario.Models.Vehiculo;
 
 namespace ProyectoSeminario.Mappers
 {

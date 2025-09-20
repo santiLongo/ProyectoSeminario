@@ -1,8 +1,10 @@
 using ProyectoSeminario.Services;
-using ProyectoSeminario.Repository;
-using ProyectoSeminario.Repository.IRepository;
 using ProyectoSeminario.Mappers;
 using Microsoft.EntityFrameworkCore;
+using ProyectoSeminario.Repository.Usuario;
+using ProyectoSeminario.Repository.Usuario.IRepository;
+using ProyectoSeminario.Repository.Vehiculo.IRepository;
+using ProyectoSeminario.Repository.Vehiculo;
 
 var builder = WebApplication.CreateBuilder(args);
 

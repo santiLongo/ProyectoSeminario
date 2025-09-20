@@ -1,7 +1,7 @@
-using ProyectoSeminario.Models;
-using ProyectoSeminario.Models.ModelsDtos;
+using ProyectoSeminario.Models.Vehiculo;
+using ProyectoSeminario.Models.Vehiculo.ModelsDtos;
 
-namespace ProyectoSeminario.Repository.IRepository
+namespace ProyectoSeminario.Repository.Vehiculo.IRepository
 {
     public interface IRepositoryVehiculo
     {

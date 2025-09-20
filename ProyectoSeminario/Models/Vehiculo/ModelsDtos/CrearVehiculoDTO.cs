@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProyectoSeminario.Models.ModelsDtos
+namespace ProyectoSeminario.Models.Vehiculo.ModelsDtos
 {
     public class CrearVehiculoDTO
     {

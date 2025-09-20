@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoSeminario.Services;
-using ProyectoSeminario.Models;
+using ProyectoSeminario.Models.SistemaGps;
 
 namespace ProyectoSeminario.Controllers
 {
@@ -18,31 +18,31 @@ namespace ProyectoSeminario.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        [Route("nuevaCoordenada")]
-        public ActionResult<SistemaGpsDAO> nuevaCoordenada(string nro_localizador, string latitud, string longitud)
-        {
+        //[HttpGet]
+        //[Route("nuevaCoordenada")]
+        //public ActionResult<SistemaGpsDAO> nuevaCoordenada(string nro_localizador, string latitud, string longitud)
+        //{
             
 
-            SistemaGpsDAO sistemaGps = _context.Localizadores
-            .Where(l => l.NroLocalizador == nro_localizador)
-            .FirstOrDefault();
+        //    SistemaGpsDAO sistemaGps = _context.Localizadores
+        //    .Where(l => l.NroLocalizador == nro_localizador)
+        //    .FirstOrDefault();
 
-            if (sistemaGps != null)
-            {
-                var coordenada = new Coordenada
-                {
-                    Latitud = latitud,
-                    Longitud = longitud,
-                    IdLocalizador = sistemaGps.Id,
-                };
+        //    if (sistemaGps != null)
+        //    {
+        //        var coordenada = new Coordenada
+        //        {
+        //            Latitud = latitud,
+        //            Longitud = longitud,
+        //            IdLocalizador = sistemaGps.Id,
+        //        };
                 
-                _context.Coordenadas.Add(coordenada);
-                _context.SaveChanges();
-                return Ok(coordenada);
-            }
+        //        _context.Coordenadas.Add(coordenada);
+        //        _context.SaveChanges();
+        //        return Ok(coordenada);
+        //    }
 
-            return BadRequest("Problema con la coordenada");
-        }
+        //    return BadRequest("Problema con la coordenada");
+        //}
     }
 }

@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "usuarioLoginDTO",
-        "Type": "ProyectoSeminario.Models.ModelsDtos.UsuarioLoginDTO",
+        "Type": "ProyectoSeminario.Models.Usuario.ModelsDtos.UsuarioLoginDTO",
         "IsRequired": true
       }
     ],
@@ -25,7 +25,7 @@
     "Parameters": [
       {
         "Name": "crearUsuarioDTO",
-        "Type": "ProyectoSeminario.Models.ModelsDtos.CrearUsuarioDTO",
+        "Type": "ProyectoSeminario.Models.Usuario.ModelsDtos.CrearUsuarioDTO",
         "IsRequired": true
       }
     ],
@@ -51,7 +51,7 @@
     "Parameters": [
       {
         "Name": "crearVehiculoDTO",
-        "Type": "ProyectoSeminario.Models.ModelsDtos.CrearVehiculoDTO",
+        "Type": "ProyectoSeminario.Models.Vehiculo.ModelsDtos.CrearVehiculoDTO",
         "IsRequired": true
       }
     ],
@@ -106,7 +106,7 @@
     "Parameters": [
       {
         "Name": "vehiculoDTO",
-        "Type": "ProyectoSeminario.Models.ModelsDtos.VehiculoDTO",
+        "Type": "ProyectoSeminario.Models.Vehiculo.ModelsDtos.VehiculoDTO",
         "IsRequired": true
       }
     ],
@@ -127,41 +127,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProyectoSeminario.Controllers.SistemaGPSController",
-    "Method": "nuevaCoordenada",
-    "RelativePath": "SistemaGPS/nuevaCoordenada",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "nro_localizador",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "latitud",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "longitud",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ProyectoSeminario.Models.SistemaGpsDAO",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   }
 ]

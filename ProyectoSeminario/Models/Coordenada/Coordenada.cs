@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations; // [Key]
 using System.ComponentModel.DataAnnotations.Schema; // [Table], [Column]
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSeminario.Models
+namespace ProyectoSeminario.Models.Coordenada
 {
 
     //Clase de acceso a la base de datos. Tadvia falta hacer la base de datos no relacional
@@ -15,11 +15,11 @@ namespace ProyectoSeminario.Models
         [Required]
         [StringLength(50)]
         [Column("latitud")]
-        public string? Latitud { get; set; }
+        public string Latitud { get; set; }
         [Required]
         [StringLength(50)]
         [Column("longitud")]
-        public string? Longitud { get; set; }
+        public string Longitud { get; set; }
         [Column("fecha")]
         public DateTime FechaYHora { get; set; } = DateTime.Now;
         [Column("movimiento")]

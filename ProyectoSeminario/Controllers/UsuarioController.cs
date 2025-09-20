@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoSeminario.Services;
 using ProyectoSeminario.Models;
-using ProyectoSeminario.Models.ModelsDtos;
-using ProyectoSeminario.Repository.IRepository;
+using ProyectoSeminario.Models.Usuario.ModelsDtos;
+using ProyectoSeminario.Repository.Usuario.IRepository;
 
 namespace ProyectoSeminario.Controllers
 {

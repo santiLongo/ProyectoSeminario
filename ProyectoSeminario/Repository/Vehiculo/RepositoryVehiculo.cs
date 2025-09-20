@@ -1,11 +1,11 @@
 using AutoMapper;
-using ProyectoSeminario.Repository.IRepository;
 using ProyectoSeminario.Mappers;
-using ProyectoSeminario.Models;
-using ProyectoSeminario.Models.ModelsDtos;
 using ProyectoSeminario.Services;
+using ProyectoSeminario.Models.Vehiculo.ModelsDtos;
+using ProyectoSeminario.Models.Vehiculo;
+using ProyectoSeminario.Repository.Vehiculo.IRepository;
 
-namespace ProyectoSeminario.Repository
+namespace ProyectoSeminario.Repository.Vehiculo
 {
     public class RepositoryVehiculo : IRepositoryVehiculo
     {
