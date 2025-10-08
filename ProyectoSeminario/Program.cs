@@ -1,6 +1,7 @@
 using ProyectoSeminario.Services;
 using ProyectoSeminario.Mappers;
 using Microsoft.EntityFrameworkCore;
+using ProyectoSeminario.Repository.Cliente;
 using ProyectoSeminario.Repository.Usuario;
 using ProyectoSeminario.Repository.Usuario.IRepository;
 using ProyectoSeminario.Repository.Vehiculo.IRepository;
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(opciones =>
 //Agregamos los Repositorios
 builder.Services.AddScoped<IRepositoryVehiculo, RepositoryVehiculo>();
 builder.Services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
+builder.Services.AddScoped<IRepositoryCliente, RepositoryCliente>();
 
 //Agregamos el AutoMapper
 builder.Services.AddAutoMapper(typeof(Mapper));

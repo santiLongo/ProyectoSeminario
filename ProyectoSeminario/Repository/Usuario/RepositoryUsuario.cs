@@ -5,6 +5,7 @@ using AutoMapper;
 using ProyectoSeminario.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.EntityFrameworkCore;
 using ProyectoSeminario.Models.Usuario;
 using ProyectoSeminario.Models.Usuario.ModelsDtos;
 using ProyectoSeminario.Repository.Usuario.IRepository;
@@ -37,8 +38,8 @@ namespace ProyectoSeminario.Repository.Usuario
 
         public async Task<UsuarioLoginTokenDTO> Login(UsuarioLoginDTO usuarioLoginDTO)
         {
-            var usuario = _db.Usuarios
-                .FirstOrDefault(
+            var usuario = await _db.Usuarios
+                .FirstOrDefaultAsync(
                 u => u.Mail == usuarioLoginDTO.Mail);
 
             if(usuario == null || !BCrypt.Net.BCrypt.Verify(usuarioLoginDTO.Password, usuario.Password))

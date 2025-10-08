@@ -5,6 +5,34 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/cliente/getAll": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "parameters": [
+          {
+            "name": "RazonSocial",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Cuit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/inicio/iniciarSesion": {
       "post": {
         "tags": [
@@ -66,155 +94,6 @@
           }
         }
       }
-    },
-    "/api/vehiculos": {
-      "get": {
-        "tags": [
-          "Vehiculo"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Vehiculo"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CrearVehiculoDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CrearVehiculoDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CrearVehiculoDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/vehiculos/{vehiculoId}": {
-      "get": {
-        "tags": [
-          "Vehiculo"
-        ],
-        "operationId": "GetVehiculo",
-        "parameters": [
-          {
-            "name": "idVehiculo",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "vehiculoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/vehiculos/GetVehiculoPorUsuario": {
-      "get": {
-        "tags": [
-          "Vehiculo"
-        ],
-        "parameters": [
-          {
-            "name": "idUsuario",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/vehiculos/{idVehiculo}": {
-      "delete": {
-        "tags": [
-          "Vehiculo"
-        ],
-        "operationId": "BorrarVehiculo",
-        "parameters": [
-          {
-            "name": "idVehiculo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/vehiculos/ActualizarVehiculo": {
-      "patch": {
-        "tags": [
-          "Vehiculo"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehiculoDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehiculoDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehiculoDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -245,42 +124,6 @@
         },
         "additionalProperties": false
       },
-      "CrearVehiculoDTO": {
-        "required": [
-          "idLocalizador",
-          "idUsuario",
-          "marca",
-          "modelo",
-          "patente"
-        ],
-        "type": "object",
-        "properties": {
-          "patente": {
-            "maxLength": 10,
-            "minLength": 0,
-            "type": "string"
-          },
-          "marca": {
-            "maxLength": 20,
-            "minLength": 0,
-            "type": "string"
-          },
-          "modelo": {
-            "maxLength": 20,
-            "minLength": 0,
-            "type": "string"
-          },
-          "idUsuario": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "idLocalizador": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "UsuarioLoginDTO": {
         "required": [
           "mail",
@@ -297,47 +140,6 @@
             "maxLength": 30,
             "minLength": 0,
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VehiculoDTO": {
-        "required": [
-          "id",
-          "idLocalizador",
-          "idUsuario",
-          "marca",
-          "modelo",
-          "patente"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "patente": {
-            "maxLength": 10,
-            "minLength": 0,
-            "type": "string"
-          },
-          "marca": {
-            "maxLength": 20,
-            "minLength": 0,
-            "type": "string"
-          },
-          "modelo": {
-            "maxLength": 20,
-            "minLength": 0,
-            "type": "string"
-          },
-          "idUsuario": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "idLocalizador": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false

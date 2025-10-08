@@ -1,8 +1,10 @@
 using AutoMapper;
+using ProyectoSeminario.Entitys;
 using ProyectoSeminario.Models.Usuario;
 using ProyectoSeminario.Models.Usuario.ModelsDtos;
 using ProyectoSeminario.Models.Vehiculo.ModelsDtos;
 using ProyectoSeminario.Models.Vehiculo;
+using ProyectoSeminario.Commands.MaestroCliente.Models;
 
 namespace ProyectoSeminario.Mappers
 {
@@ -16,6 +18,8 @@ namespace ProyectoSeminario.Mappers
             CreateMap<UsuarioDAO, CrearUsuarioDTO>().ReverseMap();
             CreateMap<UsuarioDAO, UsuarioLoginTokenDTO>().ReverseMap();
             CreateMap<UsuarioDAO, UsuarioLoginDTO>().ReverseMap();
+            CreateMap<Cliente, ClienteGridModel>().ReverseMap();
+            CreateMap<Cliente, ClienteFormModel>().ReverseMap();
         }
     }
 }

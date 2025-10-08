@@ -1,17 +1,24 @@
+using Dapper;
 using Microsoft.EntityFrameworkCore;
-using ProyectoSeminario.Models.Usuario;
-using ProyectoSeminario.Models.Vehiculo;
+using ProyectoSeminario.Commands.MaestroCliente.Models;
+using ProyectoSeminario.Entitys;
 using ProyectoSeminario.Models.Coordenada;
 using ProyectoSeminario.Models.SistemaGps;
+using ProyectoSeminario.Models.Usuario;
+using ProyectoSeminario.Models.Vehiculo;
+using ProyectoSeminario.Repository.Cliente;
+using System.Data;
 
 
 namespace ProyectoSeminario.Services
 {
-
     //Clase del contexto de la Base de Datos
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext 
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){}
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+            
+        }
 
         // Tablas de la base MySql
         public DbSet<UsuarioDAO> Usuarios { get; set; }
@@ -19,9 +26,17 @@ namespace ProyectoSeminario.Services
         public DbSet<SistemaGpsDAO> Localizadores { get; set; }
         public DbSet<Coordenada> Coordenadas { get; set; }
 
-        //Configuracion de la Base de Datos
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-          //  => options.UseMySql("Server=localhost;Database=truckalizador;User=SantiAdmin;Password=599SzekjcKNva8b",
-            //                    new MySqlServerVersion(new Version(9, 3, 0)));
+        public DbSet<Cliente> Clientes { get; set; }
+
+        public async Task<IEnumerable<T>> ExecuteAsync<T>(string query, DynamicParameters parameters)
+        {
+            var connection = Database.GetDbConnection();
+            if (connection.State != ConnectionState.Open)
+                await connection.OpenAsync();
+
+            return await connection.QueryAsync<T>(query, parameters);
+
+        }
+
     }
 }

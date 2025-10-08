@@ -183,3 +183,4 @@ C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\Proyecto
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\esmor\OneDrive\Documentos\Visual Studio Code\ProyectoSeminario\ProyectoSeminario\bin\Debug\net9.0\Dapper.dll
