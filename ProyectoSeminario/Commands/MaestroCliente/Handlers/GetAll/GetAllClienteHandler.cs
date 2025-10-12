@@ -27,19 +27,18 @@ namespace ProyectoSeminario.Commands.MaestroCliente.Handlers.GetAll
             p.Add("@razonSocial", command.RazonSocial);
             p.Add("@cuit", command.Cuit);
 
-            string sql = "SELECT" +
-                        "   idCliente AS NumeroCliente," +
-                        "   razonSocial AS RazonSocial," +
-                        "   cuit AS Cuit," +
-                        "   telefono AS Telefono," +
-                        "   mail AS Mail," +
-                        "   direccion AS Direccion," +
-                        "   userAlta AS userAlta," +
-                        "   userDateAlta AS FechaAlta" +
-                        "FROM cliente " +
-                        "WHERE" +
-                        "        (@razonSocial IS NULL OR razonSocial LIKE @razonSocial)" +
-                        "    AND (@cuit IS NULL OR cuit LIKE @cuit);";
+            string sql = @" SELECT
+                               razonSocial AS RazonSocial,
+                               cuit AS Cuit,
+                               telefono AS Telefono,
+                               mail AS Mail,
+                               direccion AS Direccion,
+                               userAlta AS userAlta,
+                               userDateAlta AS FechaAlta
+                            FROM cliente 
+                            WHERE
+                                    (@razonSocial IS NULL OR razonSocial LIKE @razonSocial)
+                                AND (@cuit IS NULL OR cuit LIKE @cuit);";
 
             var result = await _ctx.ExecuteAsync<ClienteGridModel>(sql, p);
             return result.ToList();

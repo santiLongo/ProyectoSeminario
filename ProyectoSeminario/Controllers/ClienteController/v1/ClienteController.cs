@@ -4,7 +4,7 @@ using ProyectoSeminario.Commands.MaestroCliente.Commands.GetAllCommand;
 using ProyectoSeminario.Commands.MaestroCliente.Handlers.GetAll;
 using ProyectoSeminario.Services;
 
-namespace ProyectoSeminario.Controllers
+namespace ProyectoSeminario.Controllers.ClienteController.v1
 {
 
     [ApiController]
@@ -20,10 +20,10 @@ namespace ProyectoSeminario.Controllers
         }
 
         [HttpGet("getAll")]
-        public IActionResult GetAll([FromQuery]GetAllClienteCommand command)
+        public async Task<IActionResult> GetAll([FromQuery]GetAllClienteCommand command)
         {
             var handler = new GetAllClienteHandler(_ctx);
-            var clientes = handler.Handle(command);
+            var clientes = await handler.Handle(command);
 
             return Ok(clientes);
         }

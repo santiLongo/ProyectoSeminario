@@ -33,6 +33,28 @@
         }
       }
     },
+    "/api/ComboController/{comboName}": {
+      "get": {
+        "tags": [
+          "Combo"
+        ],
+        "parameters": [
+          {
+            "name": "comboName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/inicio/iniciarSesion": {
       "post": {
         "tags": [

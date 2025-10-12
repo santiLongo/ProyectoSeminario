@@ -19,12 +19,10 @@ namespace ProyectoSeminario.Repository.Cliente
     public class RepositoryCliente : IRepositoryCliente
     {
         private readonly AppDbContext _db;
-        private readonly IMapper _mapper;
 
-        public RepositoryCliente(AppDbContext db, IMapper mapper)
+        public RepositoryCliente(AppDbContext db)
         {
             _db = db;
-            _mapper = mapper;
         }
 
         public async Task<Entitys.Cliente> FindByIdAsync(int id, bool asNoTracking = false)

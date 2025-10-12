@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "ProyectoSeminario.Controllers.ClienteController",
+    "ContainingType": "ProyectoSeminario.Controllers.ClienteController.v1.ClienteController",
     "Method": "GetAll",
     "RelativePath": "api/cliente/getAll",
     "HttpMethod": "GET",
@@ -21,7 +21,23 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ProyectoSeminario.Controllers.UsuarioController",
+    "ContainingType": "ProyectoSeminario.Controllers.ComboController.v1.ComboController",
+    "Method": "GetCombo",
+    "RelativePath": "api/ComboController/{comboName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "comboName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoSeminario.Controllers.UsuarioController.v1.UsuarioController",
     "Method": "iniciarSesion",
     "RelativePath": "api/inicio/iniciarSesion",
     "HttpMethod": "POST",
@@ -37,7 +53,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ProyectoSeminario.Controllers.UsuarioController",
+    "ContainingType": "ProyectoSeminario.Controllers.UsuarioController.v1.UsuarioController",
     "Method": "RegistrarUsuario",
     "RelativePath": "api/inicio/RegistrarUsuario",
     "HttpMethod": "POST",

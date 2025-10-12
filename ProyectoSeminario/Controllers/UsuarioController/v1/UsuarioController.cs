@@ -5,7 +5,7 @@ using ProyectoSeminario.Models;
 using ProyectoSeminario.Models.Usuario.ModelsDtos;
 using ProyectoSeminario.Repository.Usuario.IRepository;
 
-namespace ProyectoSeminario.Controllers
+namespace ProyectoSeminario.Controllers.UsuarioController.v1
 {
     [ApiController]
     [Route("api/inicio")]

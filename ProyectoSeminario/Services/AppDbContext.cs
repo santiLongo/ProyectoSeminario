@@ -2,8 +2,6 @@ using Dapper;
 using Microsoft.EntityFrameworkCore;
 using ProyectoSeminario.Commands.MaestroCliente.Models;
 using ProyectoSeminario.Entitys;
-using ProyectoSeminario.Models.Coordenada;
-using ProyectoSeminario.Models.SistemaGps;
 using ProyectoSeminario.Models.Usuario;
 using ProyectoSeminario.Models.Vehiculo;
 using ProyectoSeminario.Repository.Cliente;
@@ -23,10 +21,9 @@ namespace ProyectoSeminario.Services
         // Tablas de la base MySql
         public DbSet<UsuarioDAO> Usuarios { get; set; }
         public DbSet<VehiculoDAO> Vehiculos { get; set; }
-        public DbSet<SistemaGpsDAO> Localizadores { get; set; }
-        public DbSet<Coordenada> Coordenadas { get; set; }
-
         public DbSet<Cliente> Clientes { get; set; }
+
+        public IRepositoryCliente ClienteRepo => new RepositoryCliente(this);
 
         public async Task<IEnumerable<T>> ExecuteAsync<T>(string query, DynamicParameters parameters)
         {
