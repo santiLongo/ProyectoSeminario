@@ -1,34 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\",
+  "WorkspaceRootPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\commands\\maestrocliente\\models\\clientegridmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:commands\\maestrocliente\\models\\clientegridmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\controllers\\clientecontroller\\v1\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\github\\proyectoseminario\\proyectoseminario\\controllers\\clientecontroller\\v1\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:controllers\\clientecontroller\\v1\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\commands\\maestrocliente\\handlers\\getall\\getallclientehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:commands\\maestrocliente\\handlers\\getall\\getallclientehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\commands\\maestrocliente\\commands\\getallcommand\\getallclientecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:commands\\maestrocliente\\commands\\getallcommand\\getallclientecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\mappers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:mappers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\repository\\cliente\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:repository\\cliente\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|c:\\users\\esmor\\onedrive\\documentos\\visual studio code\\proyectoseminario\\proyectoseminario\\services\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E84D2E88-81DF-7ADC-7ACE-4D7C99E3E3E9}|ProyectoSeminario.csproj|solutionrelative:services\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,92 +35,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ClienteGridModel.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Commands\\MaestroCliente\\Models\\ClienteGridModel.cs",
-              "RelativeDocumentMoniker": "Commands\\MaestroCliente\\Models\\ClienteGridModel.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Commands\\MaestroCliente\\Models\\ClienteGridModel.cs",
-              "RelativeToolTip": "Commands\\MaestroCliente\\Models\\ClienteGridModel.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T22:07:45.509Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GetAllClienteCommand.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Commands\\MaestroCliente\\Commands\\GetAllCommand\\GetAllClienteCommand.cs",
-              "RelativeDocumentMoniker": "Commands\\MaestroCliente\\Commands\\GetAllCommand\\GetAllClienteCommand.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Commands\\MaestroCliente\\Commands\\GetAllCommand\\GetAllClienteCommand.cs",
-              "RelativeToolTip": "Commands\\MaestroCliente\\Commands\\GetAllCommand\\GetAllClienteCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T22:02:13.606Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GetAllClienteHandler.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Commands\\MaestroCliente\\Handlers\\GetAll\\GetAllClienteHandler.cs",
-              "RelativeDocumentMoniker": "Commands\\MaestroCliente\\Handlers\\GetAll\\GetAllClienteHandler.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Commands\\MaestroCliente\\Handlers\\GetAll\\GetAllClienteHandler.cs",
-              "RelativeToolTip": "Commands\\MaestroCliente\\Handlers\\GetAll\\GetAllClienteHandler.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowCIAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T21:57:35.378Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\ClienteController\\v1\\ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\ClienteController\\v1\\ClienteController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClienteController\\v1\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\ClienteController\\v1\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\Controllers\\ClienteController\\v1\\ClienteController.cs",
               "RelativeToolTip": "Controllers\\ClienteController\\v1\\ClienteController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAcwBgAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:08:52.252Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Mapper.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Mappers\\Mapper.cs",
-              "RelativeDocumentMoniker": "Mappers\\Mapper.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Mappers\\Mapper.cs",
-              "RelativeToolTip": "Mappers\\Mapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:06:10.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ClienteRepository.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Repository\\Cliente\\ClienteRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\Cliente\\ClienteRepository.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Repository\\Cliente\\ClienteRepository.cs",
-              "RelativeToolTip": "Repository\\Cliente\\ClienteRepository.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA1wBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T18:05:12.654Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Services\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Services\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\Services\\AppDbContext.cs",
-              "RelativeToolTip": "Services\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T17:52:06.015Z",
+              "WhenOpened": "2025-11-14T19:45:07.356Z",
               "EditorCaption": ""
             }
           ]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj": {}
+    "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj": {
+    "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj",
+        "projectUniqueName": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj",
         "projectName": "ProyectoSeminario",
-        "projectPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj",
+        "projectPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj",
         "packagesPath": "C:\\Users\\esmor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\obj\\",
+        "outputPath": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

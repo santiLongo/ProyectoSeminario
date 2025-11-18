@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+8uFo47UWJk=",
+  "dgSpecHash": "R2KpUq3V8Uo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\esmor\\OneDrive\\Documentos\\Visual Studio Code\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj",
+  "projectFilePath": "C:\\Users\\esmor\\OneDrive\\Documentos\\GitHub\\ProyectoSeminario\\ProyectoSeminario\\ProyectoSeminario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\esmor\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\esmor\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
