@@ -1,6 +1,5 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
-using ProyectoSeminario.Commands.MaestroCliente.Models;
 using ProyectoSeminario.Entitys;
 using ProyectoSeminario.Models.Usuario;
 using ProyectoSeminario.Models.Vehiculo;

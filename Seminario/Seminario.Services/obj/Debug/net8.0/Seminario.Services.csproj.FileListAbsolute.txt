@@ -1,0 +1,16 @@
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.csproj.AssemblyReference.cache
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.AssemblyInfoInputs.cache
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.AssemblyInfo.cs
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.csproj.CoreCompileInputs.cache
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.sourcelink.json
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\bin\Debug\net8.0\Seminario.Services.deps.json
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\bin\Debug\net8.0\Seminario.Services.dll
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\bin\Debug\net8.0\Seminario.Services.pdb
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\bin\Debug\net8.0\Seminario.Datos.dll
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\bin\Debug\net8.0\Seminario.Datos.pdb
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminari.AEC21234.Up2Date
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.dll
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\refint\Seminario.Services.dll
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\Seminario.Services.pdb
+C:\Users\esmor\OneDrive\Documentos\GitHub\ProyectoSeminario\Seminario\Seminario.Services\obj\Debug\net8.0\ref\Seminario.Services.dll
