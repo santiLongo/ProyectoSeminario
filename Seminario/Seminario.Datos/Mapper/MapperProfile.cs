@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 
-namespace Seminario.Datos.Mapper
+namespace Seminario.Datos.Mapper;
+
+public class MapperProfile : Profile
 {
-    public class MapperProfile : Profile
-    {
-    }
 }
