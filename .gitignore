@@ -1,3 +1,12 @@
 /ProyectoSeminario/.vs
 
 /Seminario/.vs
+
+/Seminario/Seminario.Api/bin
+/Seminario/Seminario.Api/obj
+
+/Seminario/Seminario.Datos/bin
+/Seminario/Seminario.Datos/obj
+
+/Seminario/Seminario.Service/bin
+/Seminario/Seminario.Service/obj
