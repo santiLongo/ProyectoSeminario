@@ -35,10 +35,10 @@ namespace Seminario.Services.Login.Handler
             }
 
             //string claveJWT = _config.GetValue<string>("ApiSettings:Secreta");
-            var claveJWT = _config.GetSection("ApiSettings:Secreta").Value ?? "";
+            string claveJWT = _config.GetSection("ApiSettings:Secreta").Value!;
 
             var handlerToken = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(claveJWT!);
+            var key = Encoding.ASCII.GetBytes(claveJWT);
             var expiration = DateTime.UtcNow.AddDays(7);
 
 
