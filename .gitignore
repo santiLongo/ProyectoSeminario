@@ -1,15 +1,6 @@
-/ProyectoSeminario/.vs
+# Visual Studio
+.vs/
 
-/Seminario/.vs
-
-/Seminario/Seminario.Api/bin
-/Seminario/Seminario.Api/obj
-
-/Seminario/Seminario.Datos/bin
-/Seminario/Seminario.Datos/obj
-
-/Seminario/Seminario.Service/bin
-/Seminario/Seminario.Service/obj
-/Seminario/Seminario.Api/obj
-/Seminario/Seminario.Datos/obj
-/Seminario/Seminario.Services/obj
+# Build outputs
+bin/
+obj/
