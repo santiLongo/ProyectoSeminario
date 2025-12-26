@@ -27,17 +27,15 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 //Agrego los Cors junto con sus variables de configuracion
 
-var corsOrigins = builder.Configuration
-    .GetSection("Cors:Origins")
-    .Get<string[]>();
 var MiPoliticaCors = "_miPoliticaDeCors";
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MiPoliticaCors,
-        builder =>
+        policy =>
         {
-            builder.WithOrigins(corsOrigins!)
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()       
                 .WithMethods("POST", "GET");
         });
 });
@@ -80,9 +78,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(MiPoliticaCors);
-
 app.UseHttpsRedirection();
+
+app.UseCors(MiPoliticaCors);
 
 app.UseAuthentication();
 
