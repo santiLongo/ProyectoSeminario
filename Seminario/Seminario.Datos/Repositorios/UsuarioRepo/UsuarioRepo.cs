@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Entidades.Usuario;
+using Seminario.Datos.Entidades;
 
 namespace Seminario.Datos.Repositorios.UsuarioRepo
 {

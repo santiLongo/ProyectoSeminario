@@ -1,0 +1,165 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "sistemagestionlogisticaContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "IrregularWords": null,
+   "MinimumProductVersion": "2.6.1301",
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entidades",
+   "PluralRules": null,
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Seminario.Datos",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "SingularRules": null,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "banco",
+         "ObjectType": 0
+      },
+      {
+         "Name": "camion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "chofer",
+         "ObjectType": 0
+      },
+      {
+         "Name": "cliente",
+         "ObjectType": 0
+      },
+      {
+         "Name": "cobro",
+         "ObjectType": 0
+      },
+      {
+         "Name": "cobrocheque",
+         "ObjectType": 0
+      },
+      {
+         "Name": "compra\/repuesto",
+         "ObjectType": 0
+      },
+      {
+         "Name": "compra\/repuesto\/detalle",
+         "ObjectType": 0
+      },
+      {
+         "Name": "especialidad",
+         "ObjectType": 0
+      },
+      {
+         "Name": "formapago",
+         "ObjectType": 0
+      },
+      {
+         "Name": "localidad",
+         "ObjectType": 0
+      },
+      {
+         "Name": "mantenimiento",
+         "ObjectType": 0
+      },
+      {
+         "Name": "mantenimiento\/observacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "mantenimiento\/tarea",
+         "ObjectType": 0
+      },
+      {
+         "Name": "moneda",
+         "ObjectType": 0
+      },
+      {
+         "Name": "pago",
+         "ObjectType": 0
+      },
+      {
+         "Name": "pago\/comprarepuesto",
+         "ObjectType": 0
+      },
+      {
+         "Name": "pago\/mantenimiento",
+         "ObjectType": 0
+      },
+      {
+         "Name": "pagocheque",
+         "ObjectType": 0
+      },
+      {
+         "Name": "pais",
+         "ObjectType": 0
+      },
+      {
+         "Name": "proveedor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "proveedor\/especialidad",
+         "ObjectType": 0
+      },
+      {
+         "Name": "provincia",
+         "ObjectType": 0
+      },
+      {
+         "Name": "taller",
+         "ObjectType": 0
+      },
+      {
+         "Name": "taller\/especialidad",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tipocamion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tipoubicacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "ubicacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "viaje",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}

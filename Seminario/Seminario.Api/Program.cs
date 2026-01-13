@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Mapper;
 using System.Text;
+using Seminario.Datos.Dapper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +20,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
         options.UseMySql(builder.Configuration.GetConnectionString("ConnectionMySql"),
     new MySqlServerVersion(new Version(9, 3, 0))));
+
+//Agrego el UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Agrego el AutoMapper
 
