@@ -22,50 +22,58 @@ namespace Seminario.Services.Login.Handler
 
         public async Task<AuthResponse> Handle(AuthCommand command)
         {
-            var usuario = await _ctx.UsuarioRepo.FindMailAsync(command.Mail);
-
-            if (usuario == null)
+            try
             {
-                throw new InvalidOperationException("No se encontro el usuario");
-            }
+                var usuario = await _ctx.UsuarioRepo.FindMailAsync(command.Mail);
 
-            if (!BCrypt.Net.BCrypt.Verify(command.Password, usuario.Password))
-            {
-                throw new InvalidOperationException("Contraseña incorrecta");
-            }
-
-            //string claveJWT = _config.GetValue<string>("ApiSettings:Secreta");
-            string claveJWT = _config.GetSection("ApiSettings:Secreta").Value!;
-
-            var handlerToken = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(claveJWT);
-            var expiration = DateTime.UtcNow.AddDays(7);
-
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
+                if (usuario == null)
                 {
-                    new Claim(ClaimTypes.Role, usuario.Role!),
-                    new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, usuario.Mail!),
-                    new Claim(JwtRegisteredClaimNames.Exp,
-                        new DateTimeOffset(expiration).ToUnixTimeSeconds().ToString())
-                }),
-                Expires = expiration,
-                SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+                    throw new InvalidOperationException("No se encontro el usuario");
+                }
 
-            var token = handlerToken.CreateToken(tokenDescriptor);
+                if (!BCrypt.Net.BCrypt.Verify(command.Password, usuario.Password))
+                {
+                    throw new InvalidOperationException("Contraseña incorrecta");
+                }
 
-            var response = new AuthResponse
+                //string claveJWT = _config.GetValue<string>("ApiSettings:Secreta");
+                string claveJWT = _config.GetSection("ApiSettings:Secreta").Value!;
+
+                var handlerToken = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(claveJWT);
+                var expiration = DateTime.UtcNow.AddDays(7);
+
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.Role, usuario.Role!),
+                        new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, usuario.Mail!),
+                        new Claim(JwtRegisteredClaimNames.Exp,
+                            new DateTimeOffset(expiration).ToUnixTimeSeconds().ToString())
+                    }),
+                    Expires = expiration,
+                    SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = handlerToken.CreateToken(tokenDescriptor);
+
+                var response = new AuthResponse
+                {
+                    Id = usuario.Id,
+                    Mail = usuario.Mail!,
+                    Token = handlerToken.WriteToken(token)
+                };
+
+                return response;
+            }
+            catch (Exception e)
             {
-                Id = usuario.Id,
-                Mail = usuario.Mail!,
-                Token = handlerToken.WriteToken(token)
-            };
-
-            return response;
+                Console.WriteLine(e);
+                throw new InvalidOperationException(e.ToString());
+            }
         }
     }
 }

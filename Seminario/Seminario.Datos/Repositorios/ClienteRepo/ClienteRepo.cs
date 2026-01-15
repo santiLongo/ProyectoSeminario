@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Entidades.Cliente;
+using Seminario.Datos.Entidades;
 
 namespace Seminario.Datos.Repositorios.ClienteRepo
 {
