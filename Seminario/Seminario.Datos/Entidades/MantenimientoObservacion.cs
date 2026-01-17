@@ -10,7 +10,7 @@ namespace Seminario.Datos.Entidades;
 
 [Table("mantenimiento/observacion")]
 [Index("IdMantenimiento", Name = "FK_MANTENIMIENTO/OBSERVACION_MANTENIEMIENTO")]
-public partial class MantenimientoObservacion
+public  class MantenimientoObservacion
 {
     [Key]
     [Column("idObservacion", TypeName = "int(11)")]

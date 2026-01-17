@@ -11,7 +11,7 @@ namespace Seminario.Datos.Entidades;
 [Table("compra/repuesto")]
 [Index("IdMantenimiento", Name = "FK_COMPRAREPUESTO_MANTENIMIENTO")]
 [Index("IdProveedor", Name = "FK_COMPRAREPUESTO_PROVEEDOR")]
-public partial class CompraRepuesto
+public  class CompraRepuesto
 {
     [Key]
     [Column("idCompraRepuesto", TypeName = "int(11)")]

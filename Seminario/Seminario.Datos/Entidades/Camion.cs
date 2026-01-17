@@ -12,7 +12,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdTipoCamion", Name = "FK_CAMION_TIPOCAMION")]
 [Index("NroChasis", Name = "id_numero_chasis", IsUnique = true)]
 [Index("NroMotor", Name = "id_numero_motor", IsUnique = true)]
-public partial class Camion
+public class Camion
 {
     [Key]
     [Column("idCamion", TypeName = "int(11)")]

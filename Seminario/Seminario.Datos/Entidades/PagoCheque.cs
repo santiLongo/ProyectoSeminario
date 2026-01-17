@@ -11,7 +11,7 @@ namespace Seminario.Datos.Entidades;
 [Table("pagocheque")]
 [Index("IdBanco", Name = "FK_PAGOCHEQUE_BANCO")]
 [Index("IdPago", Name = "FK_PAGOCHEQUE_PAGO")]
-public partial class PagoCheque
+public  class PagoCheque
 {
     [Key]
     [Column("idPagoCheque", TypeName = "int(11)")]

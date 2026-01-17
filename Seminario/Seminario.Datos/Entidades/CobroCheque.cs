@@ -11,7 +11,7 @@ namespace Seminario.Datos.Entidades;
 [Table("cobrocheque")]
 [Index("IdCobro", Name = "FK_COBROCHEQUE_COBRO")]
 [Index("IdBanco", "NroCheque", "CuitEmisor", Name = "id_unique_cobro_cheque", IsUnique = true)]
-public partial class CobroCheque
+public  class CobroCheque
 {
     [Key]
     [Column("idCobroCheque", TypeName = "int(11)")]

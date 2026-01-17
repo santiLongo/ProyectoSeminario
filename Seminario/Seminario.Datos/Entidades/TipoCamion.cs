@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Seminario.Datos.Entidades;
 
 [Table("tipocamion")]
-public partial class TipoCamion
+public class TipoCamion
 {
     [Key]
     [Column("idTipoCamion", TypeName = "int(11)")]

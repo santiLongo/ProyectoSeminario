@@ -10,7 +10,7 @@ namespace Seminario.Datos.Entidades;
 
 [Table("localidad")]
 [Index("IdProvincia", Name = "FK_LOCALIDAD_PROVINCIA")]
-public partial class Localidad
+public  class Localidad
 {
     [Key]
     [Column("idLocalidad", TypeName = "int(11)")]
@@ -32,5 +32,6 @@ public partial class Localidad
     public virtual Provincia Provincia { get; set; }
     public virtual ICollection<Proveedor> Proveedores { get; set; } = new List<Proveedor>();
     public virtual ICollection<Taller> Talleres { get; set; } = new List<Taller>();
-    public virtual ICollection<Ubicacion> Ubicaciones { get; set; } = new List<Ubicacion>();
+    public virtual ICollection<Viaje> ViajesDestino { get; set; } = new List<Viaje>();
+    public virtual ICollection<Viaje> ViajesProcedencia { get; set; } = new List<Viaje>();
 }

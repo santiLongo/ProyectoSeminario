@@ -9,14 +9,15 @@ using Microsoft.EntityFrameworkCore;
 namespace Seminario.Datos.Entidades;
 
 [Table("banco")]
-public partial class Banco
+public class Banco
 {
     [Key]
     [Column("idBanco", TypeName = "int(11)")]
     public int IdBanco { get; set; }
 
-    [Column(TypeName = "int(11)")]
-    public int Descripcion { get; set; }
+    [Column(TypeName = "char")]
+    [StringLength(50, ErrorMessage = "El nombre del Banco no puede superar los 50 caracteres")]
+    public string Descripcion { get; set; }
 
     public virtual ICollection<CobroCheque> CobroCheques { get; set; } = new List<CobroCheque>();
     public virtual ICollection<PagoCheque> PagoCheques { get; set; } = new List<PagoCheque>();

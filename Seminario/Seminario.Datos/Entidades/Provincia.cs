@@ -10,7 +10,7 @@ namespace Seminario.Datos.Entidades;
 
 [Table("provincia")]
 [Index("IdPais", Name = "FK_PROVINCIA_PAIS")]
-public partial class Provincia
+public class Provincia
 {
     [Key]
     [Column("idProvincia", TypeName = "int(11)")]

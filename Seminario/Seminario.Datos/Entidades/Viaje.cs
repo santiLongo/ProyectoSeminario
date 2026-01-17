@@ -14,7 +14,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdCliente", Name = "FK_VIAJE_CLIENTE")]
 [Index("IdDestino", Name = "FK_VIAJE_DESTINO")]
 [Index("IdProcendecia", Name = "FK_VIAJE_PROCEDENCIA")]
-public partial class Viaje
+public class Viaje
 {
     [Key]
     [Column("idViaje", TypeName = "int(11)")]
@@ -74,6 +74,6 @@ public partial class Viaje
     public virtual Camion Camion { get; set; }
     public virtual Chofer Chofer { get; set; }
     public virtual Cliente Cliente { get; set; }
-    public virtual Ubicacion Destino { get; set; }
-    public virtual Ubicacion Procendecia { get; set; }
+    public virtual Localidad Destino { get; set; }
+    public virtual Localidad Procendecia { get; set; }
 }

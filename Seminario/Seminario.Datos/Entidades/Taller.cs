@@ -10,7 +10,7 @@ namespace Seminario.Datos.Entidades;
 
 [Table("taller")]
 [Index("IdLocalidad", Name = "FK_TALLER_LOCALIDAD")]
-public partial class Taller
+public class Taller
 {
     [Key]
     [Column("idTaller", TypeName = "int(11)")]

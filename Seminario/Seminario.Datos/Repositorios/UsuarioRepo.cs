@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 
-namespace Seminario.Datos.Repositorios.UsuarioRepo
+namespace Seminario.Datos.Repositorios
 {
     public interface IUsuarioRepo
     {

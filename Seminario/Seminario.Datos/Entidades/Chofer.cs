@@ -11,7 +11,7 @@ namespace Seminario.Datos.Entidades;
 [Table("chofer")]
 [Index("Dni", Name = "id_dni", IsUnique = true)]
 [Index("NroRegistro", Name = "id_nro_registro", IsUnique = true)]
-public partial class Chofer
+public class Chofer
 {
     [Key]
     [Column("idChofer", TypeName = "int(11)")]

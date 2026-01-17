@@ -11,7 +11,7 @@ namespace Seminario.Datos.Entidades;
 [Table("pago/mantenimiento")]
 [Index("IdPago", Name = "FK_PAGOMANTENIMIENTO_PAGO")]
 [Index("IdMantenimiento", "IdPago", Name = "id_mantenimiento_pago", IsUnique = true)]
-public partial class PagoMantenimiento
+public class PagoMantenimiento
 {
     [Key]
     [Column("idPagoMantenimiento", TypeName = "int(11)")]

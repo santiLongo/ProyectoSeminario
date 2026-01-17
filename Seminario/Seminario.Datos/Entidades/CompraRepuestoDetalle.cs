@@ -10,7 +10,7 @@ namespace Seminario.Datos.Entidades;
 
 [Table("compra/repuesto/detalle")]
 [Index("IdCompraRepuesto", Name = "FK_DETALLE_COMPRA/REPUESTO")]
-public partial class CompraRepuestoDetalle
+public  class CompraRepuestoDetalle
 {
     [Key]
     [Column("idDetalle", TypeName = "int(11)")]

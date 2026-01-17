@@ -1,86 +1,80 @@
 ﻿using System.Data;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
-using Seminario.Datos.Repositorios.ClienteRepo;
-using Seminario.Datos.Repositorios.UsuarioRepo;
 using Seminario.Datos.Entidades;
+using Seminario.Datos.Repositorios;
 
 namespace Seminario.Datos.Contextos.AppDbContext
 {
     public interface IAppDbContext
     {
-        public IRepoCliente ClienteRepo { get;}
-        public IUsuarioRepo UsuarioRepo { get; }
-
+        IRepoCliente ClienteRepo { get;}
+        IUsuarioRepo UsuarioRepo { get; }
+        IBancoRepo BancoRepo { get; }
+        ITipoCamionRepo TipoCamionRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
     public partial class AppDbContext : DbContext, IAppDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-
-        }
+        { }
 
         #region Entidades
         public DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<Banco> Bancos { get; set; }
+        public DbSet<Banco> Bancos { get; set; }
 
-        public virtual DbSet<Camion> Camiones { get; set; }
+        public DbSet<Camion> Camiones { get; set; }
 
-        public virtual DbSet<Chofer> Choferes { get; set; }
+        public DbSet<Chofer> Choferes { get; set; }
 
-        public virtual DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
-        public virtual DbSet<Cobro> Cobros { get; set; }
+        public DbSet<Cobro> Cobros { get; set; }
 
-        public virtual DbSet<CobroCheque> CobroCheques { get; set; }
+        public DbSet<CobroCheque> CobroCheques { get; set; }
 
-        public virtual DbSet<CompraRepuesto> CompraRepuestos { get; set; }
+        public DbSet<CompraRepuesto> CompraRepuestos { get; set; }
 
-        public virtual DbSet<CompraRepuestoDetalle> CompraRepuestoDetalles { get; set; }
+        public DbSet<CompraRepuestoDetalle> CompraRepuestoDetalles { get; set; }
 
-        public virtual DbSet<Especialidad> Especialidades { get; set; }
+        public DbSet<Especialidad> Especialidades { get; set; }
 
-        public virtual DbSet<FormaPago> FormapPagos { get; set; }
+        public DbSet<FormaPago> FormapPagos { get; set; }
 
-        public virtual DbSet<Localidad> Localidades { get; set; }
+        public DbSet<Localidad> Localidades { get; set; }
 
-        public virtual DbSet<Mantenimiento> Mantenimientos { get; set; }
+        public DbSet<Mantenimiento> Mantenimientos { get; set; }
 
-        public virtual DbSet<MantenimientoObservacion> MantenimientoObservaciones { get; set; }
+        public DbSet<MantenimientoObservacion> MantenimientoObservaciones { get; set; }
+            
+        public DbSet<MantenimientoTarea> MantenimientoTareas { get; set; }
 
-        public virtual DbSet<MantenimientoTarea> MantenimientoTareas { get; set; }
+        public DbSet<Moneda> Monedas { get; set; }
 
-        public virtual DbSet<Moneda> Monedas { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
 
-        public virtual DbSet<Pago> Pagos { get; set; }
+        public DbSet<PagoCompraRepuesto> PagoCompraRepuestos { get; set; }
 
-        public virtual DbSet<PagoCompraRepuesto> PagoCompraRepuestos { get; set; }
+        public DbSet<PagoMantenimiento> PagoMantenimientos { get; set; }
 
-        public virtual DbSet<PagoMantenimiento> PagoMantenimientos { get; set; }
+        public DbSet<PagoCheque> PagoCheques { get; set; }
 
-        public virtual DbSet<PagoCheque> PagoCheques { get; set; }
+        public DbSet<Pais> Paises { get; set; }
 
-        public virtual DbSet<Pais> Paises { get; set; }
+        public DbSet<Proveedor> Proveedores { get; set; }
 
-        public virtual DbSet<Proveedor> Proveedores { get; set; }
+        public DbSet<ProveedorEspecialidad> ProveedorEspecialidades { get; set; }
 
-        public virtual DbSet<ProveedorEspecialidad> ProveedorEspecialidades { get; set; }
+        public DbSet<Provincia> Provincias { get; set; }
 
-        public virtual DbSet<Provincia> Provincias { get; set; }
+        public DbSet<Taller> Talleres { get; set; }
 
-        public virtual DbSet<Taller> Talleres { get; set; }
+        public DbSet<TallerEspecialidad> TallerEspecialidades { get; set; }
 
-        public virtual DbSet<TallerEspecialidad> TallerEspecialidades { get; set; }
+        public DbSet<TipoCamion> TipoCamiones { get; set; }
 
-        public virtual DbSet<TipoCamion> TipoCamiones { get; set; }
-
-        public virtual DbSet<TipoUbicacion> TipoUbicaciones { get; set; }
-
-        public virtual DbSet<Ubicacion> Ubicaciones { get; set; }
-
-        public virtual DbSet<Viaje> Viajes { get; set; }
-
+        public DbSet<Viaje> Viajes { get; set; }
+            
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -368,27 +362,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.UserName).IsFixedLength();
             });
 
-            modelBuilder.Entity<TipoUbicacion>(entity =>
-            {
-                entity.HasKey(e => e.IdTipoUbicacion).HasName("PRIMARY");
-
-                entity.Property(e => e.Descripcion).IsFixedLength();
-                entity.Property(e => e.UserName).IsFixedLength();
-            });
-
-            modelBuilder.Entity<Ubicacion>(entity =>
-            {
-                entity.HasKey(e => e.IdUbicacion).HasName("PRIMARY");
-
-                entity.Property(e => e.Descripcion).IsFixedLength();
-                entity.Property(e => e.Direccion).IsFixedLength();
-                entity.Property(e => e.UserName).IsFixedLength();
-
-                entity.HasOne(d => d.Localidad).WithMany(p => p.Ubicaciones).HasConstraintName("FK_UBICACION_LOCALIDAD");
-
-                entity.HasOne(d => d.TipoUbicacion).WithMany(p => p.Ubicaciones).HasConstraintName("FK_UBICACION_TIPOUBICACION");
-            });
-
             modelBuilder.Entity<Viaje>(entity =>
             {
                 entity.HasKey(e => e.IdViaje).HasName("PRIMARY");
@@ -428,6 +401,8 @@ namespace Seminario.Datos.Contextos.AppDbContext
         #region Repos
         public IRepoCliente ClienteRepo => new RepoCliente(this);
         public IUsuarioRepo UsuarioRepo => new UsuarioRepo(this);
+        public IBancoRepo BancoRepo => new BancoRepo(this);
+        public ITipoCamionRepo TipoCamionRepo => new TipoCamionRepo(this);
 
         #endregion
     }

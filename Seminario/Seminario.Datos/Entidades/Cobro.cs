@@ -12,7 +12,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdFormaPago", Name = "FK_COBRO_FORMAPAGO")]
 [Index("IdMoneda", Name = "FK_COBRO_MONEDA")]
 [Index("IdViaje", Name = "FK_COBRO_VIAJE")]
-public partial class Cobro
+public  class Cobro
 {
     [Key]
     [Column("idCobro", TypeName = "int(11)")]

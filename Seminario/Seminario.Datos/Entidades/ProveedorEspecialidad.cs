@@ -11,7 +11,7 @@ namespace Seminario.Datos.Entidades;
 [Table("proveedor/especialidad")]
 [Index("IdEspecialidad", Name = "FK_PROVEEDOR/ESPECIALIDAD_ESPECIALIDAD")]
 [Index("IdProveedor", "IdEspecialidad", Name = "id_proveedor_especialidad", IsUnique = true)]
-public partial class ProveedorEspecialidad
+public class ProveedorEspecialidad
 {
     [Key]
     [Column("idProveedorEspecialidad", TypeName = "int(11)")]

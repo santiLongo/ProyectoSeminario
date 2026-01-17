@@ -10,7 +10,7 @@ namespace Seminario.Datos.Entidades;
 
 [Table("proveedor")]
 [Index("IdLocalidad", Name = "FK_PROVEEDOR_LOCALIDAD")]
-public partial class Proveedor
+public class Proveedor
 {
     [Key]
     [Column("idProveedor", TypeName = "int(11)")]

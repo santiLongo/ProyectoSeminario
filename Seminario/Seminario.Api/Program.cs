@@ -23,14 +23,6 @@ builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
         options.UseMySql(builder.Configuration.GetConnectionString("ConnectionMySql"),
     new MySqlServerVersion(new Version(9, 3, 0))));
 
-//Agrego el UnitOfWork
-builder.Services.AddScoped<IDbConnection>(sp =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("ConnectionMySql");
-    return new MySqlConnection(connectionString);
-});
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 //Agrego el AutoMapper
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));

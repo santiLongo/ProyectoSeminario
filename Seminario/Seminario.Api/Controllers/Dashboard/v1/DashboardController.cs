@@ -6,10 +6,10 @@ namespace Seminario.Api.Controllers.Dashboard.v1
 {
     [Route("api/v1/dashboard")]
     [ApiController]
-    public class DashboardController(IAppDbContext ctx, IUnitOfWork unit) : ControllerBase
+    public class DashboardController(IAppDbContext ctx, IDbSession unit) : ControllerBase
     {
         private readonly IAppDbContext _ctx = ctx;
-        private readonly IUnitOfWork _unit = unit;
+        private readonly IDbSession _unit = unit;
 
         [Route("home")]
         [HttpGet]
