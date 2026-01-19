@@ -4,7 +4,7 @@ using Seminario.Datos.Entidades;
 
 namespace Seminario.Datos.Repositorios;
 
-public interface IRepoCliente
+public interface IClienteRepo
 {
     Task<Cliente> FindByIdAsync(int id, bool asNoTracking = false);
 
@@ -14,11 +14,11 @@ public interface IRepoCliente
 
     void RemoveById(Cliente cliente);
 }
-public class RepoCliente : IRepoCliente
+public class ClienteRepo : IClienteRepo
 {
     private readonly AppDbContext _db;
 
-    public RepoCliente(AppDbContext db)
+    public ClienteRepo(AppDbContext db)
     {
         _db = db;
     }

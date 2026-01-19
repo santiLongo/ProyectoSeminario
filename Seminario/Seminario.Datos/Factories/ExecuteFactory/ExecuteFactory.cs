@@ -29,7 +29,7 @@ public abstract class ExecuteFactory
         catch (Exception ex)
         {
             await dbSession.Rollback();
-            throw;
+            throw ex;
         }
     }
 }

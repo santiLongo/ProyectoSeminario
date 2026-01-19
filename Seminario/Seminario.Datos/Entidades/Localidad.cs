@@ -32,6 +32,6 @@ public  class Localidad
     public virtual Provincia Provincia { get; set; }
     public virtual ICollection<Proveedor> Proveedores { get; set; } = new List<Proveedor>();
     public virtual ICollection<Taller> Talleres { get; set; } = new List<Taller>();
-    public virtual ICollection<Viaje> ViajesDestino { get; set; } = new List<Viaje>();
-    public virtual ICollection<Viaje> ViajesProcedencia { get; set; } = new List<Viaje>();
+    public virtual ICollection<Destino> Destinos { get; set; } = new List<Destino>();
+    public virtual ICollection<Procedencia> Procedencias { get; set; } = new List<Procedencia>();
 }

@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="Dashboard\GetHome\Handler\" />
     <Folder Include="Dashboard\GetHome\Command\" />
+    <Folder Include="ViajeServices\Add\Model\" />
   </ItemGroup>
 
 </Project>

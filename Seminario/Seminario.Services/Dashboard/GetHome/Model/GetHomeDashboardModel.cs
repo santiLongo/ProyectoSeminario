@@ -21,26 +21,26 @@ public class Alertas
 
 public class Cards
 {
-    public List<Viaje> Viajes { get; set; }
-    public List<Mantenimiento> MantenimientosActivos { get; set; }
-    public Finanzas Finanazas { get; set; }
+    public List<ViajeDashboard> Viajes { get; set; }
+    public List<MantenimientoDashboard> MantenimientosActivos { get; set; }
+    public FinanzasDashboard Finanazas { get; set; }
 }
 
-public class Viaje
+public class ViajeDashboard
 {
     public int IdViaje { get; set; }
     public string Destino { get; set; }
     public string Camion { get; set; }
 }
 
-public class Mantenimiento
+public class MantenimientoDashboard
 {
     public int IdMantenimiento { get; set; }
     public string Camion { get; set; }
     public string Taller { get; set; }
 }
 
-public class Finanzas
+public class FinanzasDashboard
 {
     public decimal CobrosPendientes { get; set; }
     public decimal PagosProximos { get; set; }

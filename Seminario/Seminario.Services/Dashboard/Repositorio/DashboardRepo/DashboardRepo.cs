@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using Dapper;
-using Seminario.Datos.Dapper;
 using Seminario.Services.Dashboard.GetHome.Model;
 
 namespace Seminario.Services.Dashboard.Repositorio.DashboardRepo
@@ -10,9 +9,9 @@ namespace Seminario.Services.Dashboard.Repositorio.DashboardRepo
         Task<Cabezera> GetCabezera();
         Task<Alertas> GetAlertas();
         Task<Cards> GetCards();
-        Task<List<Viaje>> GetViajes();
-        Task<List<Mantenimiento>> GetMantenimientos();
-        Task<Finanzas> GetFinanzas();
+        Task<List<ViajeDashboard>> GetViajes();
+        Task<List<MantenimientoDashboard>> GetMantenimientos();
+        Task<FinanzasDashboard> GetFinanzas();
     }
     public class DashboardRepo(IDbConnection connection) : IDashboardRepo
     {
@@ -75,7 +74,7 @@ namespace Seminario.Services.Dashboard.Repositorio.DashboardRepo
             throw new NotImplementedException();
         }
 
-        public async Task<List<Viaje>> GetViajes()
+        public async Task<List<ViajeDashboard>> GetViajes()
         {
             var sql = @"
                             SELECT 
@@ -87,12 +86,12 @@ namespace Seminario.Services.Dashboard.Repositorio.DashboardRepo
                             INNER JOIN camion camion ON camion.idCamion = viaje.idCamion
                             WHERE viaje.FechaDescarga IS NOT NULL
                             ORDER BY viaje.FechaDescarga DESC";
-            var data = await _connection.QueryAsync<Viaje>(sql);
+            var data = await _connection.QueryAsync<ViajeDashboard>(sql);
 
             return data.ToList();
         }
 
-        public async Task<List<Mantenimiento>> GetMantenimientos()
+        public async Task<List<MantenimientoDashboard>> GetMantenimientos()
         {
             var sql = @"SELECT 
 	                        mant.idMantenimiento	IdManteniemiento,
@@ -103,12 +102,12 @@ namespace Seminario.Services.Dashboard.Repositorio.DashboardRepo
                         INNER JOIN taller ON taller.idTaller = mant.idTaller
                         WHERE mant.fechaSalida IS NULL";
 
-            var data = await _connection.QueryAsync<Mantenimiento>(sql);
+            var data = await _connection.QueryAsync<MantenimientoDashboard>(sql);
 
             return data.ToList();
         }
 
-        public Task<Finanzas> GetFinanzas()
+        public Task<FinanzasDashboard> GetFinanzas()
         {
             var sql = @"
                         SELECT

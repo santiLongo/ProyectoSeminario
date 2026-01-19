@@ -38,7 +38,7 @@ public class Chofer
     public int Dni { get; set; }
 
     /// <summary>
-    /// Nro Registro Profecional
+    /// Nro Registro Profesional
     /// </summary>
     [Column("nroRegistro", TypeName = "bigint(20)")]
     public long? NroRegistro { get; set; }
@@ -47,7 +47,7 @@ public class Chofer
     public DateTime FechaAlta { get; set; }
 
     [Column("fechaBaja", TypeName = "datetime")]
-    public DateTime FechaBaja { get; set; }
+    public DateTime? FechaBaja { get; set; }
 
     [Required]
     [Column("userName")]

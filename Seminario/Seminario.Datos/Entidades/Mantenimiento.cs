@@ -29,7 +29,7 @@ public  class Mantenimiento
     public DateTime FechaEntrada { get; set; }
 
     [Column("fechaSalida", TypeName = "datetime")]
-    public DateTime FechaSalida { get; set; }
+    public DateTime? FechaSalida { get; set; }
 
     [Column(TypeName = "int(11)")]
     public int KilometrajeVehiculo { get; set; }

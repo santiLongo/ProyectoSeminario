@@ -6,7 +6,8 @@ namespace Seminario.Datos.Repositorios;
 
 public interface IUbicacionRepo
 {
-    Task<Localidad> GetLocalidadByIdAsync(int id, bool includeProvincia, bool asNoTracking = false);
+    IQueryable<Localidad> LocalidadQuery();
+    Task<Localidad> GetLocalidadByIdAsync(int id, bool includeProvincia = false, bool asNoTracking = false);
     Task<IList<Localidad>> GetLocalidadesByProvinciaAsync(int id);
     Task<Provincia> GetProvinciaByLocalidadAsync(int id, bool asNoTracking = false);
     void Add(Localidad localidad);
@@ -26,7 +27,12 @@ public class UbicacionRepo : IUbicacionRepo
         _ctx = ctx;
     }
 
-    public async Task<Localidad> GetLocalidadByIdAsync(int id, bool includeProvincia, bool asNoTracking = false)
+    public IQueryable<Localidad> LocalidadQuery()
+    {
+        return _ctx.Localidades.AsQueryable();
+    }
+    
+    public async Task<Localidad> GetLocalidadByIdAsync(int id, bool includeProvincia = false, bool asNoTracking = false)
     {
         var query = _ctx.Localidades.AsQueryable();
 
@@ -81,4 +87,10 @@ public class UbicacionRepo : IUbicacionRepo
     {
         _ctx.Paises.Remove(pais);
     }
+}
+
+public static class LocalidadQueryExtension
+{
+    public static IQueryable<Localidad> GetAllLocalidades(this IQueryable<Localidad> query, List<int> idLocalidades) =>
+        query.Where(l => idLocalidades.Contains(l.IdLocalidad));
 }

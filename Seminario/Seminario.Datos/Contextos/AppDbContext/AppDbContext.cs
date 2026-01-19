@@ -8,10 +8,14 @@ namespace Seminario.Datos.Contextos.AppDbContext
 {
     public interface IAppDbContext
     {
-        IRepoCliente ClienteRepo { get;}
+        IClienteRepo ClienteRepo { get;}
         IUsuarioRepo UsuarioRepo { get; }
         IBancoRepo BancoRepo { get; }
         ITipoCamionRepo TipoCamionRepo { get; }
+        IUbicacionRepo UbicacionRepo { get; }
+        ICamionRepo  CamionRepo { get; }
+        IChoferRepo ChoferRepo { get; }
+        IViajeRepo ViajeRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
     public partial class AppDbContext : DbContext, IAppDbContext
@@ -381,14 +385,28 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasOne(d => d.Cliente).WithMany(p => p.Viajes)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VIAJE_CLIENTE");
+            });
 
-                entity.HasOne(d => d.Destino).WithMany(p => p.ViajesDestino)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VIAJE_DESTINO");
+            modelBuilder.Entity<Destino>(entity =>
+            {
+                entity.HasKey(e => e.IdDestino);
 
-                entity.HasOne(d => d.Procendecia).WithMany(p => p.ViajesProcedencia)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VIAJE_PROCEDENCIA");
+                entity.HasOne(d => d.Viaje).WithMany(p => p.Destinos)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Localidad).WithMany(p => p.Destinos)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+            
+            modelBuilder.Entity<Procedencia>(entity =>
+            {
+                entity.HasKey(e => e.IdProcedencia);
+
+                entity.HasOne(d => d.Viaje).WithMany(p => p.Procendecias)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Localidad).WithMany(p => p.Procedencias)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             OnModelCreatingPartial(modelBuilder);
@@ -399,11 +417,14 @@ namespace Seminario.Datos.Contextos.AppDbContext
         #endregion
 
         #region Repos
-        public IRepoCliente ClienteRepo => new RepoCliente(this);
+        public IClienteRepo ClienteRepo => new ClienteRepo(this);
         public IUsuarioRepo UsuarioRepo => new UsuarioRepo(this);
         public IBancoRepo BancoRepo => new BancoRepo(this);
         public ITipoCamionRepo TipoCamionRepo => new TipoCamionRepo(this);
-
+        public IUbicacionRepo UbicacionRepo => new UbicacionRepo(this);
+        public ICamionRepo CamionRepo => new CamionRepo(this);
+        public IChoferRepo ChoferRepo => new ChoferRepo(this);
+        public IViajeRepo ViajeRepo => new ViajeRepo(this);
         #endregion
     }
 }

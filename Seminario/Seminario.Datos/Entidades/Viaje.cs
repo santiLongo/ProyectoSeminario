@@ -23,21 +23,24 @@ public class Viaje
     [Column("idCliente", TypeName = "int(11)")]
     public int IdCliente { get; set; }
 
-    [Precision(10, 0)]
-    public decimal Kilometros { get; set; }
+    [Column("kilometros", TypeName = "decimal(10,2)")]
+    [Precision(10, 2)]
+    public decimal? Kilometros { get; set; }
 
-    [Precision(10, 0)]
+    [Column("MontoTotal", TypeName = "decimal(10,2)")]
+    [Precision(10, 2)]
     public decimal MontoTotal { get; set; }
 
-    public float PrecioKm { get; set; }
+    [Column("precioKm", TypeName = "float")]
+    public float? PrecioKm { get; set; }
 
-    [Column(TypeName = "int(11)")]
+    [Column("Estado" ,TypeName = "int(11)")]
     public int? Estado { get; set; }
 
-    [Column(TypeName = "datetime")]
+    [Column("FechaPartida",TypeName = "datetime")]
     public DateTime FechaPartida { get; set; }
 
-    [Column(TypeName = "datetime")]
+    [Column("FechaDescarga",TypeName = "datetime")]
     public DateTime? FechaDescarga { get; set; }
 
     [Column("idChofer", TypeName = "int(11)")]
@@ -46,16 +49,12 @@ public class Viaje
     [Column("idCamion", TypeName = "int(11)")]
     public int IdCamion { get; set; }
 
+    [Column("Carga", TypeName = "char(20)")]
     [StringLength(20)]
     public string Carga { get; set; }
 
-    public float Kilos { get; set; }
-
-    [Column("idProcendecia", TypeName = "int(11)")]
-    public int IdProcendecia { get; set; }
-
-    [Column("idDestino", TypeName = "int(11)")]
-    public int IdDestino { get; set; }
+    [Column("Kilos", TypeName = "float")]
+    public float? Kilos { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime FechaAlta { get; set; }
@@ -74,6 +73,42 @@ public class Viaje
     public virtual Camion Camion { get; set; }
     public virtual Chofer Chofer { get; set; }
     public virtual Cliente Cliente { get; set; }
-    public virtual Localidad Destino { get; set; }
-    public virtual Localidad Procendecia { get; set; }
+    public virtual ICollection<Destino> Destinos { get; set; }
+    public virtual ICollection<Procedencia> Procendecias { get; set; }
+
+
+    public static Viaje Create()
+    {
+        return new Viaje
+        {
+            IdCliente = 0,
+            Kilometros = 0,
+            MontoTotal = 0,
+            PrecioKm = 0,
+            Estado = 0,
+            FechaPartida = default,
+            FechaDescarga = null,
+            IdChofer = 0,
+            IdCamion = 0,
+            Carga = string.Empty,
+            Kilos = 0,
+            FechaAlta = default,
+            UserAlta = string.Empty,
+            UserName = string.Empty,
+            UserDateTime = default,
+            Cobros = null,
+            Camion = null,
+            Chofer = null,
+            Cliente = null,
+            Destinos = null,
+            Procendecias = null
+        };
+    }
+}
+
+public static class EstadosViaje
+{
+    public const int EnViaje = 1;
+    public const int Finalizado = 2;
+    public const int Suspendido = 3;
 }
