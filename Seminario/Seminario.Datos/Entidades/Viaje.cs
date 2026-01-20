@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
@@ -12,9 +13,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdCamion", Name = "FK_VIAJE_CAMION")]
 [Index("IdChofer", Name = "FK_VIAJE_CHOFER")]
 [Index("IdCliente", Name = "FK_VIAJE_CLIENTE")]
-[Index("IdDestino", Name = "FK_VIAJE_DESTINO")]
-[Index("IdProcendecia", Name = "FK_VIAJE_PROCEDENCIA")]
-public class Viaje
+public class Viaje : IAuditable
 {
     [Key]
     [Column("idViaje", TypeName = "int(11)")]
@@ -70,11 +69,11 @@ public class Viaje
     [Column(TypeName = "datetime")]
     public DateTime UserDateTime { get; set; }
     public virtual ICollection<Cobro> Cobros { get; set; } = new List<Cobro>();
-    public virtual Camion Camion { get; set; }
-    public virtual Chofer Chofer { get; set; }
-    public virtual Cliente Cliente { get; set; }
-    public virtual ICollection<Destino> Destinos { get; set; }
-    public virtual ICollection<Procedencia> Procendecias { get; set; }
+    public virtual Camion Camion { get; set; } = new Camion();
+    public virtual Chofer Chofer { get; set; } = new  Chofer();
+    public virtual Cliente Cliente { get; set; } = new  Cliente();
+    public virtual ICollection<Destino> Destinos { get; set; } = new List<Destino>();
+    public virtual ICollection<Procedencia> Procendecias { get; set; } = new List<Procedencia>();
 
 
     public static Viaje Create()
@@ -95,14 +94,21 @@ public class Viaje
             FechaAlta = default,
             UserAlta = string.Empty,
             UserName = string.Empty,
-            UserDateTime = default,
-            Cobros = null,
-            Camion = null,
-            Chofer = null,
-            Cliente = null,
-            Destinos = null,
-            Procendecias = null
+            UserDateTime = default
         };
+    }
+
+    public void CreatedAt(DateTime date, string user)
+    {
+        this.UserDateTime = date;
+        this.UserName = user;
+        this.UserAlta = user;
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        this.UserDateTime = date;
+        this.UserName = user;
     }
 }
 

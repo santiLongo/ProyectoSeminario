@@ -2,7 +2,9 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Entidades;
+using Seminario.Datos.Entidades.Interfaces;
 using Seminario.Datos.Repositorios;
+using Seminario.Datos.Services.CurrentUserService;
 
 namespace Seminario.Datos.Contextos.AppDbContext
 {
@@ -20,8 +22,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
     }
     public partial class AppDbContext : DbContext, IAppDbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        { }
+        private readonly ICurrentUserService _currentUser;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUserService userService) : base(options)
+        {
+            _currentUser = userService;
+        }
 
         #region Entidades
         public DbSet<Usuario> Usuarios { get; set; }
@@ -99,7 +105,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Patente).IsFixedLength();
                 entity.Property(e => e.UserName).IsFixedLength();
 
-                entity.HasOne(d => d.TipoCamion).WithMany(p => p.Camiones).HasConstraintName("FK_CAMION_TIPOCAMION");
+                entity.HasOne(d => d.TipoCamion)
+                    .WithMany(p => p.Camiones)
+                    .HasForeignKey(f => f.IdTipoCamion)
+                    .HasConstraintName("FK_CAMION_TIPOCAMION");
             });
 
             modelBuilder.Entity<Chofer>(entity =>
@@ -124,15 +133,20 @@ namespace Seminario.Datos.Contextos.AppDbContext
             {
                 entity.HasKey(e => e.IdCobro).HasName("PRIMARY");
 
-                entity.HasOne(d => d.FormaPago).WithMany(p => p.Cobros)
+                entity.HasOne(d => d.FormaPago)
+                    .WithMany(p => p.Cobros)
+                    .HasForeignKey(f => f.IdFormaPago)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COBRO_FORMAPAGO");
 
-                entity.HasOne(d => d.Moneda).WithMany(p => p.Cobros)
+                entity.HasOne(d => d.Moneda)
+                    .WithMany(p => p.Cobros)
+                    .HasForeignKey(f => f.IdMoneda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COBRO_MONEDA");
 
                 entity.HasOne(d => d.Viaje).WithMany(p => p.Cobros)
+                    .HasForeignKey(f => f.IdViaje)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COBRO_VIAJE");
             });
@@ -142,19 +156,25 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdCobroCheque).HasName("PRIMARY");
 
                 entity.HasOne(d => d.Banco).WithMany(p => p.CobroCheques)
+                    .HasForeignKey(f => f.IdBanco)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COBROCHEQUE_BANCO");
 
-                entity.HasOne(d => d.Cobro).WithMany(p => p.CobroCheques).HasConstraintName("FK_COBROCHEQUE_COBRO");
+                entity.HasOne(d => d.Cobro).WithMany(p => p.CobroCheques)
+                    .HasForeignKey(f => f.IdCobro)
+                    .HasConstraintName("FK_COBROCHEQUE_COBRO");
             });
 
             modelBuilder.Entity<CompraRepuesto>(entity =>
             {
                 entity.HasKey(e => e.IdCompraRepuesto).HasName("PRIMARY");
 
-                entity.HasOne(d => d.Mantenimiento).WithMany(p => p.CompraRepuestos).HasConstraintName("FK_COMPRAREPUESTO_MANTENIMIENTO");
+                entity.HasOne(d => d.Mantenimiento).WithMany(p => p.CompraRepuestos)
+                    .HasForeignKey(f => f.IdMantenimiento)
+                    .HasConstraintName("FK_COMPRAREPUESTO_MANTENIMIENTO");
 
                 entity.HasOne(d => d.Proveedor).WithMany(p => p.CompraRepuestos)
+                    .HasForeignKey(f => f.IdProveedor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COMPRAREPUESTO_PROVEEDOR");
             });
@@ -163,7 +183,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
             {
                 entity.HasKey(e => e.IdDetalle).HasName("PRIMARY");
 
-                entity.HasOne(d => d.CompraRepuesto).WithMany(p => p.Detalles).HasConstraintName("FK_DETALLE_COMPRA/REPUESTO");
+                entity.HasOne(d => d.CompraRepuesto).WithMany(p => p.Detalles)
+                    .HasForeignKey(f => f.IdCompraRepuesto)
+                    .HasConstraintName("FK_DETALLE_COMPRA/REPUESTO");
             });
 
             modelBuilder.Entity<Especialidad>(entity =>
@@ -187,7 +209,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Descripcion).IsFixedLength();
                 entity.Property(e => e.UserName).IsFixedLength();
 
-                entity.HasOne(d => d.Provincia).WithMany(p => p.Localidades).HasConstraintName("FK_LOCALIDAD_PROVINCIA");
+                entity.HasOne(d => d.Provincia)
+                    .WithMany(p => p.Localidades)
+                    .HasForeignKey(f => f.IdProvincia)
+                    .HasConstraintName("FK_LOCALIDAD_PROVINCIA");
             });
 
             modelBuilder.Entity<Mantenimiento>(entity =>
@@ -197,10 +222,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Titulo).IsFixedLength();
 
                 entity.HasOne(d => d.Taller).WithMany(p => p.Mantenimientos)
+                    .HasForeignKey(f => f.IdTaller)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MANTENIMIENTO_TALLER");
 
                 entity.HasOne(d => d.Vehiculo).WithMany(p => p.Mantenimientos)
+                    .HasForeignKey(f => f.IdVehiculo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MANTENIMIENTO_CAMION");
             });
@@ -211,7 +238,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
 
                 entity.Property(e => e.UserName).IsFixedLength();
 
-                entity.HasOne(d => d.Mantenimiento).WithMany(p => p.Observaciones).HasConstraintName("FK_MANTENIMIENTO/OBSERVACION_MANTENIEMIENTO");
+                entity.HasOne(d => d.Mantenimiento).WithMany(p => p.Observaciones)
+                    .HasForeignKey(f => f.IdMantenimiento)
+                    .HasConstraintName("FK_MANTENIMIENTO/OBSERVACION_MANTENIEMIENTO");
             });
 
             modelBuilder.Entity<MantenimientoTarea>(entity =>
@@ -221,7 +250,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Descripcion).IsFixedLength();
                 entity.Property(e => e.UserName).IsFixedLength();
 
-                entity.HasOne(d => d.Mantenimiento).WithMany(p => p.Tareas).HasConstraintName("FK_MANTENIMIENTO/TAREA_MANTENIEMIENTO");
+                entity.HasOne(d => d.Mantenimiento).WithMany(p => p.Tareas)
+                    .HasForeignKey(f => f.IdMantenimiento)
+                    .HasConstraintName("FK_MANTENIMIENTO/TAREA_MANTENIEMIENTO");
             });
 
             modelBuilder.Entity<Moneda>(entity =>
@@ -238,10 +269,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Concepto).IsFixedLength();
 
                 entity.HasOne(d => d.FormaPago).WithMany(p => p.Pagos)
+                    .HasForeignKey(f => f.IdFormaPago)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGO_FORMAPAGO");
 
                 entity.HasOne(d => d.Moneda).WithMany(p => p.Pagos)
+                    .HasForeignKey(f => f.IdMoneda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGO_MONEDA");
             });
@@ -251,10 +284,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdPagoCompraRepuesto).HasName("PRIMARY");
 
                 entity.HasOne(d => d.CompraRepuesto).WithMany(p => p.PagoCompraRepuestos)
+                    .HasForeignKey(f => f.IdCompraRepuesto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOCOMPRA_COMPRAREPUESTO");
 
                 entity.HasOne(d => d.Pago).WithMany(p => p.PagoCompraRepuestos)
+                    .HasForeignKey(f => f.IdPago)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOCOMPRA_PAGO");
             });
@@ -264,10 +299,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdPagoMantenimiento).HasName("PRIMARY");
 
                 entity.HasOne(d => d.Mantenimiento).WithMany(p => p.PagoMantenimientos)
+                    .HasForeignKey(f => f.IdMantenimiento)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOMANTENIMIENTO_MANTENIMIENTO");
 
                 entity.HasOne(d => d.Pago).WithMany(p => p.PagoMantenimientos)
+                    .HasForeignKey(f => f.IdPago)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOMANTENIMIENTO_PAGO");
             });
@@ -277,10 +314,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdPagoCheque).HasName("PRIMARY");
 
                 entity.HasOne(d => d.Banco).WithMany(p => p.PagoCheques)
+                    .HasForeignKey(f => f.IdBanco)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOCHEQUE_BANCO");
 
                 entity.HasOne(d => d.Pago).WithMany(p => p.PagoCheques)
+                    .HasForeignKey(f => f.IdPago)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOCHEQUE_PAGO");
             });
@@ -303,6 +342,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Responsable).IsFixedLength();
 
                 entity.HasOne(d => d.Localidad).WithMany(p => p.Proveedores)
+                    .HasForeignKey(f => f.IdLocalidad)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PROVEEDOR_LOCALIDAD");
             });
@@ -312,10 +352,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdProveedorEspecialidad).HasName("PRIMARY");
 
                 entity.HasOne(d => d.Especialidad).WithMany(p => p.ProveedorEspecialidades)
+                    .HasForeignKey(f => f.IdEspecialidad)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PROVEEDOR/ESPECIALIDAD_ESPECIALIDAD");
 
                 entity.HasOne(d => d.Proveedor).WithMany(p => p.ProveedorEspecialidades)
+                    .HasForeignKey(f => f.IdProveedor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PROVEEDOR/ESPECIALIDAD_PROVEEDOR");
             });
@@ -327,7 +369,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Descripcion).IsFixedLength();
                 entity.Property(e => e.UserName).IsFixedLength();
 
-                entity.HasOne(d => d.Pais).WithMany(p => p.Provincias).HasConstraintName("FK_PROVINCIA_PAIS");
+                entity.HasOne(d => d.Pais).WithMany(p => p.Provincias)
+                    .HasForeignKey(f => f.IdPais)
+                    .HasConstraintName("FK_PROVINCIA_PAIS");
             });
 
             modelBuilder.Entity<Taller>(entity =>
@@ -339,6 +383,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.Responsable).IsFixedLength();
 
                 entity.HasOne(d => d.Localidad).WithMany(p => p.Talleres)
+                    .HasForeignKey(f => f.IdLocalidad)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TALLER_LOCALIDAD");
             });
@@ -350,10 +395,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.IdTallerEspecialidad).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Especialidad).WithMany(p => p.TallerEspecialidades)
+                    .HasForeignKey(f => f.IdEspecialidad)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TALLER/ESPECIALIDAD_ESPECIALIDAD");
 
                 entity.HasOne(d => d.Taller).WithMany(p => p.TallerEspecialidades)
+                    .HasForeignKey(f => f.IdTaller)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TALLER/ESPECIALIDAD_TALLER");
             });
@@ -375,14 +422,17 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.UserName).IsFixedLength();
 
                 entity.HasOne(d => d.Camion).WithMany(p => p.Viajes)
+                    .HasForeignKey(f => f.IdCamion)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VIAJE_CAMION");
 
                 entity.HasOne(d => d.Chofer).WithMany(p => p.Viajes)
+                    .HasForeignKey(f => f.IdChofer)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VIAJE_CHOFER");
 
                 entity.HasOne(d => d.Cliente).WithMany(p => p.Viajes)
+                    .HasForeignKey(f => f.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VIAJE_CLIENTE");
             });
@@ -392,9 +442,11 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdDestino);
 
                 entity.HasOne(d => d.Viaje).WithMany(p => p.Destinos)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .HasForeignKey(f => f.IdViaje)
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.Localidad).WithMany(p => p.Destinos)
+                    .HasForeignKey(f => f.IdLocalidad)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
             
@@ -403,9 +455,11 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasKey(e => e.IdProcedencia);
 
                 entity.HasOne(d => d.Viaje).WithMany(p => p.Procendecias)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .HasForeignKey(f => f.IdViaje)
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.Localidad).WithMany(p => p.Procedencias)
+                    .HasForeignKey(f => f.IdLocalidad)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
@@ -426,5 +480,31 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public IChoferRepo ChoferRepo => new ChoferRepo(this);
         public IViajeRepo ViajeRepo => new ViajeRepo(this);
         #endregion
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e =>
+                    e.State == EntityState.Added ||
+                    e.State == EntityState.Modified
+                );
+
+            foreach (var entry in entries)
+            {
+                if (entry.Entity is IAuditable auditable)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        auditable.CreatedAt(DateTime.Now, _currentUser?.Name);
+                    }
+                    else if (entry.State == EntityState.Modified)
+                    {
+                        auditable.ModifiedAt(DateTime.Now, _currentUser?.Name);
+                    }
+                }
+            }
+            
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

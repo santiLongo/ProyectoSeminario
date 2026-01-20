@@ -35,3 +35,9 @@ public class ViajeRepo : IViajeRepo
         _ctx.Viajes.Remove(viaje);
     }
 }
+
+public static class ViajeQueryExtensions
+{
+    public static IQueryable<Viaje> WhereEnViaje(this IQueryable<Viaje> query) =>
+        query.Where(v => v.FechaDescarga != null && v.Estado == EstadosViaje.EnViaje);
+}

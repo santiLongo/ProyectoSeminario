@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Seminario.Datos.Entidades;
 
-[Table("procendecia")]
+[Table("procedencia")]
 public class Procedencia
 {
     [Column("idProcedencia", TypeName = "int(11)")]

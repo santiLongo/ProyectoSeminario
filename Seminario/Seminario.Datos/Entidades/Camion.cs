@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
@@ -12,7 +13,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdTipoCamion", Name = "FK_CAMION_TIPOCAMION")]
 [Index("NroChasis", Name = "id_numero_chasis", IsUnique = true)]
 [Index("NroMotor", Name = "id_numero_motor", IsUnique = true)]
-public class Camion
+public class Camion : IAuditable
 {
     [Key]
     [Column("idCamion", TypeName = "int(11)")]
@@ -55,4 +56,38 @@ public class Camion
     public virtual TipoCamion TipoCamion { get; set; }
     public virtual ICollection<Mantenimiento> Mantenimientos { get; set; } = new List<Mantenimiento>();
     public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
+    
+    public void CreatedAt(DateTime date, string user)
+    {
+        this.UserDateTime = date;
+        this.UserName = user;
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        this.UserDateTime = date;
+        this.UserName = user;
+    }
+
+    public static Camion Create()
+    {
+        return new Camion
+        {
+            IdCamion = 0,
+            Patente = string.Empty,
+            Marca = string.Empty,
+            Modelo = string.Empty,
+            NroChasis = string.Empty,
+            NroMotor = string.Empty,
+            IdTipoCamion = 0,
+            FechaAlta = null,
+            FechaBaja = null,
+            UserName = string.Empty,
+            UserDateTime = null,
+            TipoCamion = null,
+            Mantenimientos = null,
+            Viajes = null
+        };
+    }
+    
 }

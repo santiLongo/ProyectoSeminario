@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
 [Table("chofer")]
 [Index("Dni", Name = "id_dni", IsUnique = true)]
 [Index("NroRegistro", Name = "id_nro_registro", IsUnique = true)]
-public class Chofer
+public class Chofer : IAuditable
 {
     [Key]
     [Column("idChofer", TypeName = "int(11)")]
@@ -58,4 +59,35 @@ public class Chofer
     public DateTime UserDateTime { get; set; }
 
     public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
+
+    public static Chofer Create()
+    {
+        return new Chofer
+        {
+            IdChofer = 0,
+            Nombre = null,
+            Apellido = null,
+            Telefono = null,
+            Direccion = null,
+            Dni = 0,
+            NroRegistro = null,
+            FechaAlta = default,
+            FechaBaja = null,
+            UserName = null,
+            UserDateTime = default,
+            Viajes = null
+        };
+    }
+
+    public void CreatedAt(DateTime time, string userName)
+    {
+        this.UserDateTime = time;
+        this.UserName = userName;
+    }
+
+    public void ModifiedAt(DateTime time, string userName)
+    {
+        this.UserDateTime = time;
+        this.UserName = userName;
+    }
 }

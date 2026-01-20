@@ -13,8 +13,8 @@ namespace Seminario.Datos.Entidades
 
         [Required]
         [StringLength(100)]
-        [Column("mail")]
-        public string? Mail { get; set; }
+        [Column("name")]
+        public string? Name { get; set; }
 
         [Required]
         [StringLength(30)]

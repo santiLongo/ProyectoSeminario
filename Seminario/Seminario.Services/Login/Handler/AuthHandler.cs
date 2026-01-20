@@ -24,7 +24,7 @@ namespace Seminario.Services.Login.Handler
         {
             try
             {
-                var usuario = await _ctx.UsuarioRepo.FindMailAsync(command.Mail);
+                var usuario = await _ctx.UsuarioRepo.FindNameAsync(command.Mail);
 
                 if (usuario == null)
                 {
@@ -50,7 +50,7 @@ namespace Seminario.Services.Login.Handler
                     {
                         new Claim(ClaimTypes.Role, usuario.Role!),
                         new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, usuario.Mail!),
+                        new Claim(JwtRegisteredClaimNames.Name, usuario.Name!),
                         new Claim(JwtRegisteredClaimNames.Exp,
                             new DateTimeOffset(expiration).ToUnixTimeSeconds().ToString())
                     }),
@@ -63,7 +63,7 @@ namespace Seminario.Services.Login.Handler
                 var response = new AuthResponse
                 {
                     Id = usuario.Id,
-                    Mail = usuario.Mail!,
+                    Mail = usuario.Name!,
                     Token = handlerToken.WriteToken(token)
                 };
 

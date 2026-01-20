@@ -7,6 +7,7 @@ namespace Seminario.Datos.Repositorios;
 public interface IChoferRepo
 {
     IQueryable<Chofer> Query();
+    Task<Chofer?> GetAsync(Func<IQueryable<Chofer>, IQueryable<Chofer>> querys);
     void Add(Chofer chofer);
     void Remove(Chofer chofer);
 }
@@ -22,6 +23,16 @@ public class ChoferRepo : IChoferRepo
 
     public IQueryable<Chofer> Query()
         => _ctx.Choferes;
+
+    public async Task<Chofer?> GetAsync(Func<IQueryable<Chofer>, IQueryable<Chofer>> querys)
+    {
+        IQueryable<Chofer> query = _ctx.Choferes.AsQueryable();
+        
+        if (querys != null)
+            query = querys(query);
+        
+        return await query.FirstOrDefaultAsync();
+    }
 
     public void Add(Chofer chofer)
     {
@@ -41,4 +52,7 @@ public static class ChoferQueryExtensions
 
     public static IQueryable<Chofer> ConNoViajesFinalizados(this IQueryable<Chofer> query)
         => query.Include(c => c.Viajes.Where(v => v.FechaDescarga == null));
+
+    public static IQueryable<Chofer> WhereEqualIdChofer(this IQueryable<Chofer> query, int id) =>
+        query.Where(q => q.IdChofer == id);
 }

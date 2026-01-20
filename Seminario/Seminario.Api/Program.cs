@@ -1,14 +1,11 @@
-using System.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Mapper;
 using System.Text;
-using MySqlConnector;
-using Seminario.Datos.Dapper;
+using Seminario.Datos.Services.CurrentUserService;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,6 +67,11 @@ builder.Services.AddAuthorization(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+//Implemento esto para poder acceder al header de la request
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 var app = builder.Build();
 

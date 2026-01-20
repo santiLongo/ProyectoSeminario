@@ -25,12 +25,5 @@
     <ProjectReference Include="..\Seminario.Datos\Seminario.Datos.csproj" />
     <ProjectReference Include="..\Seminario.Services\Seminario.Services.csproj" />
   </ItemGroup>
-	
-	
-			
-
-  <ItemGroup>
-    <Folder Include="Controllers\Viaje\v1\" />
-  </ItemGroup>
 
 </Project>

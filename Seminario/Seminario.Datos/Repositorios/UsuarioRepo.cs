@@ -14,7 +14,7 @@ namespace Seminario.Datos.Repositorios
     {
         void Add(Usuario usuario);
         void Remove(Usuario usuario);
-        Task<Usuario> FindMailAsync(string mail, bool asNoTracking = false);
+        Task<Usuario> FindNameAsync(string mail, bool asNoTracking = false);
     }
     public class UsuarioRepo : IUsuarioRepo
     {
@@ -35,13 +35,13 @@ namespace Seminario.Datos.Repositorios
             _ctx.Usuarios.Remove(usuario);
         }
 
-        public async Task<Usuario> FindMailAsync(string mail, bool asNoTracking = false)
+        public async Task<Usuario> FindNameAsync(string name, bool asNoTracking = false)
         {
             if (asNoTracking)
             {
-                return await _ctx.Usuarios.AsNoTracking().FirstOrDefaultAsync(e => e.Mail == mail);
+                return await _ctx.Usuarios.AsNoTracking().FirstOrDefaultAsync(e => e.Name == name);
             }
-            return await _ctx.Usuarios.FirstOrDefaultAsync(e => e.Mail == mail);
+            return await _ctx.Usuarios.FirstOrDefaultAsync(e => e.Name == name);
         }
     }
 }

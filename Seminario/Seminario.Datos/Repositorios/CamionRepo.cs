@@ -7,26 +7,24 @@ namespace Seminario.Datos.Repositorios;
 
 public interface ICamionRepo
 {
-    IQueryable<Camion> Query();
     Task<Camion> GetCamionByIdAsync(int id, bool includeMantenimientos = false, bool asNoTracking = false);
     Task<bool> TieneMantenimetoActualAsync(Camion camion);
     Task<bool> EstaEnViajesAsync(Camion camion);    
     void Add(Camion camion);
     void Remove(Camion camion);
+    Task<Camion?> GetAsync(
+        Func<IQueryable<Camion>, IQueryable<Camion>> querys
+    );
 }
 
 public class CamionRepo : ICamionRepo
 {
     private readonly  AppDbContext _ctx;
+    private ICamionRepo _camionRepoImplementation;
 
     public CamionRepo(AppDbContext ctx)
     {
         _ctx = ctx;
-    }
-
-    public IQueryable<Camion> Query()
-    {
-        return _ctx.Camiones.AsQueryable();
     }
     
     public async Task<Camion> GetCamionByIdAsync(int id, bool includeMantenimientos = false, bool asNoTracking = false)
@@ -71,6 +69,16 @@ public class CamionRepo : ICamionRepo
     {
         _ctx.Remove(camion);
     }
+
+    public async Task<Camion?> GetAsync(Func<IQueryable<Camion>, IQueryable<Camion>> querys)
+    {
+        IQueryable<Camion> query = _ctx.Camiones.AsQueryable();
+        
+        if (querys != null)
+            query = querys(query);
+        
+        return await query.FirstOrDefaultAsync();
+    }
 }
 
 public static class CamionQueryExtension
@@ -80,4 +88,7 @@ public static class CamionQueryExtension
     
     public static IQueryable<Camion> IncludeCurrentViaje(this IQueryable<Camion> query) => 
         query.Include(c => c.Viajes.Where(m => m.FechaDescarga == null));
+    
+    public static IQueryable<Camion> WhereEqualsIdCamion(this IQueryable<Camion> query, int  idCamion) => 
+        query.Where(c => c.IdCamion == idCamion);
 }

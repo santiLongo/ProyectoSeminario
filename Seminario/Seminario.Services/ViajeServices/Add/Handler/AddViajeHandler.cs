@@ -22,7 +22,7 @@ public class AddViajeHandler
         viaje.Camion = await ValidarCamion(command.Camion);
         viaje.IdCamion = viaje.Camion.IdCamion;
         //
-	    viaje.Chofer = await ValidarChofer(command.Chofer);
+        viaje.Chofer = await ValidarChofer(command.Chofer);
         viaje.IdChofer = viaje.Chofer.IdChofer;
 	    //
         var cliente = await _ctx.ClienteRepo.FindByIdAsync(command.Cliente);
@@ -44,6 +44,8 @@ public class AddViajeHandler
         viaje.Kilos = command.Kilos;
         viaje.MontoTotal = command.MontoTotal;
         viaje.PrecioKm = (float)(viaje.MontoTotal / viaje.Kilometros)!;
+        viaje.FechaAlta = DateTime.Today;
+        viaje.FechaDescarga = command.FechaDescarga ??  DateTime.Today;
         //
         foreach (var dest in destinos)
         {
@@ -72,10 +74,11 @@ public class AddViajeHandler
 
     private async Task<Camion> ValidarCamion(int idCamion)
     {
-        var camion = await _ctx.CamionRepo.Query()
-            .IncludeMantenimientoActual()
-            .IncludeCurrentViaje()
-            .FirstOrDefaultAsync(c => c.IdCamion == idCamion);
+        var camion = await _ctx.CamionRepo.GetAsync( q => 
+                q.IncludeMantenimientoActual()
+                 .IncludeCurrentViaje()
+                 .WhereEqualsIdCamion(idCamion)
+                );
         
         if (camion == null)
         {
