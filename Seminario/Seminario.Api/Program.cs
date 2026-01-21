@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Mapper;
 using System.Text;
+using Seminario.Api.Services.CurrentUserService;
 using Seminario.Datos.Services.CurrentUserService;
 
 

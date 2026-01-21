@@ -1,15 +1,8 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Seminario.Datos.Services.CurrentUserService;
 
-namespace Seminario.Datos.Services.CurrentUserService;
-
-public interface ICurrentUserService
-{
-    int? UserId { get; }
-    string? Name { get; }
-    string? Role { get; }
-}
+namespace Seminario.Api.Services.CurrentUserService;
 
 public class CurrentUserService : ICurrentUserService
 {
