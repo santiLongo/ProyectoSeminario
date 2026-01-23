@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Seminario.Datos;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 using Seminario.Datos.Repositorios;
@@ -39,13 +40,14 @@ public class AddViajeHandler
         var procedencias = await ValidarDestinoProcencias(command.Procendecias);
         //
         viaje.Carga = command.Carga;
-        viaje.Estado = EstadosViaje.EnViaje;
+        viaje.Estado = EstadosViaje.EnViaje.ToInt();
         viaje.Kilometros =  command.Kilometros;
         viaje.Kilos = command.Kilos;
+        viaje.IdMoneda = command.IdMoneda;
         viaje.MontoTotal = command.MontoTotal;
         viaje.PrecioKm = (float)(viaje.MontoTotal / viaje.Kilometros)!;
         viaje.FechaAlta = DateTime.Today;
-        viaje.FechaDescarga = command.FechaDescarga ??  DateTime.Today;
+        viaje.FechaPartida = command.FechaPartida;
         //
         foreach (var dest in destinos)
         {

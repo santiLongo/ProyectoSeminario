@@ -6,6 +6,7 @@ namespace Seminario.Datos.Repositorios;
 
 public interface IUbicacionRepo
 {
+    Task<List<Localidad>> GetLocalidadRange(List<int> ids);
     IQueryable<Localidad> LocalidadQuery();
     Task<Localidad> GetLocalidadByIdAsync(int id, bool includeProvincia = false, bool asNoTracking = false);
     Task<IList<Localidad>> GetLocalidadesByProvinciaAsync(int id);
@@ -21,10 +22,15 @@ public interface IUbicacionRepo
 public class UbicacionRepo : IUbicacionRepo
 {
     private readonly AppDbContext _ctx;
-    
+
     public UbicacionRepo(AppDbContext ctx)
     {
         _ctx = ctx;
+    }
+
+    public async Task<List<Localidad>> GetLocalidadRange(List<int> ids)
+    {
+        return await _ctx.Localidades.Where(l => ids.Contains(l.IdLocalidad)).ToListAsync();
     }
 
     public IQueryable<Localidad> LocalidadQuery()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.TipoCamionCrud.Delete.Command;
 using Seminario.Services.TipoCamionCrud.Delete.Handler;
@@ -23,6 +24,7 @@ public class TipoCamionController : ControllerBase
     
     [HttpGet]
     [Route("getAll")]
+    [SeminarioResponse]
     public async Task<List<GetAllTipoCamionModel>> GetAll([FromQuery] GetAllTipoCamionCommand command)
     {
         var handler = new GetAllTipoCamionHandler(_ctx);
@@ -31,6 +33,7 @@ public class TipoCamionController : ControllerBase
     
     [HttpPost]
     [Route("upsert")]
+    [SeminarioResponse]
     public async Task Upsert([FromBody] UpsertTipoCamionCommand command)
     {
         var handler = new UpsertTipoCamionHandler(_ctx);
@@ -39,6 +42,7 @@ public class TipoCamionController : ControllerBase
     
     [HttpPost]
     [Route("delete")]
+    [SeminarioResponse]
     public async Task Delete([FromBody] DeleteTipoCamionCommand command)
     {
         var handler = new DeleteTipoCamionHandler(_ctx);

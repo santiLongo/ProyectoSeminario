@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.BancoCrud.Delete.Command;
 using Seminario.Services.BancoCrud.Delete.Handler;
@@ -23,6 +24,7 @@ namespace Seminario.Api.Controllers.Banco.v1
 
         [HttpGet]
         [Route("getAll")]
+        [SeminarioResponse]
         public async Task<List<GetAllBancoModel>> GetAll([FromQuery] GetAllBancoCommand command)
         {
             var handler = new GetAllBancoHandler(_ctx);
@@ -31,6 +33,7 @@ namespace Seminario.Api.Controllers.Banco.v1
 
         [HttpPost]
         [Route("upsert")]
+        [SeminarioResponse]
         public async Task Upsert([FromBody] UpsertBancoCommand command)
         {
             var handler = new UpsertBancoHandler(_ctx);
@@ -39,6 +42,7 @@ namespace Seminario.Api.Controllers.Banco.v1
 
         [HttpPost]
         [Route("delete")]
+        [SeminarioResponse]
         public async Task Delete([FromBody] DeleteBancoCommand command)
         {
             var handler = new DeleteBancoHandler(_ctx);

@@ -17,12 +17,67 @@ public class UpdateViajeHandler
 
     public async Task Handle(UpdateViajeCommand command)
     {
-        var viaje = _ctx.ViajeRepo.Query().WhereEnViaje().FirstOrDefaultAsync(v => v.IdViaje == command.IdViaje);
+        var viaje = await _ctx.ViajeRepo.Query()
+            .IncludeDestinosProcedencias()
+            .IncludeCamion()
+            .IncludeChofer()
+            .WhereEnViaje()
+            .FirstOrDefaultAsync(v => v.IdViaje == command.IdViaje);
 
         if (viaje == null)
         {
             throw new InvalidOperationException($"El viaje no existe o se encuentra finalizado");
         }
+
+        var camion = viaje.IdCamion ==  command.Camion ? viaje.Camion : await ValidarCamion(command.Camion);
+        
+        var chofer = viaje.IdChofer ==  command.Chofer ? viaje.Chofer : await ValidarChofer(command.Chofer);
+
+        var newDestinos = await ValidarDestinoProcencias(command.Destinos);
+        var newProcedencias = await ValidarDestinoProcencias(command.Procendecias);
+        
+        viaje.IdCamion = camion.IdCamion;
+        viaje.Chofer.IdChofer = chofer.IdChofer;
+        viaje.Carga = command.Carga;
+        viaje.Kilos = command.Kilos;
+        viaje.Kilometros = command.Kilometros;
+        viaje.MontoTotal = command.MontoTotal;
+        //
+        var destinos = viaje.Destinos.ToList();
+        var destinoABorrar = destinos
+            .Where(d => !command.Destinos.Contains(d.IdLocalidad))
+            .ToList();
+        
+        if(destinoABorrar.Any()) _ctx.DestinoRepo.RemoveDestinos(destinoABorrar);
+
+        foreach (var dest in newDestinos)
+        {
+            if(destinos.Exists(d => d.IdLocalidad == dest.IdLocalidad)) continue;
+
+            var newDest = Destino.Create();
+            newDest.Localidad = dest;
+            newDest.Viaje = viaje;
+            viaje.Destinos.Add(newDest);
+        }
+        //
+        var procedencias = viaje.Procendecias.ToList();
+        var procedenciasABorrar = procedencias
+            .Where(d => !command.Procendecias.Contains(d.IdLocalidad))
+            .ToList();
+        
+        if(procedenciasABorrar.Any()) _ctx.ProcedenciaRepo.RemoveProcedencias(procedenciasABorrar);
+
+        foreach (var proc in newProcedencias)
+        {
+            if(procedencias.Exists(d => d.IdLocalidad == proc.IdLocalidad)) continue;
+
+            var newProc = Procedencia.Create();
+            newProc.Localidad = proc;
+            newProc.Viaje = viaje;
+            viaje.Procendecias.Add(newProc);
+        }
+        
+        await _ctx.SaveChangesAsync();
     }
     
     private async Task<Camion> ValidarCamion(int idCamion)

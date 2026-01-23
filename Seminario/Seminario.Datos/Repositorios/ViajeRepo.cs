@@ -1,4 +1,5 @@
-﻿using Seminario.Datos.Contextos.AppDbContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 
 namespace Seminario.Datos.Repositorios;
@@ -39,5 +40,21 @@ public class ViajeRepo : IViajeRepo
 public static class ViajeQueryExtensions
 {
     public static IQueryable<Viaje> WhereEnViaje(this IQueryable<Viaje> query) =>
-        query.Where(v => v.FechaDescarga != null && v.Estado == EstadosViaje.EnViaje);
+        query.Where(v => (v.FechaDescarga == null || v.FechaDescarga > DateTime.Today) 
+                         && v.Estado == EstadosViaje.EnViaje.ToInt());
+
+    public static IQueryable<Viaje> IncludeDestinosProcedencias(this IQueryable<Viaje> query) =>
+        query.Include(c => c.Destinos).Include(c => c.Procendecias);
+    
+    public static IQueryable<Viaje> IncludeCamion(this IQueryable<Viaje> query) =>
+        query.Include(c => c.Camion);
+    
+    public static IQueryable<Viaje> IncludeChofer(this IQueryable<Viaje> query) =>
+        query.Include(c => c.Chofer);
+    
+    public static IQueryable<Viaje> Forzable(this IQueryable<Viaje> query) =>
+        query.Where(v => v.Estado < EstadosViaje.Suspendido.ToInt());
+
+    public static IQueryable<Viaje> IncludeCliente(this IQueryable<Viaje> query) =>
+        query.Include(v => v.Cliente);
 }

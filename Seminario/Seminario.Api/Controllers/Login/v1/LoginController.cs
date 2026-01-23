@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.Login.Command;
 using Seminario.Services.Login.Handler;
@@ -21,6 +22,7 @@ namespace Seminario.Api.Controllers.Login.v1
         }
 
         [HttpPost("auth")]
+        [SeminarioResponse]
         [AllowAnonymous]
         public async Task<AuthResponse> Auth([FromBody] AuthCommand command)
         {

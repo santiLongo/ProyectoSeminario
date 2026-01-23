@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.ChoferesCrud.Upsert.Command;
 using Seminario.Services.ChoferesCrud.Upsert.Handler;
@@ -18,6 +19,7 @@ public class ChoferesController : ControllerBase
 
     [HttpPost]
     [Route("upsert")]
+    [SeminarioResponse]
     public async Task Upsert([FromBody] UpsertChoferCommand command)
     {
         var handler = new UpsertChoferHandler(_ctx);

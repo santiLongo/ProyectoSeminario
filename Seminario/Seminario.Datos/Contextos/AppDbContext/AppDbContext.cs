@@ -18,6 +18,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
         ICamionRepo  CamionRepo { get; }
         IChoferRepo ChoferRepo { get; }
         IViajeRepo ViajeRepo { get; }
+        IDestinoRepo DestinoRepo { get; }
+        IProcedenciaRepo ProcedenciaRepo { get; }
+        IMantenimientoRepo MantenimientoRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
     public partial class AppDbContext : DbContext, IAppDbContext
@@ -84,6 +87,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public DbSet<TipoCamion> TipoCamiones { get; set; }
 
         public DbSet<Viaje> Viajes { get; set; }
+        
+        public DbSet<Destino> Destinos { get; set; }
+        
+        public DbSet<Procedencia> Procedencias { get; set; }
             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -479,6 +486,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public ICamionRepo CamionRepo => new CamionRepo(this);
         public IChoferRepo ChoferRepo => new ChoferRepo(this);
         public IViajeRepo ViajeRepo => new ViajeRepo(this);
+        public IDestinoRepo DestinoRepo => new DestinoRepo(this);
+        public IProcedenciaRepo ProcedenciaRepo => new ProcedenciaRepo(this);
+        public IMantenimientoRepo MantenimientoRepo => new MantenimientoRepo(this);
         #endregion
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -500,6 +510,22 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     else if (entry.State == EntityState.Modified)
                     {
                         auditable.ModifiedAt(DateTime.Now, _currentUser?.Name);
+                    }
+                }
+
+                if (entry.Entity is ICreatedTrigger created)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        created.Trigger();
+                    }
+                }
+                
+                if (entry.Entity is IModifiedTrigger modified)
+                {
+                    if (entry.State == EntityState.Modified)
+                    {
+                        modified.Trigger();
                     }
                 }
             }

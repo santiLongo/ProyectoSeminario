@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.Ubicacion.Upsert.Command;
 using Seminario.Services.Ubicacion.Upsert.Handler;
@@ -16,6 +17,7 @@ public class UbicacionController : ControllerBase
     
     [HttpPost]
     [Route("upsert")]
+    [SeminarioResponse]
     public async Task Upsert([FromBody] UpsertUbicacionCommand command)
     {
         var handler = new UpsertUbicacionHandler(_ctx);

@@ -13,7 +13,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdCamion", Name = "FK_VIAJE_CAMION")]
 [Index("IdChofer", Name = "FK_VIAJE_CHOFER")]
 [Index("IdCliente", Name = "FK_VIAJE_CLIENTE")]
-public class Viaje : IAuditable
+public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
 {
     [Key]
     [Column("idViaje", TypeName = "int(11)")]
@@ -68,6 +68,10 @@ public class Viaje : IAuditable
 
     [Column(TypeName = "datetime")]
     public DateTime UserDateTime { get; set; }
+    
+    [Column("idMoneda", TypeName =  "int(11)")]
+    public int? IdMoneda { get; set; }
+    
     public virtual ICollection<Cobro> Cobros { get; set; } = new List<Cobro>();
     public virtual Camion Camion { get; set; } = new Camion();
     public virtual Chofer Chofer { get; set; } = new  Chofer();
@@ -110,11 +114,21 @@ public class Viaje : IAuditable
         this.UserDateTime = date;
         this.UserName = user;
     }
-}
 
-public static class EstadosViaje
-{
-    public const int EnViaje = 1;
-    public const int Finalizado = 2;
-    public const int Suspendido = 3;
+    void ICreatedTrigger.Trigger()
+    {
+        this.PrecioKm = (float)(MontoTotal / Kilometros);
+    }
+
+    void IModifiedTrigger.Trigger()
+    {
+        this.PrecioKm = (float)(MontoTotal / Kilometros);
+        //
+        if(this.FechaDescarga >= DateTime.Today && Estado == EstadosViaje.EnViaje.ToInt())
+            this.Estado = EstadosViaje.Finalizado.ToInt();
+        //
+        var cobrado = Cobros.Sum(c => c.Monto);
+        if (cobrado == MontoTotal && Estado < EstadosViaje.Suspendido.ToInt())
+            this.Estado = EstadosViaje.Cobrado.ToInt();
+    }
 }
