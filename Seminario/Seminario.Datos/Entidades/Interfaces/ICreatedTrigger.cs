@@ -2,5 +2,5 @@
 
 public interface ICreatedTrigger
 {
-    void Trigger();
+    void Created();
 }

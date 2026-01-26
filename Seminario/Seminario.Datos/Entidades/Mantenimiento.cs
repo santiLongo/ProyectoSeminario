@@ -36,6 +36,10 @@ public  class Mantenimiento
 
     [Column("idTaller", TypeName = "int(11)")]
     public int IdTaller { get; set; }
+    
+    [Column("importe", TypeName = "decimal(10,2)")]
+    public decimal? Importe { get; set; }
+    
     public virtual ICollection<CompraRepuesto> CompraRepuestos { get; set; } = new List<CompraRepuesto>();
     public virtual Taller Taller { get; set; }
     public virtual Camion Vehiculo { get; set; }

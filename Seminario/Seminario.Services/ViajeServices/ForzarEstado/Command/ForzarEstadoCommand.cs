@@ -1,4 +1,6 @@
-﻿namespace Seminario.Services.ViajeServices.ForzarEstado.Command;
+﻿using Seminario.Datos;
+
+namespace Seminario.Services.ViajeServices.ForzarEstado.Command;
 
 public class ForzarEstadoCommand
 {

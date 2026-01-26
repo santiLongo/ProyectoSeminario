@@ -9,12 +9,13 @@ public interface IViajeRepo
     IQueryable<Viaje> Query();
     void Add(Viaje viaje);
     void Remove(Viaje viaje);
+    void ForzarModifiedTrigger(Viaje viaje);
 }
 
 public class ViajeRepo : IViajeRepo
 {
     private readonly AppDbContext _ctx;
-    
+
     public ViajeRepo(AppDbContext ctx)
     {
         _ctx = ctx;
@@ -34,6 +35,11 @@ public class ViajeRepo : IViajeRepo
     public void Remove(Viaje viaje)
     {
         _ctx.Viajes.Remove(viaje);
+    }
+
+    public void ForzarModifiedTrigger(Viaje viaje)
+    {
+        _ctx.Entry(viaje).State = EntityState.Modified;
     }
 }
 
@@ -57,4 +63,7 @@ public static class ViajeQueryExtensions
 
     public static IQueryable<Viaje> IncludeCliente(this IQueryable<Viaje> query) =>
         query.Include(v => v.Cliente);
+
+    public static IQueryable<Viaje> IncludeCobros(this IQueryable<Viaje> query) =>
+        query.Include(v => v.Cobros);
 }

@@ -11,7 +11,7 @@ public class DbExecutor
         _session = session;
     }
 
-    public Task<IEnumerable<T>> Query<T>(string sql, object param)
+    public Task<IEnumerable<T>> ExecuteAsync<T>(string sql, DynamicParameters? param = null)
     {
         return _session.Connection.QueryAsync<T>(
             sql, param, _session.Transaction

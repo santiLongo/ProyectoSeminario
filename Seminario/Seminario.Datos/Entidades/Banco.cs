@@ -18,7 +18,5 @@ public class Banco
     [Column(TypeName = "char")]
     [StringLength(50, ErrorMessage = "El nombre del Banco no puede superar los 50 caracteres")]
     public string Descripcion { get; set; }
-
-    public virtual ICollection<CobroCheque> CobroCheques { get; set; } = new List<CobroCheque>();
     public virtual ICollection<PagoCheque> PagoCheques { get; set; } = new List<PagoCheque>();
 }

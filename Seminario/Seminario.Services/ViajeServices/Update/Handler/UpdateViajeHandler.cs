@@ -83,7 +83,8 @@ public class UpdateViajeHandler
     private async Task<Camion> ValidarCamion(int idCamion)
     {
         var camion = await _ctx.CamionRepo.GetAsync( q => 
-            q.IncludeMantenimientoActual()
+            q.AsNoTracking()
+                .IncludeMantenimientoActual()
                 .IncludeCurrentViaje()
                 .WhereEqualsIdCamion(idCamion)
         );
@@ -114,7 +115,8 @@ public class UpdateViajeHandler
     private async Task<Chofer> ValidarChofer(int idChofer)
     {
         var chofer = await _ctx.ChoferRepo.Query()
-            .ConNoViajesFinalizados()
+            .AsNoTracking()
+            .ConViajesNoFinalizados()
             .FirstOrDefaultAsync(c => c.IdChofer == idChofer);
 
         if (chofer == null)

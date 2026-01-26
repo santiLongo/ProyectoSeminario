@@ -2,5 +2,5 @@
 
 public interface IModifiedTrigger
 {
-    void Trigger();
+    void Modified();
 }

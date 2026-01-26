@@ -19,9 +19,6 @@
     <Folder Include="Dashboard\GetHome\Handler\" />
     <Folder Include="Dashboard\GetHome\Command\" />
     <Folder Include="ViajeServices\Add\Model\" />
-    <Folder Include="ViajeServices\GetAll\Command\" />
-    <Folder Include="ViajeServices\GetAll\Handler\" />
-    <Folder Include="ViajeServices\GetAll\Model\" />
   </ItemGroup>
 
 </Project>

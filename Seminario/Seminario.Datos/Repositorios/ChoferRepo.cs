@@ -50,8 +50,8 @@ public static class ChoferQueryExtensions
     public static IQueryable<Chofer> Activos(this IQueryable<Chofer> query)
         => query.Where(c => c.FechaBaja == null);
 
-    public static IQueryable<Chofer> ConNoViajesFinalizados(this IQueryable<Chofer> query)
-        => query.Include(c => c.Viajes.Where(v => v.FechaDescarga == null));
+    public static IQueryable<Chofer> ConViajesNoFinalizados(this IQueryable<Chofer> query)
+        => query.Include(c => c.Viajes.Where(v => v.Estado == EstadosViaje.EnViaje.ToInt()));
 
     public static IQueryable<Chofer> WhereEqualIdChofer(this IQueryable<Chofer> query, int id) =>
         query.Where(q => q.IdChofer == id);

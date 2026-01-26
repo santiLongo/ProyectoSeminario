@@ -36,9 +36,12 @@ public  class Pago
 
     [Column("idFormaPago", TypeName = "int(11)")]
     public int IdFormaPago { get; set; }
+    
+    [Column("idPagoCheque", TypeName = "int(11)")]
+    public int IdPagoCheque { get; set; }
     public virtual FormaPago FormaPago { get; set; }
     public virtual Moneda Moneda { get; set; }
     public virtual ICollection<PagoCompraRepuesto> PagoCompraRepuestos { get; set; } = new List<PagoCompraRepuesto>();
     public virtual ICollection<PagoMantenimiento> PagoMantenimientos { get; set; } = new List<PagoMantenimiento>();
-    public virtual ICollection<PagoCheque> PagoCheques { get; set; } = new List<PagoCheque>();
+    public virtual PagoCheque Cheque { get; set; }
 }

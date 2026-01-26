@@ -72,6 +72,10 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
     [Column("idMoneda", TypeName =  "int(11)")]
     public int? IdMoneda { get; set; }
     
+    [Column("nroViaje", TypeName = "char(15)")]
+    [StringLength(15)]
+    public string? NroViaje { get; set; }
+    
     public virtual ICollection<Cobro> Cobros { get; set; } = new List<Cobro>();
     public virtual Camion Camion { get; set; } = new Camion();
     public virtual Chofer Chofer { get; set; } = new  Chofer();
@@ -115,12 +119,12 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
         this.UserName = user;
     }
 
-    void ICreatedTrigger.Trigger()
+    public void Created()
     {
         this.PrecioKm = (float)(MontoTotal / Kilometros);
     }
 
-    void IModifiedTrigger.Trigger()
+    public void Modified()
     {
         this.PrecioKm = (float)(MontoTotal / Kilometros);
         //
@@ -128,7 +132,7 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
             this.Estado = EstadosViaje.Finalizado.ToInt();
         //
         var cobrado = Cobros.Sum(c => c.Monto);
-        if (cobrado == MontoTotal && Estado < EstadosViaje.Suspendido.ToInt())
+        if (cobrado >= MontoTotal && Estado < EstadosViaje.Suspendido.ToInt())
             this.Estado = EstadosViaje.Cobrado.ToInt();
     }
 }

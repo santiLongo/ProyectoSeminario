@@ -38,7 +38,7 @@ public class SeminarioResponse : Attribute, IAlwaysRunResultFilter
                 }
 
                 //
-                sb.AppendLine($"{errorMessage}");
+                sb.AppendLine(errorMessage);
             }
 
             //

@@ -21,7 +21,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
         IDestinoRepo DestinoRepo { get; }
         IProcedenciaRepo ProcedenciaRepo { get; }
         IMantenimientoRepo MantenimientoRepo { get; }
+        IPagoChequeRepo PagoChequeRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        int SaveChanges();
     }
     public partial class AppDbContext : DbContext, IAppDbContext
     {
@@ -43,8 +45,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public DbSet<Cliente> Clientes { get; set; }
 
         public DbSet<Cobro> Cobros { get; set; }
-
-        public DbSet<CobroCheque> CobroCheques { get; set; }
 
         public DbSet<CompraRepuesto> CompraRepuestos { get; set; }
 
@@ -156,22 +156,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .HasForeignKey(f => f.IdViaje)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COBRO_VIAJE");
+
+                entity.HasOne(d => d.Cheque).WithOne(p => p.Cobro)
+                    .HasForeignKey<Cobro>(f => f.IdPagoCheque)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
-
-            modelBuilder.Entity<CobroCheque>(entity =>
-            {
-                entity.HasKey(e => e.IdCobroCheque).HasName("PRIMARY");
-
-                entity.HasOne(d => d.Banco).WithMany(p => p.CobroCheques)
-                    .HasForeignKey(f => f.IdBanco)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_COBROCHEQUE_BANCO");
-
-                entity.HasOne(d => d.Cobro).WithMany(p => p.CobroCheques)
-                    .HasForeignKey(f => f.IdCobro)
-                    .HasConstraintName("FK_COBROCHEQUE_COBRO");
-            });
-
+            
             modelBuilder.Entity<CompraRepuesto>(entity =>
             {
                 entity.HasKey(e => e.IdCompraRepuesto).HasName("PRIMARY");
@@ -284,6 +274,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .HasForeignKey(f => f.IdMoneda)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGO_MONEDA");
+                
+                entity.HasOne(d => d.Cheque).WithOne(p => p.Pago)
+                    .HasForeignKey<Pago>(f => f.IdPagoCheque)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<PagoCompraRepuesto>(entity =>
@@ -324,11 +318,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .HasForeignKey(f => f.IdBanco)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PAGOCHEQUE_BANCO");
-
-                entity.HasOne(d => d.Pago).WithMany(p => p.PagoCheques)
-                    .HasForeignKey(f => f.IdPago)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PAGOCHEQUE_PAGO");
             });
 
             modelBuilder.Entity<Pais>(entity =>
@@ -489,48 +478,12 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public IDestinoRepo DestinoRepo => new DestinoRepo(this);
         public IProcedenciaRepo ProcedenciaRepo => new ProcedenciaRepo(this);
         public IMantenimientoRepo MantenimientoRepo => new MantenimientoRepo(this);
+        public IPagoChequeRepo PagoChequeRepo => new PagoChequeRepo(this);
         #endregion
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            var entries = ChangeTracker.Entries()
-                .Where(e =>
-                    e.State == EntityState.Added ||
-                    e.State == EntityState.Modified
-                );
-
-            foreach (var entry in entries)
-            {
-                if (entry.Entity is IAuditable auditable)
-                {
-                    if (entry.State == EntityState.Added)
-                    {
-                        auditable.CreatedAt(DateTime.Now, _currentUser?.Name);
-                    }
-                    else if (entry.State == EntityState.Modified)
-                    {
-                        auditable.ModifiedAt(DateTime.Now, _currentUser?.Name);
-                    }
-                }
-
-                if (entry.Entity is ICreatedTrigger created)
-                {
-                    if (entry.State == EntityState.Added)
-                    {
-                        created.Trigger();
-                    }
-                }
-                
-                if (entry.Entity is IModifiedTrigger modified)
-                {
-                    if (entry.State == EntityState.Modified)
-                    {
-                        modified.Trigger();
-                    }
-                }
-            }
-            
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

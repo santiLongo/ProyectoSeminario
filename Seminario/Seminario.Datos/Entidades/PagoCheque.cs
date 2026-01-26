@@ -10,15 +10,11 @@ namespace Seminario.Datos.Entidades;
 
 [Table("pagocheque")]
 [Index("IdBanco", Name = "FK_PAGOCHEQUE_BANCO")]
-[Index("IdPago", Name = "FK_PAGOCHEQUE_PAGO")]
 public  class PagoCheque
 {
     [Key]
     [Column("idPagoCheque", TypeName = "int(11)")]
     public int IdPagoCheque { get; set; }
-
-    [Column("idPago", TypeName = "int(11)")]
-    public int IdPago { get; set; }
 
     [Column("nroCheque", TypeName = "int(11)")]
     public int NroCheque { get; set; }
@@ -26,8 +22,8 @@ public  class PagoCheque
     [Column("esPropio")]
     public bool EsPropio { get; set; }
 
-    [Column("cuitEmisor", TypeName = "int(11)")]
-    public int CuitEmisor { get; set; }
+    [Column("cuitEmisor", TypeName = "bigint")]
+    public long CuitEmisor { get; set; }
 
     [Column("idBanco", TypeName = "int(11)")]
     public int IdBanco { get; set; }
@@ -45,4 +41,5 @@ public  class PagoCheque
     public bool Rechazado { get; set; }
     public virtual Banco Banco { get; set; }
     public virtual Pago Pago { get; set; }
+    public virtual Cobro Cobro { get; set; }
 }

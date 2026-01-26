@@ -21,8 +21,8 @@ public class Taller
     [StringLength(50)]
     public string Nombre { get; set; }
 
-    [Column("cuit", TypeName = "int(11)")]
-    public int Cuit { get; set; }
+    [Column("cuit", TypeName = "bigint")]
+    public long Cuit { get; set; }
 
     [Column("telefono", TypeName = "int(11)")]
     public int Telefono { get; set; }

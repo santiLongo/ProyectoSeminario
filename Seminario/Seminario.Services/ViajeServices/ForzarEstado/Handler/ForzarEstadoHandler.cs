@@ -18,9 +18,14 @@ public class ForzarEstadoHandler
 
     public async Task Handle(ForzarEstadoCommand command)
     {
-        if (command.Estado.ExisteEstadoViaje())
+        if (!command.Estado.ExisteEstadoViaje())
         {
             throw new InvalidOperationException("El estado no se encontro");
+        }
+        
+        if (!command.Seguridad)
+        {
+            throw new InvalidOperationException("Para forzar el estado es necesario tener seguridad");
         }
         
         var viaje = await _ctx.ViajeRepo.Query()
@@ -30,18 +35,56 @@ public class ForzarEstadoHandler
         {
             throw new InvalidOperationException("El viaje no se encontro ");
         }
-
-        if (viaje.Estado > EstadosViaje.Finalizado.ToInt() && !command.Seguridad)
-        {
-            throw new InvalidOperationException("El viaje posee un estado que requiere seguridad para modificar");
-        }
-
+        
         if (viaje.Estado == EstadosViaje.Cobrado.ToInt())
         {
             throw new InvalidOperationException("El viaje esta cobrado en su totalidad, no es forzable");
         }
-
+        
+        if (viaje.Estado == EstadosViaje.Suspendido.ToInt() && command.Estado != EstadosViaje.EnViaje.ToInt())
+        {
+            throw new InvalidOperationException("El viaje se encuentra suspendido y solo se puede pasar a en viaje");
+        }
+        
+        if (command.Estado == EstadosViaje.EnViaje.ToInt())
+        {
+            await VerificarCamionYChofer(viaje);
+            viaje.FechaDescarga = null;
+        }
+        
+        if ((command.Estado == EstadosViaje.Finalizado.ToInt() 
+             || command.Estado == EstadosViaje.Cobrado.ToInt()) 
+            && viaje.Estado == EstadosViaje.EnViaje.ToInt())
+        {
+            viaje.FechaDescarga = DateTime.Today;
+        }
+        
         viaje.Estado = command.Estado;
         await _ctx.SaveChangesAsync();
+    }
+
+    private async Task VerificarCamionYChofer(Viaje viaje)
+    {
+        var camion = await _ctx.CamionRepo.GetAsync(q =>
+            q.AsNoTracking()
+                .IncludeCurrentViaje()
+                .IncludeMantenimientoActual()
+                .WhereEqualsIdCamion(viaje.IdCamion)
+            );
+
+        if (camion == null) throw new InvalidOperationException("Ups, parece que el camion no existe");
+        //
+        if(camion.Viajes.Any()) throw new InvalidOperationException("El camion se encuentra en un viaje");
+        //
+        if(camion.Mantenimientos.Any()) throw new InvalidOperationException("El camion se encuentra en un mantenimiento");
+        
+        var chofer = await _ctx.ChoferRepo.Query()
+            .AsNoTracking()
+            .ConViajesNoFinalizados()
+            .FirstOrDefaultAsync(c => c.IdChofer == viaje.IdChofer);
+        
+        if (chofer == null) throw new InvalidOperationException("Ups, parece que el camion no existe");
+        //
+        if(chofer.Viajes.Any()) throw new InvalidOperationException("El chofer se encuentra en un viaje");
     }
 }

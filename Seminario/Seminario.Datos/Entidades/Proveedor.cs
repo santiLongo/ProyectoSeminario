@@ -21,8 +21,8 @@ public class Proveedor
     [StringLength(50)]
     public string RazonSocial { get; set; }
 
-    [Column("cuit", TypeName = "int(11)")]
-    public int Cuit { get; set; }
+    [Column("cuit", TypeName = "bigint")]
+    public long Cuit { get; set; }
 
     [Required]
     [Column("mail")]
