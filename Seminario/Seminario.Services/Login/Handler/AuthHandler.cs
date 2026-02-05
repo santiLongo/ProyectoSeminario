@@ -24,7 +24,7 @@ namespace Seminario.Services.Login.Handler
         {
             try
             {
-                var usuario = await _ctx.UsuarioRepo.FindNameAsync(command.Mail);
+                var usuario = await _ctx.UsuarioRepo.FindNameAsync(command.Usuario);
 
                 if (usuario == null)
                 {

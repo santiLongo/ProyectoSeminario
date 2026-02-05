@@ -14,7 +14,7 @@ namespace Seminario.Datos.Repositorios
     {
         void Add(Usuario usuario);
         void Remove(Usuario usuario);
-        Task<Usuario> FindNameAsync(string mail, bool asNoTracking = false);
+        Task<Usuario> FindNameAsync(string name, bool asNoTracking = false);
     }
     public class UsuarioRepo : IUsuarioRepo
     {
