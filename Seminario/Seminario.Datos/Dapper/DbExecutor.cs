@@ -17,4 +17,12 @@ public class DbExecutor
             sql, param, _session.Transaction
         );
     }
+    
+    
+    public IEnumerable<T> Execute<T>(string sql, DynamicParameters? param = null)
+    {
+        return _session.Connection.Query<T>(
+            sql, param, _session.Transaction
+        );
+    }
 }

@@ -16,8 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CombosServices\Command\" />
     <Folder Include="Dashboard\GetHome\Handler\" />
     <Folder Include="Dashboard\GetHome\Command\" />
+    <Folder Include="Mantenimiento\" />
     <Folder Include="ViajeServices\Add\Model\" />
   </ItemGroup>
 
