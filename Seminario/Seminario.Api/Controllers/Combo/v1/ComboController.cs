@@ -14,11 +14,11 @@ public class ComboController
 
     [HttpGet("get")]
     [SeminarioResponse]
-    public IList<ICombo> Get([FromQuery] string type, 
+    public List<ICombo> Get([FromQuery] string type, 
         [FromServices] IAppDbContext context, [FromServices] IDbSession session)
     {
         var handler = new ComboHandler(context, session);
         var response = handler.Handle(type);
-        return response;
+        return response.ToList();
     }
 }

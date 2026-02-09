@@ -73,7 +73,7 @@ public class AddViajeHandler
         _ctx.ViajeRepo.Add(viaje);
         await _ctx.SaveChangesAsync();
         
-        viaje.NroViaje = $"V-{viaje.FechaAlta.Year}-{viaje.IdViaje.ToString("D8")}";
+        viaje.NroViaje = $"V-{viaje.FechaAlta.Year}-{viaje.IdViaje}";
 
         await _ctx.SaveChangesAsync();
     }

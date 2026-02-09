@@ -6,4 +6,6 @@ public class ComboIntModel : ICombo
 {
     public int Numero { get; set; }
     public string Descripcion { get; set; }
+    
+    object ICombo.Numero => Numero;
 }

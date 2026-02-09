@@ -2,5 +2,6 @@
 
 public interface ICombo
 {
-    
+    string Descripcion { get; }
+    object Numero { get; }
 }
