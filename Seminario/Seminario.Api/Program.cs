@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Mapper;
 using System.Text;
+using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Api.Services.CurrentUserService;
 using Seminario.Datos.Contextos.SaveChangesInterceptors;
 using Seminario.Datos.Dapper;
@@ -77,6 +78,8 @@ builder.Services.AddScoped<AuditSaveChangesInterceptor>();
 builder.Services.AddScoped<IDbSession, DbSession>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
