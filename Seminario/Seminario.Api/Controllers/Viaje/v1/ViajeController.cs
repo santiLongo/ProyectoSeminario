@@ -2,6 +2,8 @@
 using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
+using Seminario.Datos.DataSourceResult.Clases;
+using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.ViajeServices.Add.Command;
 using Seminario.Services.ViajeServices.Add.Handler;
 using Seminario.Services.ViajeServices.CargarDescarga.Command;
@@ -33,10 +35,11 @@ public class ViajeController : ControllerBase
     [HttpPost]
     [Route("add")]
     [SeminarioResponse]
-    public async Task Add([FromBody] AddViajeCommand command)
+    public async Task<object> Add([FromBody] AddViajeCommand command)
     {
         var handler = new AddViajeHandler(_ctx);
-        await handler.Handle(command);
+        var response = await handler.Handle(command);
+        return new { NroViaje = response };
     }
     
     [HttpPost]
@@ -58,10 +61,12 @@ public class ViajeController : ControllerBase
     
     [HttpGet("getAll")]
     [SeminarioResponse]
-    public async Task<List<GetAllViajeModel>> GetAll([FromQuery] GetAllViajeCommand command, [FromServices] IDbSession session)
+    public async Task<DataSourceResult<GetAllViajeModel>> GetAll([FromQuery] GetAllViajeCommand command, [FromQuery] DataSourceRequest request,
+        [FromServices] IDbSession session)
     {
         var handler = new GetAllViajeHandler(session);
-        return await handler.Handle(command);
+        var response= await handler.Handle(command);
+        return response.ToDataSourceResult<GetAllViajeModel>(request);
     }
     
     [HttpPost("forzar-estado")]

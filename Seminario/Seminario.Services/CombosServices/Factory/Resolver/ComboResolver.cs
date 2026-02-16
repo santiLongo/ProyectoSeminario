@@ -19,6 +19,8 @@ public static class ComboResolver
                 return new ComboDestinoProcedencia();
             case "ComboEstadosViaje":
                 return new ComboEstadosViaje();
+            case "ComboMoneda":
+                return new ComboMoneda();
             default:
                 throw new NotImplementedException($"El combo {type}, no se encuentra implementado");
         }

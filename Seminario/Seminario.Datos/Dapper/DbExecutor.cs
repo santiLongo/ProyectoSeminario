@@ -25,4 +25,18 @@ public class DbExecutor
             sql, param, _session.Transaction
         );
     }
+    
+    public T? ExecuteFirstOrDefault<T>(string sql, DynamicParameters? param = null)
+    {
+        return _session.Connection.QueryFirstOrDefault<T>(
+            sql, param, _session.Transaction
+        );
+    }
+    
+    public Task<T?> ExecuteFirstOrDefaultAsync<T>(string sql, DynamicParameters? param = null)
+    {
+        return _session.Connection.QueryFirstOrDefaultAsync<T>(
+            sql, param, _session.Transaction
+        );
+    }
 }

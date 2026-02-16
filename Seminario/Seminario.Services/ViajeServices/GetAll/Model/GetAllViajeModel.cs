@@ -6,7 +6,7 @@ public class GetAllViajeModel
     public string NroViaje { get; set; }
     public string Cliente { get; set; }
     public string Chofer { get; set; }
-    public string PatenteCamion { get; set; }
+    public string Patente { get; set; }
     public string Carga { get; set; }
     public decimal Kilometros { get; set; }
     public decimal MontoTotal { get; set; }

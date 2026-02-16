@@ -16,7 +16,7 @@ public class AddViajeHandler
         _ctx = ctx;
     }
 
-    public async Task Handle(AddViajeCommand command)
+    public async Task<string> Handle(AddViajeCommand command)
     {
         var viaje = Viaje.Create();
         //
@@ -76,6 +76,8 @@ public class AddViajeHandler
         viaje.NroViaje = $"V-{viaje.IdViaje}";
 
         await _ctx.SaveChangesAsync();
+
+        return viaje.NroViaje;
     }
 
     private async Task<Camion> ValidarCamion(int idCamion)

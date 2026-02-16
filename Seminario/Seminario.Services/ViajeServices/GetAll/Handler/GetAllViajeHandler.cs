@@ -48,23 +48,33 @@ public class GetAllViajeHandler
                     inner join camion cam ON cam.idCamion = via.idCamion
                     inner join cliente cli ON cli.idCliente = via.idCliente
                     inner join chofer chf ON chf.idChofer = via.idChofer
-                    LEFT JOIN destino dest ON dest.idViaje = via.idViaje
-                    LEFT JOIN procedencia proc ON proc.idViaje = via.idViaje
                     LEFT JOIN moneda mon ON mon.idMoneda = via.idMoneda
                     where
                                 (@nroViaje is NULL or via.nroViaje = @nroViaje)
                         AND     (@idCamion is NULL or cam.idCamion = @idCamion)
                         AND     (@idCliente is NULL or cli.idCliente = @idCliente)
                         AND     (@idChofer is NULL or chf.idChofer = @idChofer)
-                        AND     (@idLocalidadDest is NULL or dest.idLocalidad  = @idLocalidadDest)
-                        AND     (@idLocalidadProc is NULL or proc.idLocalidad  = @idLocalidadProc)
                         AND     (@fechaAltaDesde is NULL or via.FechaAlta > @fechaAltaDesde)
                         AND     (@fechaAltaHasta is NULL or via.FechaAlta < @fechaAltaHasta)
                         AND     (@estado is NULL or via.Estado = @estado)
-                        group by
-                            via.idViaje, via.nroViaje, via.Carga, via.MontoTotal, via.FechaPartida, via.FechaDescarga,
-                            via.UserName, via.UserDateTime, cli.razonSocial, chf.nombre, chf.apellido, cam.Patente,
-                            mon.Descripcion;";
+                        AND (
+                                @idLocalidadProc IS NULL
+                                OR EXISTS (
+                                    SELECT 1
+                                    FROM procedencia proc
+                                    WHERE proc.idViaje = via.idViaje
+                                      AND proc.idLocalidad = @idLocalidadProc
+                                )
+                            )
+                        AND (
+                            @idLocalidadDest IS NULL
+                            OR EXISTS (
+                                SELECT 1
+                                FROM destino dest
+                                WHERE dest.idViaje = via.idViaje
+                                  AND dest.idLocalidad = @idLocalidadDest
+                                )
+                            )";
 
         var result = (await _executor.ExecuteAsync<GetAllViajeModel>(sql, p)).ToList();
 
