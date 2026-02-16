@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Entidades.Interfaces;
 
@@ -82,6 +83,7 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
     public virtual Cliente Cliente { get; set; } = new  Cliente();
     public virtual ICollection<Destino> Destinos { get; set; } = new List<Destino>();
     public virtual ICollection<Procedencia> Procendecias { get; set; } = new List<Procedencia>();
+    public virtual ICollection<ViajeObservacion> Observaciones { get; set; } = new List<ViajeObservacion>();
 
 
     public static Viaje Create()
@@ -104,6 +106,18 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
             UserName = string.Empty,
             UserDateTime = default
         };
+    }
+
+    public void AgregarObservacion(string observacion)
+    {
+        var obs = new ViajeObservacion
+        {
+            IdViaje = IdViaje,
+            Observacion = observacion,
+            Viaje = this
+        };
+        
+        Observaciones.Add(obs);
     }
 
     public void CreatedAt(DateTime date, string user)

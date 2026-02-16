@@ -29,6 +29,7 @@ public class ForzarEstadoHandler
         }
         
         var viaje = await _ctx.ViajeRepo.Query()
+            .IncludeObservaciones()
             .FirstOrDefaultAsync(v => v.IdViaje == command.IdViaje);
 
         if (viaje == null)
@@ -60,6 +61,7 @@ public class ForzarEstadoHandler
         }
         
         viaje.Estado = command.Estado;
+        viaje.AgregarObservacion(command.Oservacion);
         await _ctx.SaveChangesAsync();
     }
 

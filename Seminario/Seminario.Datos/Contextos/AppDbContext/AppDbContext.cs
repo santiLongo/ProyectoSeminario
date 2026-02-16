@@ -91,6 +91,8 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public DbSet<Destino> Destinos { get; set; }
         
         public DbSet<Procedencia> Procedencias { get; set; }
+        
+        public DbSet<ViajeObservacion> ViajesObservaciones { get; set; }
             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -431,6 +433,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .HasForeignKey(f => f.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VIAJE_CLIENTE");
+
+                entity.HasMany(v => v.Observaciones)
+                    .WithOne(o => o.Viaje)
+                    .HasForeignKey(f => f.IdViaje);
             });
 
             modelBuilder.Entity<Destino>(entity =>

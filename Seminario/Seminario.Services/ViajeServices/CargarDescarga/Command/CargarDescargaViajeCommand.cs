@@ -8,4 +8,6 @@ public class CargarDescargaViajeCommand
     public int IdViaje { get; set; }
     
     public DateTime? FechaDescarga { get; set; }
+    
+    public string Oservacion { get; set; }
 }
