@@ -61,7 +61,8 @@ public class ForzarEstadoHandler
         }
         
         viaje.Estado = command.Estado;
-        viaje.AgregarObservacion(command.Oservacion);
+        if(command.Observacion != null)
+            viaje.AgregarObservacion(command.Observacion);
         await _ctx.SaveChangesAsync();
     }
 

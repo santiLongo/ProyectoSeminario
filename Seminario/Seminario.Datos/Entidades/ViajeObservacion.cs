@@ -7,6 +7,11 @@ namespace Seminario.Datos.Entidades;
 [Table("viajes/observaciones")]
 public class ViajeObservacion : IAuditable
 {
+    [Key]
+    [Column("idObservacion", TypeName = "int")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int IdObservacion { get; set; }
+    
     [Column("idViaje", TypeName = "int")]
     public int IdViaje { get; set; }
     

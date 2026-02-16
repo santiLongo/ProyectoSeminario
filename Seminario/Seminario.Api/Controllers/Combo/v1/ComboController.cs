@@ -9,16 +9,19 @@ namespace Seminario.Api.Controllers.Combo.v1;
 
 [ApiController]
 [Route("api/v1/combo")]
-public class ComboController
+public class ComboController : ControllerBase
 {
-
+    
     [HttpGet("get")]
     [SeminarioResponse]
-    public List<ICombo> Get([FromQuery] string type, 
+    public List<ICombo> Get([FromQuery] string type,
         [FromServices] IAppDbContext context, [FromServices] IDbSession session)
     {
+        var extraParams = HttpContext.Request.Query
+            .ToDictionary(x => x.Key, x => x.Value.ToString());
+        
         var handler = new ComboHandler(context, session);
-        var response = handler.Handle(type);
+        var response = handler.Handle(type, extraParams);
         return response.ToList();
     }
 }

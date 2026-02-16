@@ -9,5 +9,5 @@ public class CargarDescargaViajeCommand
     
     public DateTime? FechaDescarga { get; set; }
     
-    public string Oservacion { get; set; }
+    public string? Observacion { get; set; }
 }

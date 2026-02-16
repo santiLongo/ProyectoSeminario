@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using MySqlConnector;
 
 namespace Seminario.Api.Middleware.ExceptionMiddleware;
 
@@ -47,14 +48,24 @@ public class ExceptionMiddleware
                 JsonSerializer.Serialize(response)
             );
         }
-        catch (Exception)
+        catch (MySqlException e)
         {
             context.Response.Clear();
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Response.ContentType = "application/json";
 
             await context.Response.WriteAsync(
-                JsonSerializer.Serialize(new { message = "Error inesperado" })
+                JsonSerializer.Serialize(new { message = "Error con la base de datos o el EF, cominquese con sistemas: " + e.Message })
+            );
+        }
+        catch (Exception e)
+        {
+            context.Response.Clear();
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.ContentType = "application/json";
+
+            await context.Response.WriteAsync(
+                JsonSerializer.Serialize(new { message = "Error inesperado: " + e.Message })
             );
         }
     }

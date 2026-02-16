@@ -30,7 +30,8 @@ public class CargarDescargaViajeHandler
         }
         
         viaje.FechaDescarga = command.FechaDescarga ?? DateTime.Now;
-        viaje.AgregarObservacion(command.Oservacion);
+        if(command.Observacion != null)
+            viaje.AgregarObservacion(command.Observacion);
         await _ctx.SaveChangesAsync();
     }
 }

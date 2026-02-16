@@ -17,7 +17,7 @@ public  class Localidad
     public int IdLocalidad { get; set; }
 
     [Required]
-    [StringLength(20)]
+    [MaxLength(50)]
     public string Descripcion { get; set; }
 
     [Column("idProvincia", TypeName = "int(11)")]

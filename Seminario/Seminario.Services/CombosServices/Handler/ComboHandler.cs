@@ -17,7 +17,7 @@ public class ComboHandler
         _session = session;
     }
 
-    public List<ICombo> Handle(string type)
+    public List<ICombo> Handle(string type, Dictionary<string, string> extraParams)
     {
         var provider = ComboResolver.Resolve(type);
         
@@ -26,6 +26,9 @@ public class ComboHandler
 
         if (provider is ISetContext setContext)
             setContext.SetContext(_ctx);
+        
+        if(provider is ISetExtraParams setExtraParams)
+            setExtraParams.SetExtraParams(extraParams);
         
         return provider.GetCombo().ToList();
     }
