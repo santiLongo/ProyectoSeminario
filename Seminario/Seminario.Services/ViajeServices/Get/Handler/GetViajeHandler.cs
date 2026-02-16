@@ -53,6 +53,7 @@ public class GetViajeHandler
             MontoTotal = viaje.MontoTotal,
             PrecioKm = viaje.PrecioKm.GetValueOrDefault(),
             Moneda = "",
+            IdMoneda = viaje.IdMoneda.GetValueOrDefault(),
             FechaPartida = viaje.FechaPartida,
             FechaDescarga = viaje.FechaDescarga,
             Carga = viaje.Carga,

@@ -13,7 +13,7 @@ public class GetAllViajeModel
     public string Moneda { get; set; }
     public string Estado { get; set; }
     public DateTime FechaPartida { get; set; }
-    public DateTime FechaDescarga { get; set; }
+    public DateTime? FechaDescarga { get; set; }
     public string UserName { get; set; } 
     public DateTime UserDateTime { get; set; } 
 }

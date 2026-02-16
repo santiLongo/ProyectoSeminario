@@ -17,6 +17,7 @@ public class DatosPrincipales
     public decimal MontoTotal { get; set; }
     public float PrecioKm { get; set; }
     public string Moneda { get; set; }
+    public int IdMoneda { get; set; }
     public DateTime FechaPartida { get; set; }
     public DateTime? FechaDescarga { get; set; }
     public string Carga { get; set; }
