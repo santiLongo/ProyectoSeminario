@@ -15,11 +15,11 @@ public class GetAllTipoCamionHandler
 
     public async Task<List<GetAllTipoCamionModel>> Handle(GetAllTipoCamionCommand command)
     {
-        var data = await _ctx.BancoRepo.GetAllAsync(command.Tipo);
+        var data = await _ctx.TipoCamionRepo.GetAllAsync(command.Tipo);
 
         return data.Select(b => new GetAllTipoCamionModel
         {
-            Id = b.IdBanco,
+            Id = b.IdTipoCamion,
             Tipo = b.Descripcion
         }).ToList();
     }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Seminario.Api.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
+using Seminario.Datos.DataSourceResult.Clases;
+using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.TipoCamionCrud.Delete.Command;
 using Seminario.Services.TipoCamionCrud.Delete.Handler;
 using Seminario.Services.TipoCamionCrud.GetAll.Command;
@@ -25,10 +27,12 @@ public class TipoCamionController : ControllerBase
     [HttpGet]
     [Route("getAll")]
     [SeminarioResponse]
-    public async Task<List<GetAllTipoCamionModel>> GetAll([FromQuery] GetAllTipoCamionCommand command)
+    public async Task<DataSourceResult<GetAllTipoCamionModel>> GetAll([FromQuery] GetAllTipoCamionCommand command,
+        [FromQuery] DataSourceRequest request)
     {
         var handler = new GetAllTipoCamionHandler(_ctx);
-        return await handler.Handle(command);
+        var response = await handler.Handle(command);
+        return response.ToDataSourceResult(request);
     }
     
     [HttpPost]

@@ -7,7 +7,7 @@ namespace Seminario.Datos.Repositorios;
 public interface ITipoCamionRepo
 {
     Task<TipoCamion>  GetByIdAsync(int id, bool asNoTracking = false);
-    Task<IEnumerable<TipoCamion>> GetAll(string? tipo);
+    Task<IEnumerable<TipoCamion>> GetAllAsync(string? tipo);
     void Add(TipoCamion tipoCamion);
     void Remove(TipoCamion tipoCamion);
 }
@@ -30,9 +30,9 @@ public class TipoCamionRepo : ITipoCamionRepo
         return await _ctx.TipoCamiones.FirstOrDefaultAsync(t => t.IdTipoCamion == id);
     }
 
-    public async Task<IEnumerable<TipoCamion>> GetAll(string? tipo)
+    public async Task<IEnumerable<TipoCamion>> GetAllAsync(string? tipo)
     {
-        return await _ctx.TipoCamiones.Where(t => tipo.Contains(t.Descripcion)).ToListAsync();
+        return await _ctx.TipoCamiones.Where(t => t.Descripcion.Contains(tipo) || tipo == null).ToListAsync();
     }
 
     public void Add(TipoCamion tipoCamion)

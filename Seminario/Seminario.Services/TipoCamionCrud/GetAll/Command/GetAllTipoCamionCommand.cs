@@ -2,5 +2,5 @@
 
 public class GetAllTipoCamionCommand
 {
-    public string Tipo { get; set; }
+    public string? Tipo { get; set; }
 }

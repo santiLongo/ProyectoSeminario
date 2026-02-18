@@ -25,6 +25,14 @@ public static class ComboResolver
                 return new ComboProvincia();
             case "ComboPais":
                 return new ComboPais();
+            case "ComboTipoCamion":
+                return new ComboTipoCamion();
+            case "ComboMarcaCamion":
+                return new ComboMarcaCamion();
+            case "ComboModeloCamion":
+                return new ComboModeloCamion();
+            case "ComboCamionesDisponibles":
+                return new ComboCamionesDisponibles();
             default:
                 throw new NotImplementedException($"El combo {type}, no se encuentra implementado");
         }
