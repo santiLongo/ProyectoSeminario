@@ -1,4 +1,5 @@
-﻿using Seminario.Datos.DataSourceResult.Clases;
+﻿using System.Reflection;
+using Seminario.Datos.DataSourceResult.Clases;
 
 namespace Seminario.Datos.DataSourceResult.ExtesionMethods;
 
@@ -10,9 +11,14 @@ public static class QueryExtensions
     {
         var list = data as IList<T> ?? data.ToList();
 
+        if (request.Filters != null && request.Filters.Any())
+        {
+            list = ApplyFiltering(list, request.Filters).ToList();
+        }
+        
         var total = list.Count;
 
-        if (!string.IsNullOrWhiteSpace(request.Sort))
+        if (request.Sort != null)
         {
             list = ApplySorting(list, request.Sort).ToList();
         }
@@ -29,17 +35,57 @@ public static class QueryExtensions
         };
     }
     
-    public static IEnumerable<T> ApplySorting<T>(IEnumerable<T> data, string sort)
+    private static IEnumerable<T> ApplySorting<T>(
+        IEnumerable<T> data,
+        SortDto sort)
     {
-        var parts = sort.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        var prop = typeof(T).GetProperty(parts[0]);
+        var prop = typeof(T).GetProperty(
+            sort.Field,
+            BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance
+        );
 
-        if (prop == null) return data;
+        if (prop == null)
+            return data;
 
-        var desc = parts.Length > 1 && parts[1].Equals("desc", StringComparison.OrdinalIgnoreCase);
+        var desc = sort.Direction.Equals("desc", StringComparison.OrdinalIgnoreCase);
 
         return desc
             ? data.OrderByDescending(x => prop.GetValue(x))
             : data.OrderBy(x => prop.GetValue(x));
+    }
+    
+    private static IEnumerable<T> ApplyFiltering<T>(
+        IEnumerable<T> data,
+        Dictionary<string, string> filters)
+    {
+        foreach (var filter in filters)
+        {
+            var field = filter.Key;
+            var value = filter.Value?.ToString();
+
+            if (string.IsNullOrWhiteSpace(value))
+                continue;
+
+            var prop = typeof(T).GetProperty(field,
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+            if (prop == null)
+                continue;
+
+            data = data.Where(item =>
+            {
+                var propValue = prop.GetValue(item);
+
+                if (propValue == null)
+                    return false;
+
+                var str = propValue.ToString();
+
+                return str != null &&
+                       str.Contains(value, StringComparison.OrdinalIgnoreCase);
+            });
+        }
+
+        return data;
     }
 }
