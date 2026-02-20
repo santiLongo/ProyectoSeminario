@@ -32,7 +32,7 @@ public class DatosChofer
 {
     public int IdChofer { get; set; }
     public string NombreCompleto { get; set; }
-    public long NroRegistro { get; set; }
+    public string NroRegistro { get; set; }
     public int Dni { get; set; }
 }
 

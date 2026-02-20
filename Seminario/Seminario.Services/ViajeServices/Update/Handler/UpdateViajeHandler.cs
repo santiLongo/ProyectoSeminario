@@ -26,7 +26,7 @@ public class UpdateViajeHandler
 
         if (viaje == null)
         {
-            throw new InvalidOperationException($"El viaje no existe o se encuentra finalizado");
+            throw new InvalidOperationException($"El viaje no se encontro o se encuentra finalizado");
         }
 
         var camion = viaje.IdCamion ==  command.Camion ? viaje.Camion : await ValidarCamion(command.Camion);

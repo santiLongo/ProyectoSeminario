@@ -85,7 +85,7 @@ public class GetViajeHandler
         {
             IdChofer = chofer.IdChofer,
             NombreCompleto = $"{chofer.Nombre} {chofer.Apellido}",
-            NroRegistro = chofer.NroRegistro.GetValueOrDefault(),
+            NroRegistro = chofer.NroRegistro,
             Dni = chofer.Dni
         };
     }

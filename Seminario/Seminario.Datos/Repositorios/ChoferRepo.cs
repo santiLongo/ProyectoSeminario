@@ -8,6 +8,7 @@ public interface IChoferRepo
 {
     IQueryable<Chofer> Query();
     Task<Chofer?> GetAsync(Func<IQueryable<Chofer>, IQueryable<Chofer>> querys);
+    Task<Chofer?> GetAsync(int id, bool asNoTracking = false);
     Task<List<Chofer>> GetAllByEstadoAsync(int estado);
     void Add(Chofer chofer);
     void Remove(Chofer chofer);
@@ -41,6 +42,16 @@ public class ChoferRepo : IChoferRepo
         return await _ctx.Choferes.Where(c => estado == (int)GetAllChoferesEstados.Todos 
                                          || (estado == (int)GetAllChoferesEstados.Activos && c.FechaBaja == null)
                                          || (estado == (int)GetAllChoferesEstados.Inactivos && c.FechaBaja != null)).ToListAsync();
+    }
+
+    public async Task<Chofer> GetAsync(int id, bool asNoTracking = false)
+    {
+        IQueryable<Chofer> query = _ctx.Choferes;
+        
+        if (asNoTracking)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync(c => c.IdChofer == id);
     }
 
     public void Add(Chofer chofer)

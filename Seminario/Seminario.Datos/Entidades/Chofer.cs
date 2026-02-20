@@ -41,8 +41,8 @@ public class Chofer : IAuditable
     /// <summary>
     /// Nro Registro Profesional
     /// </summary>
-    [Column("nroRegistro", TypeName = "bigint(20)")]
-    public long? NroRegistro { get; set; }
+    [Column("nroRegistro", TypeName = "varchar(50)")]
+    public string NroRegistro { get; set; }
 
     [Column("fechaAlta", TypeName = "datetime")]
     public DateTime FechaAlta { get; set; }
