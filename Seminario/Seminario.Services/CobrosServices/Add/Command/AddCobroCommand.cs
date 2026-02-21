@@ -12,8 +12,7 @@ public class AddCobroCommand
     public decimal? Monto { get; set; }
     [Required(ErrorMessage = "La moneda es obligatoria")]
     public int? IdMoneda { get; set; }
-    [Required(ErrorMessage = "El tipo de cambio es obligatorio")]
-    public double TipoCambio { get; set; }
+    public double? TipoCambio { get; set; }
     [Required(ErrorMessage = "La forma de pago es obligatoria")]
     public int? IdFormaPago { get; set; }
     public CobroChequeCommand? DatosCheque { get; set; }
@@ -24,7 +23,6 @@ public class CobroChequeCommand
     public int? NroCheque { get; set; }
     public long? CuitEmisor { get; set; }
     public int? IdBanco { get; set; }
-    public DateTime? FechaCobro { get; set; }
-    public DateTime? FechaDepositado { get; set; }
-    public bool Rechazado { get; set; }
+    public DateTime? FechaEmision { get; set; }
+    public DateTime? FechaDeposito { get; set; }
 }

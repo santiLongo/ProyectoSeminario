@@ -28,6 +28,7 @@ public  class PagoCheque
     [Column("idBanco", TypeName = "int(11)")]
     public int IdBanco { get; set; }
 
+    //Esta fecha hace referencia a la primera fecha que tiene un cheque, es normalmente la fecha de emision
     [Column("fechaCobro", TypeName = "datetime")]
     public DateTime? FechaCobro { get; set; }
 

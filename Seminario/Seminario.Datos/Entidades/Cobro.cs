@@ -36,7 +36,10 @@ public  class Cobro
     public int IdFormaPago { get; set; }
     
     [Column("idPagoCheque", TypeName = "int(11)")]
-    public int IdPagoCheque { get; set; }
+    public int? IdPagoCheque { get; set; }
+    
+    [Column("cobroAnulado",TypeName = "int(11)")]
+    public int? CobroAnulado { get; set; }
 
     public virtual FormaPago FormaPago { get; set; }
     public virtual Moneda Moneda { get; set; }

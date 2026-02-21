@@ -146,7 +146,10 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
             this.Estado = EstadosViaje.Finalizado.ToInt();
         //
         var cobrado = Cobros.Sum(c => c.Monto);
-        if (cobrado >= MontoTotal && Estado < EstadosViaje.Suspendido.ToInt())
+        if (cobrado >= MontoTotal && Estado == EstadosViaje.Finalizado.ToInt()){}
             this.Estado = EstadosViaje.Cobrado.ToInt();
+        //
+        if(cobrado < MontoTotal && Estado == EstadosViaje.Cobrado.ToInt())
+            this.Estado = EstadosViaje.Finalizado.ToInt();
     }
 }

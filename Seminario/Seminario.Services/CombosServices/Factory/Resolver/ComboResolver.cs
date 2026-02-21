@@ -33,6 +33,10 @@ public static class ComboResolver
                 return new ComboModeloCamion();
             case "ComboCamionesDisponibles":
                 return new ComboCamionesDisponibles();
+            case "ComboFormaPago":
+                return new ComboFormaPago();
+            case "ComboBanco":
+                return new ComboBanco();
             default:
                 throw new NotImplementedException($"El combo {type}, no se encuentra implementado");
         }
