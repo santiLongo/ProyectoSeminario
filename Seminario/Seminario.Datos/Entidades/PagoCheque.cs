@@ -17,26 +17,28 @@ public  class PagoCheque
     public int IdPagoCheque { get; set; }
 
     [Column("nroCheque", TypeName = "int(11)")]
-    public int NroCheque { get; set; }
+    public int? NroCheque { get; set; }
 
     [Column("esPropio")]
-    public bool EsPropio { get; set; }
+    public bool? EsPropio { get; set; }
 
     [Column("cuitEmisor", TypeName = "bigint")]
-    public long CuitEmisor { get; set; }
+    public long? CuitEmisor { get; set; }
 
     [Column("idBanco", TypeName = "int(11)")]
-    public int IdBanco { get; set; }
+    public int? IdBanco { get; set; }
 
-    //Esta fecha hace referencia a la primera fecha que tiene un cheque, es normalmente la fecha de emision
+    //Esta es la fecha en la que se cobra el cheque
     [Column("fechaCobro", TypeName = "datetime")]
     public DateTime? FechaCobro { get; set; }
 
+    //Esta es la fecha con la que se confirma que se cobro el cheque
     [Column("fechaDeposito", TypeName = "datetime")]
-    public DateTime FechaDeposito { get; set; }
+    public DateTime? FechaDeposito { get; set; }
 
+    //Esta fecha es referencial (interna) de especulando cuando vence la posibilidad de cobrar un cheque (aprox 30 dias)
     [Column("fechaVencimiento", TypeName = "datetime")]
-    public DateTime FechaVencimiento { get; set; }
+    public DateTime? FechaVencimiento { get; set; }
 
     [Column("rechazado")]
     public bool Rechazado { get; set; }

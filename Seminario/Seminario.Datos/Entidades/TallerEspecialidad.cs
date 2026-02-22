@@ -15,6 +15,7 @@ public class TallerEspecialidad
 {
     [Key]
     [Column("idTallerEspecialidad", TypeName = "int(11)")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdTallerEspecialidad { get; set; }
 
     [Column("idTaller", TypeName = "int(11)")]
@@ -24,4 +25,14 @@ public class TallerEspecialidad
     public int IdEspecialidad { get; set; }
     public virtual Especialidad Especialidad { get; set; }
     public virtual Taller Taller { get; set; }
+    
+    public static TallerEspecialidad Create()
+    {
+        return new TallerEspecialidad
+        {
+            IdTallerEspecialidad = 0,
+            IdTaller = 0,
+            IdEspecialidad = 0,
+        };
+    }
 }

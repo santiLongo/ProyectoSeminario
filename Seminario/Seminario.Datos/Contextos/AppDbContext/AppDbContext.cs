@@ -22,6 +22,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
         IProcedenciaRepo ProcedenciaRepo { get; }
         IMantenimientoRepo MantenimientoRepo { get; }
         IPagoChequeRepo PagoChequeRepo { get; }
+        ICobrosRepo CobrosRepo { get; }
+        IPagosRepo PagosRepo { get; }
+        IEspecialidadRepo EspecialidadRepo { get; }
+        ITallerRepo TallerRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         int SaveChanges();
     }
@@ -390,8 +394,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
             {
                 entity.HasKey(e => e.IdTallerEspecialidad).HasName("PRIMARY");
 
-                entity.Property(e => e.IdTallerEspecialidad).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Especialidad).WithMany(p => p.TallerEspecialidades)
                     .HasForeignKey(f => f.IdEspecialidad)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -485,6 +487,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public IProcedenciaRepo ProcedenciaRepo => new ProcedenciaRepo(this);
         public IMantenimientoRepo MantenimientoRepo => new MantenimientoRepo(this);
         public IPagoChequeRepo PagoChequeRepo => new PagoChequeRepo(this);
+        public ICobrosRepo CobrosRepo => new CobrosRepo(this);
+        public IPagosRepo PagosRepo => new PagosRepo(this);
+        public IEspecialidadRepo EspecialidadRepo => new EspecialidadRepo(this);
+        public ITallerRepo TallerRepo => new TallerRepo(this);
         #endregion
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

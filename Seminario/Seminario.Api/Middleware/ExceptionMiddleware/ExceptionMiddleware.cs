@@ -55,7 +55,7 @@ public class ExceptionMiddleware
             context.Response.ContentType = "application/json";
 
             await context.Response.WriteAsync(
-                JsonSerializer.Serialize(new { message = "Error con la base de datos o el EF, cominquese con sistemas: " + e.Message })
+                JsonSerializer.Serialize(new { message = "Error al comunicarse con la base de datos, cominquese con sistemas: " + e.Message })
             );
         }
         catch (Exception e)

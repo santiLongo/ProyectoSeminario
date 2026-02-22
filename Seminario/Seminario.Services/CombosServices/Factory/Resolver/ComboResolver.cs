@@ -37,6 +37,8 @@ public static class ComboResolver
                 return new ComboFormaPago();
             case "ComboBanco":
                 return new ComboBanco();
+            case "ComboEspecialidad":
+                return new ComboEspecialidad();
             default:
                 throw new NotImplementedException($"El combo {type}, no se encuentra implementado");
         }

@@ -20,6 +20,7 @@
     <Folder Include="Dashboard\GetHome\Handler\" />
     <Folder Include="Dashboard\GetHome\Command\" />
     <Folder Include="Mantenimiento\" />
+    <Folder Include="TallerServices\Get\" />
     <Folder Include="ViajeServices\Add\Model\" />
   </ItemGroup>
 

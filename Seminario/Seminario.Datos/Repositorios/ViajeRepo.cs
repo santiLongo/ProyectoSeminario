@@ -7,9 +7,11 @@ namespace Seminario.Datos.Repositorios;
 public interface IViajeRepo
 {
     IQueryable<Viaje> Query();
+    Task<Viaje> FindByIdAsync(int id, bool asNoTracking = false);
     void Add(Viaje viaje);
     void Remove(Viaje viaje);
     void ForzarModifiedTrigger(Viaje viaje);
+    Task ActualizarEstadoAsync(int idViaje);
 }
 
 public class ViajeRepo : IViajeRepo
@@ -27,6 +29,16 @@ public class ViajeRepo : IViajeRepo
         return _ctx.Viajes.AsQueryable();
     }
 
+    public async Task<Viaje> FindByIdAsync(int id, bool asNoTracking = false)
+    {
+        var query = Query();
+        
+        if (asNoTracking)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync(v => v.IdViaje == id);
+    }
+
     public void Add(Viaje viaje)
     {
         _ctx.Viajes.Add(viaje);
@@ -40,6 +52,13 @@ public class ViajeRepo : IViajeRepo
     public void ForzarModifiedTrigger(Viaje viaje)
     {
         _ctx.Entry(viaje).State = EntityState.Modified;
+    }
+
+    public async Task ActualizarEstadoAsync(int idViaje)
+    {
+        await _ctx.Database.ExecuteSqlRawAsync(
+            "CALL ReCalcularEstadoViaje({0})",
+            idViaje);
     }
 }
 

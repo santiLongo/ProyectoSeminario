@@ -25,9 +25,7 @@ public class AddCobroHandler
             if (command.TipoCambio != null)
                 throw new SeminarioException("EL tipo de cambio es obligatorio cuando la moneda no es pesos",
                     HttpStatusCode.BadRequest);      
-                
-        var cheque = await ValidoCheque(command.DatosCheque, command.IdFormaPago.GetValueOrDefault());
-        
+                        
         var viaje = await ValidoViaje(command.IdViaje.GetValueOrDefault());
         
         var cobro = new Cobro
@@ -39,8 +37,12 @@ public class AddCobroHandler
             TipoCambio = command.TipoCambio.GetValueOrDefault(),
             IdFormaPago = command.IdFormaPago.GetValueOrDefault(),
             Viaje = viaje,
-            Cheque =  cheque
         };
+        
+        if(command.IdFormaPago == 1)
+        {
+            cobro.Cheque = await ValidoCheque(command.DatosCheque);
+        }
         
         viaje.Cobros.Add(cobro);
 
@@ -64,21 +66,8 @@ public class AddCobroHandler
         return viaje;
     }
 
-    private async Task<PagoCheque?> ValidoCheque(CobroChequeCommand? datos, int idFormaPago)
+    private async Task<PagoCheque?> ValidoCheque(CobroChequeCommand? datos)
     {
-        if (idFormaPago != 1)
-        {
-            return null;
-        }
-        
-        var banco = await _ctx.BancoRepo.GetByIdAsync(datos!.IdBanco.GetValueOrDefault());
-        
-        var cheque = await _ctx.PagoChequeRepo
-            .FindByNroYBancoAsync(datos.NroCheque.GetValueOrDefault(), datos.IdBanco.GetValueOrDefault());
-        
-        if (cheque != null)
-            throw new InvalidOperationException($"El cheque {cheque.NroCheque} de {cheque.CuitEmisor} informado ya se encuentra registrado");
-        
         if (datos == null)
             throw new InvalidOperationException("Faltan los datos del cheque");
         
@@ -88,14 +77,24 @@ public class AddCobroHandler
         if (datos.CuitEmisor == null)
             throw new InvalidOperationException("El cuit del emisor es requerido");
 
-        if (datos.FechaDeposito == null)
-            throw new InvalidOperationException("La fecha de deposito del cheque es obligatoria");
+        if (datos.FechaCobro == null)
+            throw new InvalidOperationException("La fecha de cobro del cheque es obligatoria");
 
         if (datos.IdBanco == null)
             throw new InvalidOperationException("El banco es obligatorio para cargar el cheque");
         
+        var banco = await _ctx.BancoRepo.GetByIdAsync(datos!.IdBanco.GetValueOrDefault());
+        
         if (banco == null)
             throw new InvalidOperationException("El banco no esta ingresado en el sistema");
+        
+        var cheque = await _ctx.PagoChequeRepo
+            .FindByNroYBancoAsync(datos.NroCheque.GetValueOrDefault(), datos.IdBanco.GetValueOrDefault());
+        
+        if (cheque != null)
+            throw new InvalidOperationException($"El cheque {cheque.NroCheque} de {cheque.CuitEmisor} informado ya se encuentra registrado");
+        
+       
 
         cheque = new PagoCheque
         {
@@ -103,9 +102,8 @@ public class AddCobroHandler
             EsPropio = false,
             CuitEmisor = datos.CuitEmisor.GetValueOrDefault(),
             IdBanco = banco.IdBanco,
-            FechaCobro = datos.FechaEmision,
-            FechaDeposito = datos.FechaDeposito.GetValueOrDefault(),
-            FechaVencimiento = datos.FechaDeposito.GetValueOrDefault().AddDays(30),
+            FechaCobro = datos.FechaCobro,
+            FechaVencimiento = datos.FechaCobro.GetValueOrDefault().AddDays(30),
             Rechazado = false,
         };
         

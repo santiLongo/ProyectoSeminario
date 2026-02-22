@@ -20,4 +20,9 @@ public  class Especialidad
     public string Descripcion { get; set; }
     public virtual ICollection<ProveedorEspecialidad> ProveedorEspecialidades { get; set; } = new List<ProveedorEspecialidad>();
     public virtual ICollection<TallerEspecialidad> TallerEspecialidades { get; set; } = new List<TallerEspecialidad>();
+
+    public static Especialidad Create()
+    {
+        return new Especialidad();
+    }
 }

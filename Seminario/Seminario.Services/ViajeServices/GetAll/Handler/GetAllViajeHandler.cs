@@ -38,6 +38,7 @@ public class GetAllViajeHandler
                         via.Carga                           Carga,
                         via.kilometros                      Kilometros,
                         via.MontoTotal                      MontoTotal,
+                        cobros.Cobrado                      Cobrado,
                         via.Estado                          Estado,
                         mon.Descripcion                     Moneda,
                         via.FechaPartida                    FechaPartida,
@@ -49,6 +50,7 @@ public class GetAllViajeHandler
                     inner join cliente cli ON cli.idCliente = via.idCliente
                     inner join chofer chf ON chf.idChofer = via.idChofer
                     LEFT JOIN moneda mon ON mon.idMoneda = via.idMoneda
+                    LEFT JOIN LATERAL ( SELECT SUM(MONTO) AS Cobrado FROM cobro WHERE cobro.idViaje = via.idViaje) cobros ON TRUE
                     where
                                 (@nroViaje is NULL or via.nroViaje = @nroViaje)
                         AND     (@idCamion is NULL or cam.idCamion = @idCamion)

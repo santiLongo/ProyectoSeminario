@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
 [Table("taller")]
 [Index("IdLocalidad", Name = "FK_TALLER_LOCALIDAD")]
-public class Taller
+public class Taller : IAuditable
 {
     [Key]
     [Column("idTaller", TypeName = "int(11)")]
@@ -27,22 +28,43 @@ public class Taller
     [Column("telefono", TypeName = "int(11)")]
     public int Telefono { get; set; }
 
-    [Required]
     [Column("responsable")]
-    [StringLength(50)]
+    [MaxLength(50)]
     public string Responsable { get; set; }
 
-    [Required]
     [Column("mail")]
-    [StringLength(50)]
+    [MaxLength(50)]
     public string Mail { get; set; }
 
     [Column("idLocalidad", TypeName = "int(11)")]
     public int IdLocalidad { get; set; }
 
-    [Column("codigoPostal", TypeName = "int(11)")]
-    public int CodigoPostal { get; set; }
+    [Column("codigoPostal")]
+    [MaxLength(15)]
+    public string CodigoPostal { get; set; }
+    
+    [Column("direccion")]
+    [MaxLength(50)]
+    public string Direccion { get; set; }
+    
+    [Column("userName")]
+    [MaxLength(15)]
+    public string UserName { get; set; }
+    
+    [Column("userDateTime", TypeName =  "datetime")]
+    public DateTime UserDateTime { get; set; }
     public virtual Localidad Localidad { get; set; }
     public virtual ICollection<Mantenimiento> Mantenimientos { get; set; } = new List<Mantenimiento>();
     public virtual ICollection<TallerEspecialidad> TallerEspecialidades { get; set; } = new List<TallerEspecialidad>();
+    public void CreatedAt(DateTime date, string user)
+    {
+        UserDateTime = date;
+        user = user;
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        UserDateTime = date;
+        user = user;
+    }
 }

@@ -10,6 +10,7 @@ public class GetAllViajeModel
     public string Carga { get; set; }
     public decimal Kilometros { get; set; }
     public decimal MontoTotal { get; set; }
+    public decimal Cobrado { get; set; }
     public string Moneda { get; set; }
     public string Estado { get; set; }
     public DateTime FechaPartida { get; set; }
