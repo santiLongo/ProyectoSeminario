@@ -16,25 +16,21 @@ public class Proveedor
     [Column("idProveedor", TypeName = "int(11)")]
     public int IdProveedor { get; set; }
 
-    [Required]
     [Column("razonSocial")]
     [StringLength(50)]
     public string RazonSocial { get; set; }
 
     [Column("cuit", TypeName = "bigint")]
-    public long Cuit { get; set; }
+    public long? Cuit { get; set; }
 
-    [Required]
     [Column("mail")]
     [StringLength(50)]
     public string Mail { get; set; }
 
-    [Required]
     [Column("responsable")]
     [StringLength(50)]
     public string Responsable { get; set; }
 
-    [Required]
     [Column("direccion")]
     [StringLength(30)]
     public string Direccion { get; set; }
@@ -42,8 +38,8 @@ public class Proveedor
     [Column("idLocalidad", TypeName = "int(11)")]
     public int IdLocalidad { get; set; }
 
-    [Column("codigoPostal", TypeName = "mediumint(9)")]
-    public int CodigoPostal { get; set; }
+    [Column("codigoPostal", TypeName = "varchar(15)")]
+    public string CodigoPostal { get; set; }
     public virtual ICollection<CompraRepuesto> CompraRepuestos { get; set; } = new List<CompraRepuesto>();
     public virtual Localidad Localidad { get; set; }
     public virtual ICollection<ProveedorEspecialidad> ProveedorEspecialidades { get; set; } = new List<ProveedorEspecialidad>();

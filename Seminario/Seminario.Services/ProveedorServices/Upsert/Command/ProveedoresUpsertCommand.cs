@@ -1,20 +1,18 @@
-﻿namespace Seminario.Services.TallerServices.Upsert.Command;
+﻿namespace Seminario.Services.ProveedorServices.Upsert.Command;
 
-public class TalleresUpsertCommand
+public class ProveedoresUpsertCommand
 {
-    public int? IdTaller { get; set; }
-    public string Nombre { get; set; }
+    public int? IdProveedor { get; set; }
+    public string RazonSocial { get; set; }
     public string Direccion { get; set; }
     public long? Cuit { get; set; }
-    public int? Telefono { get; set; }
     public string Responsable { get; set; }
     public string Mail { get; set; }
     public string CodigoPostal { get; set; }
     public int IdLocalidad { get; set; }
-
-    public List<UpsertEspecialidadTaller> Especialidades { get; set; } = new();
+    public List<UpsertEspecialidadProveedor> Especialidades { get; set; } = new();
 }
-public class UpsertEspecialidadTaller
+public class UpsertEspecialidadProveedor
 {
     public int IdEspecialidad { get; set; }
     public string Descripcion { get; set; } = null!;

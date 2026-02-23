@@ -4,6 +4,9 @@ using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
 using Seminario.Datos.DataSourceResult.Clases;
 using Seminario.Datos.DataSourceResult.ExtesionMethods;
+using Seminario.Services.TallerServices.Get.Command;
+using Seminario.Services.TallerServices.Get.Handler;
+using Seminario.Services.TallerServices.Get.Response;
 using Seminario.Services.TallerServices.GetAll.Command;
 using Seminario.Services.TallerServices.GetAll.Handler;
 using Seminario.Services.TallerServices.GetAll.Response;
@@ -39,5 +42,13 @@ public class TallerController : ControllerBase
     {
         var handler = new TalleresUpsertHandler(_ctx);
         await handler.HandleAsync(command);
+    }
+    
+    [HttpGet("get")]
+    [SeminarioResponse]
+    public async Task<TalleresGetResponse> Get([FromQuery] TalleresGetCommand command)
+    {
+        var handler = new TalleresGetHandler(_ctx);
+        return await handler.HandleAsync(command);
     }
 }

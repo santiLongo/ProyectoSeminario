@@ -40,6 +40,9 @@ public  class Mantenimiento
     [Column("importe", TypeName = "decimal(10,2)")]
     public decimal? Importe { get; set; }
     
+    [Column("suspendido", TypeName = "bit")]
+    public bool Suspendido { get; set; }
+    
     public virtual ICollection<CompraRepuesto> CompraRepuestos { get; set; } = new List<CompraRepuesto>();
     public virtual Taller Taller { get; set; }
     public virtual Camion Vehiculo { get; set; }

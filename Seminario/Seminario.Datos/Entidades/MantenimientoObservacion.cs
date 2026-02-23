@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
 [Table("mantenimiento/observacion")]
 [Index("IdMantenimiento", Name = "FK_MANTENIMIENTO/OBSERVACION_MANTENIEMIENTO")]
-public  class MantenimientoObservacion
+public  class MantenimientoObservacion : IAuditable
 {
     [Key]
     [Column("idObservacion", TypeName = "int(11)")]
@@ -35,4 +36,15 @@ public  class MantenimientoObservacion
     [StringLength(20)]
     public string UserName { get; set; }
     public virtual Mantenimiento Mantenimiento { get; set; }
+    public void CreatedAt(DateTime date, string user)
+    {
+        UserDateTime = date;
+        UserName = user;
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        UserDateTime = date;
+        UserName = user;
+    }
 }

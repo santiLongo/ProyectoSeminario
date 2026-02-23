@@ -26,7 +26,7 @@ public  class MantenimientoTarea
 
     [Column("costo")]
     [Precision(10, 0)]
-    public decimal Costo { get; set; }
+    public decimal? Costo { get; set; }
 
     [Column("fecha", TypeName = "datetime")]
     public DateTime Fecha { get; set; }

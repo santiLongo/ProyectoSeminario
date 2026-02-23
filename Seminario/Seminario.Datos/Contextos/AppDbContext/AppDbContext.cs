@@ -26,6 +26,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
         IPagosRepo PagosRepo { get; }
         IEspecialidadRepo EspecialidadRepo { get; }
         ITallerRepo TallerRepo { get; }
+        IProveedorRepo ProveedorRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         int SaveChanges();
     }
@@ -491,6 +492,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public IPagosRepo PagosRepo => new PagosRepo(this);
         public IEspecialidadRepo EspecialidadRepo => new EspecialidadRepo(this);
         public ITallerRepo TallerRepo => new TallerRepo(this);
+        public IProveedorRepo ProveedorRepo => new ProveedorRepo(this);
         #endregion
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

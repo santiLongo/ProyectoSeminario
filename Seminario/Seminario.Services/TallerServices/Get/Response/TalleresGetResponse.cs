@@ -1,6 +1,6 @@
-﻿namespace Seminario.Services.TallerServices.Upsert.Command;
+﻿namespace Seminario.Services.TallerServices.Get.Response;
 
-public class TalleresUpsertCommand
+public class TalleresGetResponse
 {
     public int? IdTaller { get; set; }
     public string Nombre { get; set; }
@@ -12,10 +12,11 @@ public class TalleresUpsertCommand
     public string CodigoPostal { get; set; }
     public int IdLocalidad { get; set; }
 
-    public List<UpsertEspecialidadTaller> Especialidades { get; set; } = new();
+    public List<GetEspecialidadTaller> Especialidades { get; set; } = new();
 }
-public class UpsertEspecialidadTaller
+
+public class GetEspecialidadTaller
 {
     public int IdEspecialidad { get; set; }
-    public string Descripcion { get; set; } = null!;
+    public string Descripcion { get; set; }
 }

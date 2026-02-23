@@ -8,6 +8,7 @@ public interface IEspecialidadRepo
 {
     Task<IEnumerable<Especialidad>> GetAll();
     Task<Especialidad> GetByIdAsync(int id, bool asNoTracking = false);
+    Task<List<Especialidad>> GetRange(List<int> ids);
     void Add(Especialidad especialidad);
 }
 
@@ -36,6 +37,11 @@ public class EspecialidadRepo : IEspecialidadRepo
         return await query.FirstOrDefaultAsync(e => e.IdEspecialidad == id);
     }
 
+    public async Task<List<Especialidad>> GetRange(List<int> ids)
+    {
+        return await _ctx.Especialidades.Where(e => ids.Contains(e.IdEspecialidad)).ToListAsync();
+    }
+    
     public void Add(Especialidad especialidad)
     {
         _ctx.Especialidades.Add(especialidad);
