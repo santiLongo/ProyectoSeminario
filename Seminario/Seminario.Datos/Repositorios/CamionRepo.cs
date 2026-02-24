@@ -86,8 +86,12 @@ public static class CamionQueryExtension
     public static IQueryable<Camion> IncludeMantenimientoActual(this IQueryable<Camion> query) =>
         query.Include(c => c.Mantenimientos.Where(m => m.FechaSalida == null));
     
-    public static IQueryable<Camion> IncludeCurrentViaje(this IQueryable<Camion> query) => 
-        query.Include(c => c.Viajes
+    public static IQueryable<Camion> IncludeCurrentViajeCamion(this IQueryable<Camion> query) => 
+        query.Include(c => c.ViajesComoCamion
+            .Where(v => v.Estado == EstadosViaje.EnViaje.ToInt()));
+    
+    public static IQueryable<Camion> IncludeCurrentViajeSemi(this IQueryable<Camion> query) => 
+        query.Include(c => c.ViajesComoSemi
             .Where(v => v.Estado == EstadosViaje.EnViaje.ToInt()));
     
     public static IQueryable<Camion> WhereEqualsIdCamion(this IQueryable<Camion> query, int  idCamion) => 

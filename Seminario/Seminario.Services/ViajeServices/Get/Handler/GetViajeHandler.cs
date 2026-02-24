@@ -21,6 +21,7 @@ public class GetViajeHandler
         var viaje = await _ctx.ViajeRepo.Query()
             .IncludeChofer()
             .IncludeCamion()
+            .IncludeSemirremolque()
             .IncludeCliente()
             .IncludeDestinosProcedencias()
             .FirstOrDefaultAsync(v => v.IdViaje == command.IdViaje);
@@ -31,7 +32,7 @@ public class GetViajeHandler
 
         model.DatosPrincipales = CargoPrincipales(viaje);
         //
-        model.DatosCamion = await CargoCamion(viaje.Camion);
+        model.DatosCamion = await CargoCamion(viaje.Camion, viaje.Semirremolque);
         //
         model.DatosChofer = CargoChofer(viaje.Chofer);
         //
@@ -65,17 +66,23 @@ public class GetViajeHandler
         };
     }
     
-    private async Task<DatosCamion> CargoCamion(Camion camion)
+    private async Task<DatosCamion> CargoCamion(Camion camion, Camion? semi = null)
     {
-        var ultimoMantemiento = await _ctx.MantenimientoRepo.UltimoMantenimientoCamion(camion.IdCamion);
-        var tipoCamion = await _ctx.TipoCamionRepo.GetByIdAsync(camion.IdCamion);
-        
+        var tipoCamion = await _ctx.TipoCamionRepo.GetByIdAsync(camion.IdTipoCamion.GetValueOrDefault());
+        var mantCamion = await _ctx.MantenimientoRepo.UltimoMantenimientoCamion(camion.IdCamion);
+
+        var mantSemi = semi is null
+            ? null
+            : await _ctx.MantenimientoRepo.UltimoMantenimientoCamion(semi.IdCamion);
+
         return new DatosCamion
         {
             IdCamion = camion.IdCamion,
             Patente = camion.Patente,
-            UltimoMantenimiento = ultimoMantemiento?.FechaSalida.GetValueOrDefault(),
-            TipoCamion = tipoCamion.Descripcion
+            TipoCamion = tipoCamion.Descripcion,
+            UltimoMantenimiento = mantCamion?.FechaSalida,
+            IdSemi = semi?.IdCamion,
+            UltimoMantenimientoSemi = mantSemi?.FechaSalida
         };
     }
     

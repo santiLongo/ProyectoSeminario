@@ -23,7 +23,7 @@ public class MantenimientoUpsertHandler
         {
             mantenimiento = new Datos.Entidades.Mantenimiento();
             _ctx.MantenimientoRepo.Add(mantenimiento);
-            mantenimiento.IdVehiculo = mantenimiento.IdVehiculo;
+            mantenimiento.IdVehiculo = command.IdCamion;
         }
 
         if (mantenimiento.Suspendido)

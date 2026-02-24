@@ -30,6 +30,8 @@ public class AddViajeCommand
     [Required(ErrorMessage = "Se requiere informar el chofer")]
     public int? Camion { get; set; }
     
+    public int? Semirremolque { get; set; }
+    
     public string? Carga { get; set; }
     
     public float? Kilos { get; set; }

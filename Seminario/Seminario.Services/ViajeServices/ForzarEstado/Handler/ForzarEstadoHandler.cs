@@ -70,16 +70,29 @@ public class ForzarEstadoHandler
     {
         var camion = await _ctx.CamionRepo.GetAsync(q =>
             q.AsNoTracking()
-                .IncludeCurrentViaje()
+                .IncludeCurrentViajeCamion()
                 .IncludeMantenimientoActual()
                 .WhereEqualsIdCamion(viaje.IdCamion)
             );
 
         if (camion == null) throw new InvalidOperationException("Ups, parece que el camion no existe");
         //
-        if(camion.Viajes.Any()) throw new InvalidOperationException("El camion se encuentra en un viaje");
+        if(camion.ViajesComoCamion.Any()) throw new InvalidOperationException("El camion se encuentra en un viaje");
         //
         if(camion.Mantenimientos.Any()) throw new InvalidOperationException("El camion se encuentra en un mantenimiento");
+        
+        var semi = await _ctx.CamionRepo.GetAsync(q =>
+            q.AsNoTracking()
+                .IncludeCurrentViajeSemi()
+                .IncludeMantenimientoActual()
+                .WhereEqualsIdCamion(viaje.IdCamion)
+        );
+
+        if (semi == null) throw new InvalidOperationException("Ups, parece que el camion no existe");
+        //
+        if(semi.ViajesComoSemi.Any()) throw new InvalidOperationException("El camion se encuentra en un viaje");
+        //
+        if(semi.Mantenimientos.Any()) throw new InvalidOperationException("El camion se encuentra en un mantenimiento");
         
         var chofer = await _ctx.ChoferRepo.Query()
             .AsNoTracking()

@@ -74,6 +74,9 @@ public static class ViajeQueryExtensions
     public static IQueryable<Viaje> IncludeCamion(this IQueryable<Viaje> query) =>
         query.Include(c => c.Camion);
     
+    public static IQueryable<Viaje> IncludeSemirremolque(this IQueryable<Viaje> query) =>
+        query.Include(c => c.Semirremolque);
+    
     public static IQueryable<Viaje> IncludeChofer(this IQueryable<Viaje> query) =>
         query.Include(c => c.Chofer);
     

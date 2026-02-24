@@ -48,6 +48,9 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
 
     [Column("idCamion", TypeName = "int(11)")]
     public int IdCamion { get; set; }
+    
+    [Column("IdSemirremolque", TypeName = "int(11)")]
+    public int? IdSemirremolque { get; set; }
 
     [Column("Carga", TypeName = "char(20)")]
     [StringLength(20)]
@@ -78,7 +81,8 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
     public string? NroViaje { get; set; }
     
     public virtual ICollection<Cobro> Cobros { get; set; } = new List<Cobro>();
-    public virtual Camion Camion { get; set; } = new Camion();
+    public virtual Camion? Camion { get; set; }
+    public virtual Camion? Semirremolque { get; set; }
     public virtual Chofer Chofer { get; set; } = new  Chofer();
     public virtual Cliente Cliente { get; set; } = new  Cliente();
     public virtual ICollection<Destino> Destinos { get; set; } = new List<Destino>();
@@ -142,11 +146,11 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
     {
         this.PrecioKm = (float)(MontoTotal / Kilometros);
         //
-        if(this.FechaDescarga <= DateTime.Today && Estado == EstadosViaje.EnViaje.ToInt())
+        if(this.FechaDescarga <= DateTime.Today && Estado == EstadosViaje.EnViaje.ToInt() && this.FechaDescarga is not null)
             this.Estado = EstadosViaje.Finalizado.ToInt();
         //
         var cobrado = Cobros.Sum(c => c.Monto);
-        if (cobrado >= MontoTotal && Estado == EstadosViaje.Finalizado.ToInt()){}
+        if (cobrado >= MontoTotal && Estado == EstadosViaje.Finalizado.ToInt())
             this.Estado = EstadosViaje.Cobrado.ToInt();
         //
         if(cobrado < MontoTotal && Estado == EstadosViaje.Cobrado.ToInt())

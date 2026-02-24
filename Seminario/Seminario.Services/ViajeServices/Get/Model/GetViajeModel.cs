@@ -49,6 +49,8 @@ public class DatosCamion
     public string Patente { get; set; }
     public DateTime? UltimoMantenimiento { get; set; }
     public string TipoCamion { get; set; }
+    public int? IdSemi { get; set; }
+    public DateTime? UltimoMantenimientoSemi { get; set; }
 }
 
 public class DatosDestino

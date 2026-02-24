@@ -23,6 +23,12 @@ public class AddViajeHandler
         viaje.Camion = await ValidarCamion(command.Camion.GetValueOrDefault());
         viaje.IdCamion = viaje.Camion.IdCamion;
         //
+        if (command.Semirremolque != null)
+        {
+            viaje.Semirremolque = await ValidarCamion(command.Semirremolque.GetValueOrDefault());
+            viaje.IdSemirremolque = viaje.Camion.IdCamion;
+        }
+        //
         viaje.Chofer = await ValidarChofer(command.Chofer.GetValueOrDefault());
         viaje.IdChofer = viaje.Chofer.IdChofer;
 	    //
@@ -84,7 +90,8 @@ public class AddViajeHandler
     {
         var camion = await _ctx.CamionRepo.GetAsync( q => 
                 q .IncludeMantenimientoActual()
-                    .IncludeCurrentViaje()
+                    .IncludeCurrentViajeCamion()
+                    .IncludeCurrentViajeSemi()
                     .WhereEqualsIdCamion(idCamion)
                 );
         
@@ -103,9 +110,14 @@ public class AddViajeHandler
             throw new InvalidOperationException("El camion tiene un mantenimiento que no a terminado aun");
         }
         
-        if(camion.Viajes.Any())
+        if(camion.ViajesComoCamion.Any())
         {
             throw new InvalidOperationException("El camion se encuentra en un viaje");
+        }
+        
+        if(camion.ViajesComoSemi.Any())
+        {
+            throw new InvalidOperationException("El semi se encuentra en un viaje");
         }
 
         return camion;

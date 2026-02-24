@@ -8,6 +8,7 @@ using System.Text;
 using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Api.Services.CurrentUserService;
 using Seminario.Datos.Contextos.SaveChangesInterceptors;
+using Seminario.Datos.ControlGroupSingleton;
 using Seminario.Datos.Dapper;
 using Seminario.Datos.Services.CurrentUserService;
 
@@ -76,6 +77,8 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<AuditSaveChangesInterceptor>();
 //Agrego el IDbSession para el Dapper
 builder.Services.AddScoped<IDbSession, DbSession>();
+//Agrego singleton para las consultas a control group
+builder.Services.AddSingleton<IControlConnection, ControlGroupConnection>();
 
 var app = builder.Build();
 

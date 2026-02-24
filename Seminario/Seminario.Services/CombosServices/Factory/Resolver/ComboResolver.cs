@@ -41,6 +41,8 @@ public static class ComboResolver
                 return new ComboEspecialidad();
             case "ComboTalleres":
                 return new ComboTalleres();
+            case "ComboSemisDisponibles":
+                return new ComboSemisDisponibles();
             default:
                 throw new NotImplementedException($"El combo {type}, no se encuentra implementado");
         }

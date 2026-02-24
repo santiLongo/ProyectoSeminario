@@ -20,6 +20,7 @@ public class UpdateViajeHandler
         var viaje = await _ctx.ViajeRepo.Query()
             .IncludeDestinosProcedencias()
             .IncludeCamion()
+            .IncludeSemirremolque()
             .IncludeChofer()
             .WhereEnViaje()
             .FirstOrDefaultAsync(v => v.IdViaje == command.IdViaje);
@@ -30,6 +31,8 @@ public class UpdateViajeHandler
         }
 
         var camion = viaje.IdCamion ==  command.Camion ? viaje.Camion : await ValidarCamion(command.Camion);
+        
+        var semi = viaje.IdSemirremolque ==  command.Semirremolque ? viaje.Semirremolque : await ValidarCamion(command.Semirremolque.GetValueOrDefault());
         
         var chofer = viaje.IdChofer ==  command.Chofer ? viaje.Chofer : await ValidarChofer(command.Chofer);
 
@@ -85,7 +88,8 @@ public class UpdateViajeHandler
         var camion = await _ctx.CamionRepo.GetAsync( q => 
             q.AsNoTracking()
                 .IncludeMantenimientoActual()
-                .IncludeCurrentViaje()
+                .IncludeCurrentViajeCamion()
+                .IncludeCurrentViajeSemi()
                 .WhereEqualsIdCamion(idCamion)
         );
         
@@ -104,9 +108,14 @@ public class UpdateViajeHandler
             throw new InvalidOperationException("El camion tiene un mantenimiento que no a terminado aun");
         }
         
-        if(camion.Viajes.Any())
+        if(camion.ViajesComoCamion.Any())
         {
             throw new InvalidOperationException("El camion se encuentra en un viaje");
+        }
+        
+        if(camion.ViajesComoSemi.Any())
+        {
+            throw new InvalidOperationException("El semi se encuentra en un viaje");
         }
 
         return camion;

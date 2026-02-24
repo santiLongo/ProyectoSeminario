@@ -422,10 +422,14 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.Property(e => e.UserAlta).IsFixedLength();
                 entity.Property(e => e.UserName).IsFixedLength();
 
-                entity.HasOne(d => d.Camion).WithMany(p => p.Viajes)
+                entity.HasOne(d => d.Camion).WithMany(p => p.ViajesComoCamion)
                     .HasForeignKey(f => f.IdCamion)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VIAJE_CAMION");
+
+                entity.HasOne(d => d.Semirremolque).WithMany(p => p.ViajesComoSemi)
+                    .HasForeignKey(f => f.IdSemirremolque)
+                    .OnDelete(DeleteBehavior.NoAction);
 
                 entity.HasOne(d => d.Chofer).WithMany(p => p.Viajes)
                     .HasForeignKey(f => f.IdChofer)

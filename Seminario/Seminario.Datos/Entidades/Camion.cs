@@ -55,7 +55,8 @@ public class Camion : IAuditable
 
     public virtual TipoCamion TipoCamion { get; set; }
     public virtual ICollection<Mantenimiento> Mantenimientos { get; set; } = new List<Mantenimiento>();
-    public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
+    public virtual ICollection<Viaje> ViajesComoCamion { get; set; } = new List<Viaje>();
+    public virtual ICollection<Viaje> ViajesComoSemi { get; set; } = new List<Viaje>();
     
     public void CreatedAt(DateTime date, string user)
     {
@@ -86,7 +87,8 @@ public class Camion : IAuditable
             UserDateTime = null,
             TipoCamion = null,
             Mantenimientos = null,
-            Viajes = null
+            ViajesComoCamion = null,
+            ViajesComoSemi = null
         };
     }
     

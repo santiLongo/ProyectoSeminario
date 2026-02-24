@@ -6,10 +6,9 @@ using Seminario.Services.CombosServices.Factory.Interface;
 
 namespace Seminario.Services.CombosServices.Factory.Implementacion;
 
-public class ComboCamionesDisponibles: IGetComboData, ISetSession, ISetExtraParams
+public class ComboSemisDisponibles : IGetComboData, ISetSession, ISetExtraParams
 {
     private DbExecutor _executor;
-    private int? _tipoCamion;
     private string? _marca;
     private string? _modelo;
     
@@ -21,7 +20,7 @@ public class ComboCamionesDisponibles: IGetComboData, ISetSession, ISetExtraPara
         p.Add("@marca", _marca);
         
         var sql = @"
-                    select
+               select
                         camion.idCamion   Numero,
                         CONCAT(Patente,' ','(',Marca,',',Modelo,')') Descripcion
                     from camion
@@ -36,7 +35,7 @@ public class ComboCamionesDisponibles: IGetComboData, ISetSession, ISetExtraPara
                     where   camion.FechaBaja IS NULL
                         AND mante.idMantenimiento IS NULL
                         AND viaje.idViaje IS NULL   
-                        AND idTipoCamion in (1,2)
+                        AND idTipoCamion in (4,5)
                         AND (@marca IS NULL OR Marca = @marca)
                         AND (@modelo IS NULL OR Marca = @modelo)";
 
@@ -54,6 +53,6 @@ public class ComboCamionesDisponibles: IGetComboData, ISetSession, ISetExtraPara
         _marca = value;
         extraParams.TryGetValue("modelo", out value);
         _modelo = value;
-        _tipoCamion = extraParams.TryGetValue("tipoCamion", out value) ? Convert.ToInt32(value) : null;
     }
+    
 }
