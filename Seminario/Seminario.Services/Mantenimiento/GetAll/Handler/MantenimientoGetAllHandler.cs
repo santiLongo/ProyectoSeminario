@@ -42,10 +42,11 @@ public class MantenimientoGetAllHandler
                                                 WHERE pagman.idMantenimiento = man.idMantenimiento) pago ON TRUE
                     WHERE
                         (
-                            (@estado = 1 AND (man.fechaSalida is null AND man.suspendido = 0)) OR
-                            (@estado = 2 AND (pago.total < man.importe AND man.suspendido = 0)) OR
-                            (@estado = 3 AND (pago.total >= man.importe AND man.suspendido = 0)) OR
-                            (@estado = 4 AND man.suspendido = 1) OR
+                            (@estado = 1 AND (man.fechaSalida is null AND IFNULL(man.suspendido,0) = 0)) OR
+                            (@estado = 2 AND ((IFNULL(pago.total,0) < man.importe || man.importe <= 0 || man.importe is null)
+                                                    AND IFNULL(man.suspendido,0) = 0 AND man.fechaSalida is not null)) OR
+                            (@estado = 3 AND ( IFNULL(pago.total,0) >= man.importe AND IFNULL(man.suspendido,0) = 0)) OR
+                            (@estado = 4 AND IFNULL(man.suspendido,0) = 1) OR
                             (@estado = 5)
                         )
                         AND (@camion is null or man.idVehiculo = @camion)

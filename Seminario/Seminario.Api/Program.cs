@@ -41,8 +41,8 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.AllowAnyOrigin()
-                .AllowAnyHeader()       
-                .WithMethods("POST", "GET");
+                .AllowAnyHeader()
+                .AllowAnyMethod();
         });
 });
 //Agrego Autorizacion con el JWT
@@ -91,9 +91,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors(MiPoliticaCors);
+
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

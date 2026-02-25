@@ -27,6 +27,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
         IEspecialidadRepo EspecialidadRepo { get; }
         ITallerRepo TallerRepo { get; }
         IProveedorRepo ProveedorRepo { get; }
+        IEventoRepo EventoRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         int SaveChanges();
     }
@@ -98,6 +99,9 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public DbSet<Procedencia> Procedencias { get; set; }
         
         public DbSet<ViajeObservacion> ViajesObservaciones { get; set; }
+        
+        public DbSet<Evento> Eventos { get; set; } 
+        public DbSet<TipoEvento> TiposEvento { get; set; } 
             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -472,6 +476,20 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
+            modelBuilder.Entity<Evento>(entity =>
+            {
+                entity.HasKey(e => e.IdEvento);
+                entity.HasOne(e => e.TipoEvento)
+                    .WithMany(t => t.Eventos)
+                    .HasForeignKey(e => e.IdTipoEvento)
+                    .OnDelete(DeleteBehavior.ClientNoAction);
+            });
+            
+            modelBuilder.Entity<TipoEvento>(entity =>
+            {
+                entity.HasKey(e => e.IdTipo);
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
@@ -497,6 +515,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public IEspecialidadRepo EspecialidadRepo => new EspecialidadRepo(this);
         public ITallerRepo TallerRepo => new TallerRepo(this);
         public IProveedorRepo ProveedorRepo => new ProveedorRepo(this);
+        public IEventoRepo EventoRepo => new EventoRepo(this);
         #endregion
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
