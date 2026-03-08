@@ -6,10 +6,9 @@ using Seminario.Services.CombosServices.Factory.Interface;
 
 namespace Seminario.Services.CombosServices.Factory.Implementacion;
 
-public class ComboCamion : IGetComboData, ISetSession, ISetExtraParams
+public class ComboSemis : IGetComboData, ISetSession, ISetExtraParams
 {
     private DbExecutor _executor;
-    private int? _tipoCamion;
     private string? _marca;
     private string? _modelo;
     
@@ -19,17 +18,16 @@ public class ComboCamion : IGetComboData, ISetSession, ISetExtraParams
         var p = new DynamicParameters();
         p.Add("@modelo", _modelo);
         p.Add("@marca", _marca);
-        p.Add("@tipoCamion", _tipoCamion);
         
         var sql = @"
                select
-                    idCamion   Numero,
-                    CONCAT(Patente,' ','(',Marca,',',Modelo,')') Descripcion
-                from camion
-                where   idTipoCamion in (1, 2)
-                    AND (@tipoCamion IS NULL OR idTipoCamion = @tipoCamion)
-                    AND (@marca IS NULL OR Marca = @marca)
-                    AND (@modelo IS NULL OR Marca = @modelo)";
+                        camion.idCamion   Numero,
+                        CONCAT(Patente,' ','(',Marca,',',Modelo,')') Descripcion
+                    from camion
+                    where   
+                            idTipoCamion in (4,5)
+                        AND (@marca IS NULL OR Marca = @marca)
+                        AND (@modelo IS NULL OR Marca = @modelo)";
 
         return _executor.Execute<ComboIntModel>(sql, p).ToList();
     }
@@ -45,6 +43,6 @@ public class ComboCamion : IGetComboData, ISetSession, ISetExtraParams
         _marca = value;
         extraParams.TryGetValue("modelo", out value);
         _modelo = value;
-        _tipoCamion = extraParams.TryGetValue("tipoCamion", out value) ? Convert.ToInt32(value) : null;
     }
+    
 }

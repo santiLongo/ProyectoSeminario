@@ -32,7 +32,7 @@ public class Proveedor
     public string Responsable { get; set; }
 
     [Column("direccion")]
-    [StringLength(30)]
+    [MaxLength(100)]
     public string Direccion { get; set; }
 
     [Column("idLocalidad", TypeName = "int(11)")]

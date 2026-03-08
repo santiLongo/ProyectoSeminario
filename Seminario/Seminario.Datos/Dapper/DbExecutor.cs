@@ -2,7 +2,16 @@
 
 namespace Seminario.Datos.Dapper;
 
-public class DbExecutor
+public interface IDbExecutor
+{
+    Task<IEnumerable<T>> ExecuteAsync<T>(string sql, DynamicParameters? param = null);
+    IEnumerable<T> Execute<T>(string sql, DynamicParameters? param = null);
+    T? ExecuteFirstOrDefault<T>(string sql, DynamicParameters? param = null);
+    Task<T?> ExecuteFirstOrDefaultAsync<T>(string sql, DynamicParameters? param = null);
+}
+
+
+public class DbExecutor : IDbExecutor
 {
     private readonly IDbSession _session;
 

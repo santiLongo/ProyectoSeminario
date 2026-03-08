@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Contextos.AppDbContext;
+using Seminario.Datos.DataSourceResult.Clases;
 using Seminario.Datos.Entidades;
 
 namespace Seminario.Datos.Repositorios;

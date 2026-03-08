@@ -5,18 +5,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
 [Table("cliente")]
-public  class Cliente
+public  class Cliente : IAuditable
 {
     [Key]
     [Column("idCliente", TypeName = "int(11)")]
     public int IdCliente { get; set; }
 
     [Column("cuit")]
-    [StringLength(30)]
+    [MaxLength(11)]
     public string Cuit { get; set; }
 
     [Column("razonSocial")]
@@ -40,5 +41,21 @@ public  class Cliente
 
     [Column("userDateTime", TypeName = "datetime")]
     public DateTime? UserDateTime { get; set; }
+    
+    [Column("FechaBaja", TypeName = "datetime")]
+    public DateTime? FechaBaja { get; set; }
+    
     public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
+    public void CreatedAt(DateTime date, string user)
+    {
+        UserName = user;
+        UserDateTime = date;
+        
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        UserName = user;
+        UserDateTime = date;
+    }
 }

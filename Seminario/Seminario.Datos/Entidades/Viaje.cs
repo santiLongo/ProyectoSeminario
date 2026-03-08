@@ -146,7 +146,7 @@ public class Viaje : IAuditable, ICreatedTrigger, IModifiedTrigger
     {
         this.PrecioKm = (float)(MontoTotal / Kilometros);
         //
-        if(this.FechaDescarga <= DateTime.Today && Estado == EstadosViaje.EnViaje.ToInt() && this.FechaDescarga is not null)
+        if(this.FechaDescarga <= DateTime.Today.AddDays(1) && Estado == EstadosViaje.EnViaje.ToInt() && this.FechaDescarga is not null)
             this.Estado = EstadosViaje.Finalizado.ToInt();
         //
         var cobrado = Cobros.Sum(c => c.Monto);

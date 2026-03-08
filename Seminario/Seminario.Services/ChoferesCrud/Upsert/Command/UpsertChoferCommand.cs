@@ -13,11 +13,11 @@ public class UpsertChoferCommand
     [Required(ErrorMessage = "El chofer debe tener apellido", AllowEmptyStrings = false, ErrorMessageResourceType = typeof(SeminarioException))]
     public string Apellido { get; set; }
     public string Direccion { get; set; }
-    public int Telefono { get; set; }
+    public int? Telefono { get; set; }
     
     [Required(ErrorMessage = "El chofer debe tener un Nro de Registro", AllowEmptyStrings = false, ErrorMessageResourceType = typeof(SeminarioException))]
     public string NroRegistro { get; set; }
     
-    [Required(ErrorMessage = "El chofer debe tener un DNI", ErrorMessageResourceType = typeof(SeminarioException))]
-    public int Dni { get; set; }
+    // [Required(ErrorMessage = "El chofer debe tener un DNI", ErrorMessageResourceType = typeof(SeminarioException))]
+    public int? Dni { get; set; }
 }

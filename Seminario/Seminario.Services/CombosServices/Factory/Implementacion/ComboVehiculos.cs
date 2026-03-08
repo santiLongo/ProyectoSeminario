@@ -6,7 +6,7 @@ using Seminario.Services.CombosServices.Factory.Interface;
 
 namespace Seminario.Services.CombosServices.Factory.Implementacion;
 
-public class ComboCamion : IGetComboData, ISetSession, ISetExtraParams
+public class ComboVehiculos : IGetComboData, ISetSession, ISetExtraParams
 {
     private DbExecutor _executor;
     private int? _tipoCamion;
@@ -26,8 +26,7 @@ public class ComboCamion : IGetComboData, ISetSession, ISetExtraParams
                     idCamion   Numero,
                     CONCAT(Patente,' ','(',Marca,',',Modelo,')') Descripcion
                 from camion
-                where   idTipoCamion in (1, 2)
-                    AND (@tipoCamion IS NULL OR idTipoCamion = @tipoCamion)
+                where   (@tipoCamion IS NULL OR idTipoCamion = @tipoCamion)
                     AND (@marca IS NULL OR Marca = @marca)
                     AND (@modelo IS NULL OR Marca = @modelo)";
 

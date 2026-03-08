@@ -79,6 +79,9 @@ builder.Services.AddScoped<AuditSaveChangesInterceptor>();
 builder.Services.AddScoped<IDbSession, DbSession>();
 //Agrego singleton para las consultas a control group
 builder.Services.AddSingleton<IControlConnection, ControlGroupConnection>();
+//Registro el DbExecutor como servicio, no se porque no lo hice antes.
+//Tiene mas sentido implementar la interfaz en vez de estar llamando DbSession para pasarlo por el ctor
+builder.Services.AddScoped<IDbExecutor, DbExecutor>();
 
 var app = builder.Build();
 

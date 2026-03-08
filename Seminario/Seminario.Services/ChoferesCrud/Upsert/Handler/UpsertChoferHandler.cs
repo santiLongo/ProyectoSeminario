@@ -30,7 +30,7 @@ public class UpsertChoferHandler
         chofer.Nombre = command.Nombre;
         chofer.Apellido = command.Apellido;
         chofer.Direccion = command.Direccion;
-        chofer.Dni = command.Dni;
+        chofer.Dni = command.Dni.GetValueOrDefault();
         chofer.Telefono = command.Telefono;
         chofer.NroRegistro = command.NroRegistro;
 
