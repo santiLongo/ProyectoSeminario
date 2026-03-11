@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
 [Table("localidad")]
 [Index("IdProvincia", Name = "FK_LOCALIDAD_PROVINCIA")]
-public  class Localidad
+public  class Localidad : IAuditable
 {
     [Key]
     [Column("idLocalidad", TypeName = "int(11)")]
@@ -34,4 +35,16 @@ public  class Localidad
     public virtual ICollection<Taller> Talleres { get; set; } = new List<Taller>();
     public virtual ICollection<Destino> Destinos { get; set; } = new List<Destino>();
     public virtual ICollection<Procedencia> Procedencias { get; set; } = new List<Procedencia>();
+
+    public void CreatedAt(DateTime date, string user)
+    {
+        UserDateTime = date;
+        UserName = user;
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        UserDateTime = date;
+        UserName = user;
+    }
 }

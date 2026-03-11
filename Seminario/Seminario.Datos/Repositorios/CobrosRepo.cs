@@ -8,6 +8,7 @@ namespace Seminario.Datos.Repositorios;
 public interface ICobrosRepo
 {
     Task<Cobro> FindByIdCobroAsync(int id, bool asNoTracking = false, bool includeViaje = false, bool includeCheque = false);
+    Task<Cobro> FindAnuladorByIdAsync(int id, bool asNoTracking = false);
     Task<List<Cobro>> FindCobrosByViajeAsync(int idViaje);
     void Add(Cobro cobro);
     Task Anular(Cobro cobro);
@@ -37,6 +38,16 @@ public class CobrosRepo : ICobrosRepo
             query = query.Include(v => v.Cheque);
         
         return await query.FirstOrDefaultAsync(x => x.IdCobro == id);
+    }
+
+    public async Task<Cobro> FindAnuladorByIdAsync(int id, bool asNoTracking = false)
+    {
+        var query = _ctx.Cobros.AsQueryable();
+
+        if (asNoTracking)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync(x => x.CobroAnulado == id);
     }
 
     public async Task<List<Cobro>> FindCobrosByViajeAsync(int idViaje)

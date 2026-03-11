@@ -37,7 +37,7 @@ public class UpsertCamionHandler
         camion.Modelo = command.Modelo.ToUpper();
         camion.Patente = command.Patente.ToUpper();
         camion.NroChasis = command.NroChasis.ToUpper();
-        camion.NroMotor = command.NroMotor.ToUpper();
+        camion.NroMotor = command.NroMotor?.ToUpper();
 
         await _ctx.SaveChangesAsync();
     }

@@ -136,7 +136,7 @@ public class AddViajeHandler
         
         if (chofer.Viajes.Any())
         {
-            throw new InvalidOperationException("El chofer tien viajes no finalizados");
+            throw new InvalidOperationException("El chofer tiene viajes no finalizados");
         }
 
         if (chofer.FechaBaja != null)

@@ -20,8 +20,9 @@ public class CobrosAnularHandler
 
         if (cobro == null)
             throw new SeminarioException("No se encontro el cobro", HttpStatusCode.NotFound);
-        
-        if(cobro.CobroAnulado != null)
+
+        var anulador = await _ctx.CobrosRepo.FindAnuladorByIdAsync(cobro.IdCobro);
+        if (anulador != null)
             throw new SeminarioException("No se puede anular un cobro ya anulado", HttpStatusCode.Conflict);
 
         if (cobro.Cheque != null)

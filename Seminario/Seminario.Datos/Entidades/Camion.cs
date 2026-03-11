@@ -10,9 +10,7 @@ using Seminario.Datos.Entidades.Interfaces;
 namespace Seminario.Datos.Entidades;
 
 [Table("camion")]
-[Index("IdTipoCamion", Name = "FK_CAMION_TIPOCAMION")]
 [Index("NroChasis", Name = "id_numero_chasis", IsUnique = true)]
-[Index("NroMotor", Name = "id_numero_motor", IsUnique = true)]
 public class Camion : IAuditable
 {
     [Key]
@@ -33,7 +31,6 @@ public class Camion : IAuditable
     [StringLength(50)]
     public string NroChasis { get; set; }
 
-    [Required]
     [StringLength(50)]
     public string NroMotor { get; set; }
 

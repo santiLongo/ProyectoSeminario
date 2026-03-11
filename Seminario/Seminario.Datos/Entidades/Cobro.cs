@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Datos.Entidades.Interfaces;
 
 namespace Seminario.Datos.Entidades;
 
@@ -12,7 +13,7 @@ namespace Seminario.Datos.Entidades;
 [Index("IdFormaPago", Name = "FK_COBRO_FORMAPAGO")]
 [Index("IdMoneda", Name = "FK_COBRO_MONEDA")]
 [Index("IdViaje", Name = "FK_COBRO_VIAJE")]
-public  class Cobro
+public  class Cobro : IAuditable
 {
     [Key]
     [Column("idCobro", TypeName = "int(11)")]
@@ -41,8 +42,26 @@ public  class Cobro
     [Column("cobroAnulado",TypeName = "int(11)")]
     public int? CobroAnulado { get; set; }
 
+    [Column("userName", TypeName = "varchar(15)")]
+    public string UserName { get; set; }
+
+    [Column("userDateTime", TypeName = "datetime")]
+    public DateTime? UserDateTime { get; set; }
+
     public virtual FormaPago FormaPago { get; set; }
     public virtual Moneda Moneda { get; set; }
     public virtual Viaje Viaje{ get; set; }
     public virtual PagoCheque Cheque { get; set; }
+
+    public void CreatedAt(DateTime date, string user)
+    {
+        UserName = user;
+        UserDateTime = date;
+    }
+
+    public void ModifiedAt(DateTime date, string user)
+    {
+        UserName = user;
+        UserDateTime = date;
+    }
 }
