@@ -13,6 +13,7 @@ public interface IMantenimientoRepo
     void Remove(Mantenimiento mantenimiento);
     void RemoveTareas(List<MantenimientoTarea> tareas);
     Task<decimal> TotalDePago(int idMantenimiento);
+    void Suspender(Mantenimiento mante);
 }
 
 public class MantenimientoRepo : IMantenimientoRepo
@@ -76,5 +77,12 @@ public class MantenimientoRepo : IMantenimientoRepo
         return _ctx.Pagos
             .Where(p => p.PagoMantenimientos.Any(m => m.IdMantenimiento == idMantenimiento))
             .Sum(p => p.Monto);
+    }
+
+    public void Suspender(Mantenimiento mante)
+    {
+        mante.FechaSalida = DateTime.Now;
+
+        mante.Suspendido = true;
     }
 }

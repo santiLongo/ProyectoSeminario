@@ -8,6 +8,7 @@ public interface IViajeRepo
 {
     IQueryable<Viaje> Query();
     Task<Viaje> FindByIdAsync(int id, bool asNoTracking = false);
+    Task<IEnumerable<ViajeObservacion>> FindObsByIdAsync(int id);
     void Add(Viaje viaje);
     void Remove(Viaje viaje);
     void ForzarModifiedTrigger(Viaje viaje);
@@ -59,6 +60,11 @@ public class ViajeRepo : IViajeRepo
         await _ctx.Database.ExecuteSqlRawAsync(
             "CALL ReCalcularEstadoViaje({0})",
             idViaje);
+    }
+
+    public async Task<IEnumerable<ViajeObservacion>> FindObsByIdAsync(int id)
+    {
+        return await _ctx.ViajesObservaciones.Where(o => o.IdViaje == id).ToListAsync();
     }
 }
 

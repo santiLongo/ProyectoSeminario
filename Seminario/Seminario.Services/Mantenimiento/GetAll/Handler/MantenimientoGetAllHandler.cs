@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Seminario.Datos.Dapper;
+using Seminario.Datos.ExtensionMethods;
 using Seminario.Services.Mantenimiento.GetAll.Command;
 using Seminario.Services.Mantenimiento.GetAll.Response;
 
@@ -32,7 +33,7 @@ public class MantenimientoGetAllHandler
                         man.fechaSalida FechaSalida,
                         tal.nombre Taller,
                         man.importe Importe,
-                        pago.total TotalPagado,
+                        IFNULL(pago.total, 0) TotalPagado,
                         man.suspendido Suspendido
                     FROM mantenimiento man
                     INNER JOIN camion cam ON cam.idCamion = man.idVehiculo
@@ -85,14 +86,14 @@ public class MantenimientoGetAllHandler
                 continue;
             }
             
-            if (dato.Importe == null)
+            if (dato.Importe.IsNullOrZero())
             {
                 item.Estado = "Pendiente de Pago";
                 response.Add(item);
                 continue;
             }
             
-            if (dato.Importe > dato.TotalPagado)
+            if (dato.Importe.GetValueOrDefault() > dato.TotalPagado.GetValueOrDefault())
             {
                 item.Estado = "Pendiente de Pago";
                 response.Add(item);

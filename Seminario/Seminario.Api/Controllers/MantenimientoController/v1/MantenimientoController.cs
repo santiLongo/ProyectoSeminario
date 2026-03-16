@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Seminario.Api.FilterResponse;
+using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
 using Seminario.Datos.DataSourceResult.Clases;
@@ -10,12 +12,16 @@ using Seminario.Services.Mantenimiento.Get.Response;
 using Seminario.Services.Mantenimiento.GetAll.Command;
 using Seminario.Services.Mantenimiento.GetAll.Handler;
 using Seminario.Services.Mantenimiento.GetAll.Response;
+using Seminario.Services.Mantenimiento.GetObservaciones.Command;
+using Seminario.Services.Mantenimiento.GetObservaciones.Handler;
+using Seminario.Services.Mantenimiento.GetObservaciones.Response;
 using Seminario.Services.Mantenimiento.InformarImporte.Command;
 using Seminario.Services.Mantenimiento.InformarImporte.Handler;
 using Seminario.Services.Mantenimiento.InformarSalida.Command;
 using Seminario.Services.Mantenimiento.InformarSalida.Handler;
 using Seminario.Services.Mantenimiento.Upsert.Command;
 using Seminario.Services.Mantenimiento.Upsert.Handler;
+using System.Net;
 
 namespace Seminario.Api.Controllers.MantenimientoController.v1;
 
@@ -71,5 +77,27 @@ public class MantenimientoController : ControllerBase
     {
         var handler = new MantenimientoInformarImporteHandler(_ctx);
         await handler.Handle(command);
+    }
+
+    [HttpGet("get-obs")]
+    public async Task<DataSourceResult<MantenimientoGetObservacionesResponse>> GetObservaciones([FromQuery] MantenimientoGetObservacionesCommand command,
+        [FromQuery] DataSourceRequest request)
+    {
+        var handler = new MantenimientoGetObservacionesHandler(_ctx);
+        var response = await handler.HandleAsync(command);
+        return response.ToDataSourceResult(request);
+    }
+
+    [HttpPost("suspender")]
+    [SeminarioResponse]
+    public async Task Suspender([FromBody] int idMantenimiento)
+    {
+        var mante = await _ctx.MantenimientoRepo.FindByIdAsync(idMantenimiento);
+
+        if (mante == null)
+            throw new SeminarioException("No se encuentra el mantenimiento", HttpStatusCode.NotFound);
+
+        _ctx.MantenimientoRepo.Suspender(mante);
+        await _ctx.SaveChangesAsync();
     }
 }

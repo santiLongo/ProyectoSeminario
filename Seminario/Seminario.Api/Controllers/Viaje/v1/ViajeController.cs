@@ -16,6 +16,7 @@ using Seminario.Services.ViajeServices.Get.Model;
 using Seminario.Services.ViajeServices.GetAll.Command;
 using Seminario.Services.ViajeServices.GetAll.Handler;
 using Seminario.Services.ViajeServices.GetAll.Model;
+using Seminario.Services.ViajeServices.GetObservaciones;
 using Seminario.Services.ViajeServices.Update.Command;
 using Seminario.Services.ViajeServices.Update.Handler;
 
@@ -83,5 +84,15 @@ public class ViajeController : ControllerBase
     {
         var handler = new CargarDescargaViajeHandler(_ctx);
         await handler.Handle(command);
+    }
+
+    [HttpGet("get-obs")]
+    [SeminarioResponse]
+    public async Task<DataSourceResult<ViajeGetObservacionesResponse>> GetObs([FromQuery] ViajeGetObservacionesCommand command,
+        [FromQuery] DataSourceRequest request)
+    {
+        var handler = new ViajeGetObservacionesHandler(_ctx);
+        var response = await handler.Handle(command);
+        return response.ToDataSourceResult(request);
     }
 }
