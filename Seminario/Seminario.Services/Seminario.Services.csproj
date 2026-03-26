@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ChequesServices\Models\" />
     <Folder Include="CombosServices\Command\" />
     <Folder Include="Dashboard\GetHome\Handler\" />
     <Folder Include="Dashboard\GetHome\Command\" />

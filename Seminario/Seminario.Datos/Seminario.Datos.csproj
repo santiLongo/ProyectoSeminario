@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="StoredProcedures\Querys\GetAllCheques.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\Querys\GetAllCheques.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.0.0" />
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.11" />

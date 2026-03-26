@@ -18,7 +18,7 @@ public class MantenimientoUpsertCommand
 
 public class MantenimientoUpsertTareas
 {
-    public int IdTarea { get; set; }
+    public int? IdTarea { get; set; }
     public string Descripcion { get; set; }
     public decimal? Costo { get; set; }
 }
