@@ -1,15 +1,20 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
-COPY . ./
+COPY . .
 
-RUN ls -R
+# Buscar automáticamente el csproj
+RUN find . -name "*.csproj"
 
-RUN dotnet restore ./Seminario.Api.csproj
-RUN dotnet publish ./Seminario.Api.csproj -c Release -o out
+# Restaurar usando el primero que encuentre
+RUN dotnet restore $(find . -name "*.csproj" | head -n 1)
+
+# Publicar usando el mismo
+RUN dotnet publish $(find . -name "*.csproj" | head -n 1) -c Release -o /app/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
 
-ENTRYPOINT ["dotnet", "Seminario.Api.dll"]
+# Ejecutar dinámicamente el dll
+CMD ["sh", "-c", "dotnet $(ls *.dll | head -n 1)"]
