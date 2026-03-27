@@ -1,16 +1,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# copiar todo
 COPY . ./
 
-# restaurar dependencias
-RUN dotnet restore
+RUN dotnet restore ./Seminario.Api/Seminario.Api.csproj
 
-# publicar
-RUN dotnet publish -c Release -o out
+RUN dotnet publish ./Seminario.Api/Seminario.Api.csproj -c Release -o out
 
-# runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
