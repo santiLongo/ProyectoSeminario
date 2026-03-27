@@ -6,8 +6,9 @@ COPY . ./
 RUN ls -R
 
 # 🔥 usar la solución completa
-RUN dotnet restore $(find . -name "*.sln")
-RUN dotnet publish $(find . -name "*.sln") -c Release -o out -v diag
+RUN dotnet restore ./Seminario/Seminario.sln
+RUN dotnet build ./Seminario/Seminario.sln -c Release
+RUN dotnet publish ./Seminario/Seminario.sln -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
