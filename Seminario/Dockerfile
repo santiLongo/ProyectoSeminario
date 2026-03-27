@@ -7,7 +7,7 @@ RUN ls -R
 
 # 🔥 usar la solución completa
 RUN dotnet restore $(find . -name "*.sln")
-RUN dotnet publish $(find . -name "*.sln") -c Release -o out
+RUN dotnet publish $(find . -name "*.sln") -c Release -o out -v diag
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
