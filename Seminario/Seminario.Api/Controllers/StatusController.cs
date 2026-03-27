@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 using Seminario.Datos.Contextos.AppDbContext;
+using Seminario.Datos.Entidades;
 
 namespace Seminario.Api.Controllers
 {
@@ -18,9 +20,20 @@ namespace Seminario.Api.Controllers
 
         [HttpGet("sayHello")]
         [AllowAnonymous]
-        public IActionResult SayHello()
+        public async Task<IActionResult> SayHello()
         {
-            return Ok("Tamo activo");
+            IEnumerable<Seminario.Datos.Entidades.Especialidad> especialidades;
+            //
+            try
+            {
+                especialidades = await _ctx.EspecialidadRepo.GetAll();
+            }
+            catch (MySqlException ex)
+            {
+                return Ok(ex.Message);
+            }
+            //
+            return Ok($"Hoy soy bueno en todo esto: {especialidades.ToList()}");
         }
     }
 }
