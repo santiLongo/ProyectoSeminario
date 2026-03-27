@@ -3,6 +3,8 @@ WORKDIR /app
 
 COPY . ./
 
+RUN ls -R
+
 RUN dotnet restore ./Seminario.Api/Seminario.Api.csproj
 RUN dotnet publish ./Seminario.Api/Seminario.Api.csproj -c Release -o out
 
