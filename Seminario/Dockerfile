@@ -5,8 +5,8 @@ COPY . ./
 
 RUN ls -R
 
-RUN dotnet restore ./Seminario.Api/Seminario.Api.csproj
-RUN dotnet publish ./Seminario.Api/Seminario.Api.csproj -c Release -o out
+RUN dotnet restore ./Seminario.Api.csproj
+RUN dotnet publish ./Seminario.Api.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
