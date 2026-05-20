@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Entidades.Interfaces;
+using Seminario.Datos.ExtensionMethods;
 
 namespace Seminario.Datos.Entidades;
 
@@ -88,5 +89,7 @@ public class Camion : IAuditable
             ViajesComoSemi = null
         };
     }
-    
+
+    public bool DadoDeBaja() => this.FechaBaja.IsNotNull();
+
 }

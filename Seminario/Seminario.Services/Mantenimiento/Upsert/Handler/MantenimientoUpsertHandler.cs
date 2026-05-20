@@ -2,6 +2,7 @@
 using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
+using Seminario.Datos.ExtensionMethods;
 using Seminario.Services.Mantenimiento.Upsert.Command;
 
 namespace Seminario.Services.Mantenimiento.Upsert.Handler;
@@ -23,7 +24,8 @@ public class MantenimientoUpsertHandler
         {
             mantenimiento = new Datos.Entidades.Mantenimiento();
             _ctx.MantenimientoRepo.Add(mantenimiento);
-            mantenimiento.IdVehiculo = command.IdCamion;
+            mantenimiento.Vehiculo = await ValidoCamion(command.IdCamion);
+            mantenimiento.IdVehiculo = mantenimiento.Vehiculo.IdCamion;
         }
 
         if (mantenimiento.Suspendido)
@@ -38,8 +40,10 @@ public class MantenimientoUpsertHandler
                 HttpStatusCode.NotModified);
         }
         
+        
+        mantenimiento.Taller = await ValidoTaller(command.IdTaller);
+        mantenimiento.IdTaller = mantenimiento.Taller.IdTaller;
         mantenimiento.Titulo = command.Titulo;
-        mantenimiento.IdTaller = command.IdTaller;
         mantenimiento.FechaEntrada = command.FechaEntrada;
         
         
@@ -69,5 +73,34 @@ public class MantenimientoUpsertHandler
         }
 
         await _ctx.SaveChangesAsync();
+    }
+
+    private async Task<Camion> ValidoCamion(int idCamion)
+    {
+        var camion = await _ctx.CamionRepo.GetCamionByIdAsync(idCamion);
+
+        if (camion.IsNull())
+        {
+            throw new SeminarioException("No se encuentra el camion informado");
+        }
+
+        if (camion.DadoDeBaja())
+        {
+            throw new SeminarioException("El camion se encuentra dado de baja");
+        }
+        
+        return camion;
+    }
+    
+    private async Task<Taller> ValidoTaller(int idTaller)
+    {
+        var taller = await _ctx.TallerRepo.FindByIdAsync(idTaller);
+
+        if (taller.IsNull())
+        {
+            throw new SeminarioException("No se encuentra el taller informado");
+        }
+        
+        return taller;
     }
 }

@@ -8,7 +8,6 @@ namespace Seminario.Datos.ControlGroupSingleton;
 
 public interface IControlConnection
 {
-    Task LoginAsync();
     Task<List<PosicionUnidad>> GetPosicionUnidadesAsync();
 }
 
@@ -46,7 +45,7 @@ public class ControlGroupConnection : IControlConnection
 
     // ================= LOGIN =================
 
-    public async Task LoginAsync()
+    private async Task LoginAsync()
     {
         await _loginLock.WaitAsync();
         try
