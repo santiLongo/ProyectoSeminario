@@ -41,6 +41,8 @@ namespace Seminario.Datos.Contextos.AppDbContext
         }
 
         #region Entidades
+        
+        public DbSet<Configuracion> Configuraciones { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Banco> Bancos { get; set; }
 
@@ -102,12 +104,42 @@ namespace Seminario.Datos.Contextos.AppDbContext
         
         public DbSet<Evento> Eventos { get; set; } 
         public DbSet<TipoEvento> TiposEvento { get; set; } 
-            
+
+        #endregion
+
+        #region Repos
+        public IClienteRepo ClienteRepo => new ClienteRepo(this);
+        public IUsuarioRepo UsuarioRepo => new UsuarioRepo(this);
+        public IBancoRepo BancoRepo => new BancoRepo(this);
+        public ITipoCamionRepo TipoCamionRepo => new TipoCamionRepo(this);
+        public IUbicacionRepo UbicacionRepo => new UbicacionRepo(this);
+        public ICamionRepo CamionRepo => new CamionRepo(this);
+        public IChoferRepo ChoferRepo => new ChoferRepo(this);
+        public IViajeRepo ViajeRepo => new ViajeRepo(this);
+        public IDestinoRepo DestinoRepo => new DestinoRepo(this);
+        public IProcedenciaRepo ProcedenciaRepo => new ProcedenciaRepo(this);
+        public IMantenimientoRepo MantenimientoRepo => new MantenimientoRepo(this);
+        public IPagoChequeRepo PagoChequeRepo => new PagoChequeRepo(this);
+        public ICobrosRepo CobrosRepo => new CobrosRepo(this);
+        public IPagosRepo PagosRepo => new PagosRepo(this);
+        public IEspecialidadRepo EspecialidadRepo => new EspecialidadRepo(this);
+        public ITallerRepo TallerRepo => new TallerRepo(this);
+        public IProveedorRepo ProveedorRepo => new ProveedorRepo(this);
+        public IEventoRepo EventoRepo => new EventoRepo(this);
+        #endregion
+
+        #region ModelCreating
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .UseCollation("utf8mb4_general_ci")
                 .HasCharSet("utf8mb4");
+
+            modelBuilder.Entity<Configuracion>(entity =>
+            {
+                entity.HasKey(k => new { k.Modulo, k.Nombre, k.Clave });
+            });
 
             modelBuilder.Entity<Banco>(entity =>
             {
@@ -495,27 +527,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        #endregion
-
-        #region Repos
-        public IClienteRepo ClienteRepo => new ClienteRepo(this);
-        public IUsuarioRepo UsuarioRepo => new UsuarioRepo(this);
-        public IBancoRepo BancoRepo => new BancoRepo(this);
-        public ITipoCamionRepo TipoCamionRepo => new TipoCamionRepo(this);
-        public IUbicacionRepo UbicacionRepo => new UbicacionRepo(this);
-        public ICamionRepo CamionRepo => new CamionRepo(this);
-        public IChoferRepo ChoferRepo => new ChoferRepo(this);
-        public IViajeRepo ViajeRepo => new ViajeRepo(this);
-        public IDestinoRepo DestinoRepo => new DestinoRepo(this);
-        public IProcedenciaRepo ProcedenciaRepo => new ProcedenciaRepo(this);
-        public IMantenimientoRepo MantenimientoRepo => new MantenimientoRepo(this);
-        public IPagoChequeRepo PagoChequeRepo => new PagoChequeRepo(this);
-        public ICobrosRepo CobrosRepo => new CobrosRepo(this);
-        public IPagosRepo PagosRepo => new PagosRepo(this);
-        public IEspecialidadRepo EspecialidadRepo => new EspecialidadRepo(this);
-        public ITallerRepo TallerRepo => new TallerRepo(this);
-        public IProveedorRepo ProveedorRepo => new ProveedorRepo(this);
-        public IEventoRepo EventoRepo => new EventoRepo(this);
         #endregion
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

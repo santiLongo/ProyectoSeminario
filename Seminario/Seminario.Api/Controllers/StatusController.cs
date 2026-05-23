@@ -33,7 +33,9 @@ namespace Seminario.Api.Controllers
                 return Ok(ex.Message);
             }
             //
-            return Ok($"Hoy soy bueno en todo esto: {especialidades.ToList()}");
+            string especialidadesString = string.Join(", ", especialidades?.Select(e => e.Descripcion));
+            //
+            return Ok($"Hoy soy bueno en todo esto: {especialidadesString}");
         }
     }
 }

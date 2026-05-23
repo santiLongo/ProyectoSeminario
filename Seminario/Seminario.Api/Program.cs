@@ -10,6 +10,7 @@ using Seminario.Api.Services.CurrentUserService;
 using Seminario.Datos.Contextos.SaveChangesInterceptors;
 using Seminario.Datos.ControlGroupSingleton;
 using Seminario.Datos.Dapper;
+using Seminario.Datos.Migrations;
 using Seminario.Datos.Services.CurrentUserService;
 
 
@@ -82,8 +83,17 @@ builder.Services.AddSingleton<IControlConnection, ControlGroupConnection>();
 //Registro el DbExecutor como servicio, no se porque no lo hice antes.
 //Tiene mas sentido implementar la interfaz en vez de estar llamando DbSession para pasarlo por el ctor
 builder.Services.AddScoped<IDbExecutor, DbExecutor>();
+//
+builder.Services.AddTransient<Migration>();
 
 var app = builder.Build();
+
+using (var  scope = app.Services.CreateScope())
+{
+    var migration = scope.ServiceProvider.GetRequiredService<Migration>();
+
+    await migration.MigrarAsync();
+}
 
 app.UseMiddleware<ExceptionMiddleware>();
 
