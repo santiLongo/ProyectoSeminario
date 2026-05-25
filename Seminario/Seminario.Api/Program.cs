@@ -85,6 +85,12 @@ builder.Services.AddSingleton<IControlConnection, ControlGroupConnection>();
 builder.Services.AddScoped<IDbExecutor, DbExecutor>();
 //
 builder.Services.AddTransient<Migration>();
+// HttpClient para comunicarse con EasyAfip
+builder.Services.AddHttpClient("easyafip", c =>
+{
+    c.BaseAddress = new Uri(builder.Configuration["EasyAfip:BaseUrl"]!);
+    c.Timeout = TimeSpan.FromSeconds(90);
+});
 
 var app = builder.Build();
 

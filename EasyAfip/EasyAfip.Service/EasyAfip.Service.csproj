@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="FacturaElectronica\GetPtosVenta\" />
+      <Folder Include="FacturaElectronica\GetTiposComprobante\" />
+      <Folder Include="FacturaElectronica\GetTiposConceptos\" />
+      <Folder Include="FacturaElectronica\GetTiposDocumentacion\" />
+      <Folder Include="FacturaElectronica\GetTiposIva\" />
+      <Folder Include="FacturaElectronica\GetTiposMonedas\" />
+      <Folder Include="FacturaElectronica\GetTiposTributos\" />
+      <Folder Include="FacturaElectronica\Solicitar\" />
+      <Folder Include="LoginWSAA\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EasyAfip.Core\EasyAfip.Core.csproj" />
+    </ItemGroup>
+
+</Project>

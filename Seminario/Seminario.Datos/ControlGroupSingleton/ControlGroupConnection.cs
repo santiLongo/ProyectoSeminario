@@ -130,9 +130,9 @@ public class ControlGroupConnection : IControlConnection
                 FechaPosicion = DateTime.Parse((string)x.Attribute("F")),
                 Velocidad = int.Parse((string)x.Attribute("G") ?? "0"),
                 Ubicacion = (string)x.Attribute("I"),
-                Latitud = double.Parse((string)x.Attribute("N"), CultureInfo.InvariantCulture),
-                Longitud = double.Parse((string)x.Attribute("O"), CultureInfo.InvariantCulture),
-                IdRastreable = int.Parse((string)x.Attribute("R"))
+                Latitud = double.Parse((string)x.Attribute("Q"), CultureInfo.InvariantCulture),
+                Longitud = double.Parse((string)x.Attribute("R"), CultureInfo.InvariantCulture),
+                IdRastreable = int.Parse((string)x.Attribute("U"))
             })
             .ToList();
     }

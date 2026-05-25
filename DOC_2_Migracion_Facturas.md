@@ -389,7 +389,8 @@ CREATE TABLE recibofactura (
 
 ---
 
-## 4. Cambios en Entidades Existentes
+## 4. Cambios en Entidades Ex
+istentes
 
 ### 4.1 `PagoCheque` — nuevo FK a `ReciboFormaPago`
 

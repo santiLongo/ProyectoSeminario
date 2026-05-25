@@ -1,4 +1,4 @@
-﻿namespace Seminario.Datos;
+namespace Seminario.Datos;
 
 public enum EstadosViaje
 {
@@ -6,6 +6,7 @@ public enum EstadosViaje
     Finalizado = 2,
     Suspendido = 3,
     Cobrado = 4,
+    Facturado = 5,
 }
 
 public static class EstadosViajeDiccionary
@@ -15,15 +16,16 @@ public static class EstadosViajeDiccionary
         { EstadosViaje.EnViaje.ToInt(), "En Viaje" },
         { EstadosViaje.Finalizado.ToInt(), "Finalizado" },
         { EstadosViaje.Suspendido.ToInt(), "Suspendido" },
-        { EstadosViaje.Cobrado.ToInt(), "Cobrado" }
+        { EstadosViaje.Cobrado.ToInt(), "Cobrado" },
+        { EstadosViaje.Facturado.ToInt(), "Facturado" }
     };
 }
 
 public static class EstadosViajeExtensions
 {
     public static int ToInt(this EstadosViaje estado) => Convert.ToInt32(estado);
-    
-    public static bool ExisteEstadoViaje(this int estado) 
+
+    public static bool ExisteEstadoViaje(this int estado)
     {
         return Enum.IsDefined(typeof(EstadosViaje), estado);
     }

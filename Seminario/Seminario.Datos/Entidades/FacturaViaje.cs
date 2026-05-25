@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Seminario.Datos.Entidades;
 
+[Table("facturaviaje")]
 public class FacturaViaje
 {
     public int IdFacturaViaje { get; set; }

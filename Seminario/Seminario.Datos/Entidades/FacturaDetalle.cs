@@ -1,16 +1,30 @@
-using Seminario.Datos.Entidades.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Seminario.Datos.Entidades;
 
-public class FacturaDetalle : IAuditable
+[Table("facturadetalle")]
+public class FacturaDetalle
 {
-    public void CreatedAt(DateTime date, string user)
-    {
-        throw new NotImplementedException();
-    }
+    [Key]
+    public int IdFacturaDetalle { get; set; }
 
-    public void ModifiedAt(DateTime date, string user)
-    {
-        throw new NotImplementedException();
-    }
+    public int IdFactura { get; set; }
+
+    public int Orden { get; set; }
+
+    public string Descripcion { get; set; }
+
+    public decimal Cantidad { get; set; }
+
+    public decimal PrecioUnitario { get; set; }
+
+    public decimal PorcentajeIva { get; set; }
+
+    public decimal Subtotal { get; set; }
+
+    public decimal Total { get; set; }
+
+    // Navigation Property
+    public virtual Factura Factura { get; set; }
 }

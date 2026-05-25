@@ -6,6 +6,7 @@ namespace Seminario.Datos.Repositorios;
 
 public interface IMantenimientoRepo
 {
+    IQueryable<Mantenimiento> Query();
     Task<Mantenimiento> UltimoMantenimientoCamion(int idCamion);
     Task<Mantenimiento> FindByIdAsync(int id, bool asNoTracking = false, bool includeTarea = false, bool includeObs = false,
         bool includeCamion = false, bool includeTaller = false);
@@ -25,6 +26,7 @@ public class MantenimientoRepo : IMantenimientoRepo
         _ctx = ctx;
     }
 
+    public IQueryable<Mantenimiento> Query() => _ctx.Mantenimientos.AsQueryable();
 
     public async Task<Mantenimiento> UltimoMantenimientoCamion(int idCamion)
     {

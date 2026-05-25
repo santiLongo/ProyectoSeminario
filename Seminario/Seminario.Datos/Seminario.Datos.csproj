@@ -14,6 +14,12 @@
     <EmbeddedResource Include="StoredProcedures\Querys\GetAllCheques.sql" />
     <None Remove="Migrations\Migrations\migration_1.sql" />
     <EmbeddedResource Include="Migrations\Migrations\migration_1.sql" />
+    <None Remove="Migrations\Migrations\migration_2.sql" />
+    <EmbeddedResource Include="Migrations\Migrations\migration_2.sql" />
+    <None Remove="Migrations\Migrations\migration_3.sql" />
+    <EmbeddedResource Include="Migrations\Migrations\migration_3.sql" />
+    <None Remove="Migrations\Migrations\migration_4.sql" />
+    <EmbeddedResource Include="Migrations\Migrations\migration_4.sql" />
   </ItemGroup>
 
   <ItemGroup>

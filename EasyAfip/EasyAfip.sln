@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyAfip.Api", "EasyAfip.Api\EasyAfip.Api.csproj", "{C67AFD38-1B5F-450B-BB1C-A926062FCAEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyAfip.Core", "EasyAfip.Core\EasyAfip.Core.csproj", "{D69CDADB-BC0B-4540-9598-CBF780704111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyAfip.Service", "EasyAfip.Service\EasyAfip.Service.csproj", "{48F5C515-AAAB-4D33-895F-F983FD4E5157}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C67AFD38-1B5F-450B-BB1C-A926062FCAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67AFD38-1B5F-450B-BB1C-A926062FCAEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67AFD38-1B5F-450B-BB1C-A926062FCAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67AFD38-1B5F-450B-BB1C-A926062FCAEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D69CDADB-BC0B-4540-9598-CBF780704111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D69CDADB-BC0B-4540-9598-CBF780704111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D69CDADB-BC0B-4540-9598-CBF780704111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D69CDADB-BC0B-4540-9598-CBF780704111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48F5C515-AAAB-4D33-895F-F983FD4E5157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48F5C515-AAAB-4D33-895F-F983FD4E5157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48F5C515-AAAB-4D33-895F-F983FD4E5157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48F5C515-AAAB-4D33-895F-F983FD4E5157}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
