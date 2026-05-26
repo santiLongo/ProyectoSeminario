@@ -575,7 +575,8 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasOne(d => d.Factura)
                     .WithMany(f => f.Detalles)
                     .HasForeignKey(fk => fk.IdFactura)
-                    .HasConstraintName("FK_FACTURADETALLE_FACTURA");
+                    .HasConstraintName("FK_FACTURADETALLE_FACTURA")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<FacturaViaje>(entity =>

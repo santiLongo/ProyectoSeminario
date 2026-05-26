@@ -9,4 +9,6 @@ public class GetAllFacturasCommand
     public int? Estado { get; set; }
     public DateTime? FechaDesde { get; set; }
     public DateTime? FechaHasta { get; set; }
+    public bool? Confirmada { get; set; }
+    public bool? Anulada { get; set; }
 }

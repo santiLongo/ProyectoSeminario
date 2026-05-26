@@ -8,6 +8,7 @@ using Seminario.Services.FacturasServices.EnviarAfip;
 using Seminario.Services.FacturasServices.FacturasEmitidas.ConfirmarEmitida;
 using Seminario.Services.FacturasServices.FacturasEmitidas.CrearEmitidaConViaje;
 using Seminario.Services.FacturasServices.FacturasEmitidas.CrearEmitidaSinViaje;
+using Seminario.Services.FacturasServices.FacturasEmitidas.UpdateEmitida;
 using Seminario.Services.FacturasServices.GetAllFacturas;
 using Seminario.Services.FacturasServices.GetFactura;
 using Seminario.Datos.Entidades;
@@ -50,6 +51,7 @@ public class FacturasEmitidasController : ControllerBase
         [FromQuery] GetAllFacturasCommand command)
     {
         command.TipoFactura = (int)Factura.TipoFactura.Emitida;
+        command.Confirmada = true;
         var handler = new GetAllFacturasHandler(_ctx);
         var response = await handler.HandleAsync(command);
         return response.ToDataSourceResult(request);
@@ -86,6 +88,14 @@ public class FacturasEmitidasController : ControllerBase
     public async Task Confirmar(int id, [FromBody] ConfirmarEmitidaCommand command)
     {
         var handler = new ConfirmarEmitidaHandler(_ctx);
+        await handler.HandleAsync(id, command);
+    }
+
+    [HttpPost("{id:int}/update")]
+    [SeminarioResponse]
+    public async Task Update(int id, [FromBody] UpdateEmitidaCommand command)
+    {
+        var handler = new UpdateEmitidaHandler(_ctx);
         await handler.HandleAsync(id, command);
     }
 }

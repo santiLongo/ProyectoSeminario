@@ -5,7 +5,9 @@ using Seminario.Datos.DataSourceResult.Clases;
 using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Datos.Entidades;
 using Seminario.Services.FacturasServices.AnularFactura;
+using Seminario.Services.FacturasServices.FacturasRecibidas.ConfirmarRecibida;
 using Seminario.Services.FacturasServices.FacturasRecibidas.CrearRecibida;
+using Seminario.Services.FacturasServices.FacturasRecibidas.UpdateRecibida;
 using Seminario.Services.FacturasServices.GetAllFacturas;
 using Seminario.Services.FacturasServices.GetFactura;
 
@@ -37,6 +39,7 @@ public class FacturasRecibidasController : ControllerBase
         [FromQuery] GetAllFacturasCommand command)
     {
         command.TipoFactura = (int)Factura.TipoFactura.Recibida;
+        command.Confirmada = true;
         var handler = new GetAllFacturasHandler(_ctx);
         var response = await handler.HandleAsync(command);
         return response.ToDataSourceResult(request);
@@ -56,5 +59,21 @@ public class FacturasRecibidasController : ControllerBase
     {
         var handler = new AnularFacturaHandler(_ctx);
         await handler.HandleAsync(command);
+    }
+
+    [HttpPost("{id:int}/confirmar")]
+    [SeminarioResponse]
+    public async Task Confirmar(int id, [FromBody] ConfirmarRecibidaCommand command)
+    {
+        var handler = new ConfirmarRecibidaHandler(_ctx);
+        await handler.HandleAsync(id, command);
+    }
+
+    [HttpPut("{id:int}")]
+    [SeminarioResponse]
+    public async Task Update(int id, [FromBody] UpdateRecibidaCommand command)
+    {
+        var handler = new UpdateRecibidaHandler(_ctx);
+        await handler.HandleAsync(id, command);
     }
 }

@@ -12,6 +12,7 @@ public interface IFacturaRepo
     Task RecalcularEstadoAsync(int idFactura);
     Task<bool> ViajeTieneFacturaActivaAsync(int idViaje);
     Task<int> ObtenerProximoNumeroAsync(Factura.TipoFactura tipo, int puntoVenta);
+    void Remove(Factura factura);
 }
 
 public class FacturaRepo : IFacturaRepo
@@ -65,6 +66,11 @@ public class FacturaRepo : IFacturaRepo
             .FirstOrDefaultAsync();
 
         return (ultimo ?? 0) + 1;
+    }
+
+    public void Remove(Factura factura)
+    {
+        _ctx.Facturas.Remove(factura);
     }
 }
 

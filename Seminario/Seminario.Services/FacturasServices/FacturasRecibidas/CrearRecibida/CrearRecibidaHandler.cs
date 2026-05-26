@@ -7,6 +7,7 @@ namespace Seminario.Services.FacturasServices.FacturasRecibidas.CrearRecibida;
 public class CrearRecibidaHandler
 {
     private readonly IAppDbContext _ctx;
+    private const int PuntoVentaRecibidas = 2;
 
     public CrearRecibidaHandler(IAppDbContext ctx)
     {
@@ -32,13 +33,15 @@ public class CrearRecibidaHandler
                 throw new InvalidOperationException("El taller informado no existe");
         }
 
+        var numero = await _ctx.FacturaRepo.ObtenerProximoNumeroAsync(Factura.TipoFactura.Recibida, PuntoVentaRecibidas);
+
         var (subtotal, totalConIva, detalles) = FacturaCalculos.CalcularDetalles(command.Detalles);
 
         var factura = new Factura
         {
             Tipo = Factura.TipoFactura.Recibida,
-            PuntoVenta = command.PuntoVenta!.Value,
-            Numero = command.Numero!.Value,
+            PuntoVenta = PuntoVentaRecibidas,
+            Numero = numero,
             FechaEmision = command.FechaEmision!.Value,
             FechaVencimiento = command.FechaVencimiento,
             Subtotal = subtotal,
@@ -59,14 +62,14 @@ public class CrearRecibidaHandler
 
         foreach (var idMant in command.IdsMantenimiento)
         {
-            var mant = await _ctx.MantenimientoRepo.FindByIdAsync(idMant);
+            var mant = await _ctx.MantenimientoRepo.FindByIdAsync(idMant, includeTarea: true);
             if (mant == null)
                 throw new InvalidOperationException($"El mantenimiento {idMant} no existe");
 
             factura.FacturasMantenimiento.Add(new FacturaMantenimiento
             {
                 IdMantenimiento = idMant,
-                ImporteMantenimiento = mant.Importe ?? 0
+                ImporteMantenimiento = mant.Importe ?? mant.Tareas.Sum(t => t.Costo) ?? 0
             });
         }
 

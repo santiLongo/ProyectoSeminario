@@ -3,26 +3,26 @@ using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 
-namespace Seminario.Services.FacturasServices.FacturasEmitidas.ConfirmarEmitida;
+namespace Seminario.Services.FacturasServices.FacturasRecibidas.ConfirmarRecibida;
 
-public class ConfirmarEmitidaHandler
+public class ConfirmarRecibidaHandler
 {
     private readonly IAppDbContext _ctx;
 
-    public ConfirmarEmitidaHandler(IAppDbContext ctx)
+    public ConfirmarRecibidaHandler(IAppDbContext ctx)
     {
         _ctx = ctx;
     }
 
-    public async Task HandleAsync(int idFactura, ConfirmarEmitidaCommand command)
+    public async Task HandleAsync(int idFactura, ConfirmarRecibidaCommand command)
     {
         var factura = await _ctx.FacturaRepo.FindByIdAsync(idFactura);
 
         if (factura == null)
             throw new SeminarioException("La factura no existe", HttpStatusCode.NotFound);
 
-        if (factura.Tipo != Factura.TipoFactura.Emitida)
-            throw new SeminarioException("Solo se pueden confirmar facturas emitidas con este endpoint", HttpStatusCode.BadRequest);
+        if (factura.Tipo != Factura.TipoFactura.Recibida)
+            throw new SeminarioException("Solo se pueden confirmar facturas recibidas con este endpoint", HttpStatusCode.BadRequest);
 
         if (factura.Anulada)
             throw new SeminarioException("No se puede confirmar una factura anulada", HttpStatusCode.Conflict);

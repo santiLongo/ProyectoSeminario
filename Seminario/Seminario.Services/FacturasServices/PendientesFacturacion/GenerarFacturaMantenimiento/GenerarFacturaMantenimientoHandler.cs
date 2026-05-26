@@ -1,3 +1,5 @@
+using System.Net;
+using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 
@@ -6,6 +8,7 @@ namespace Seminario.Services.FacturasServices.PendientesFacturacion.GenerarFactu
 public class GenerarFacturaMantenimientoHandler
 {
     private readonly IAppDbContext _ctx;
+    private const int PuntoVentaRecibidas = 2;
 
     public GenerarFacturaMantenimientoHandler(IAppDbContext ctx)
     {
@@ -14,56 +17,68 @@ public class GenerarFacturaMantenimientoHandler
 
     public async Task<int> HandleAsync(int idMantenimiento, GenerarFacturaMantenimientoCommand command)
     {
-        var mant = await _ctx.MantenimientoRepo.FindByIdAsync(idMantenimiento, includeTaller: true);
+        var mant = await _ctx.MantenimientoRepo.FindByIdAsync(idMantenimiento, includeTaller: true, includeTarea: true);
 
         if (mant == null)
-            throw new InvalidOperationException("El mantenimiento no existe");
+            throw new SeminarioException("El mantenimiento no existe", HttpStatusCode.NotFound);
 
         if (mant.FechaSalida == null)
-            throw new InvalidOperationException("El mantenimiento no está terminado (sin fecha de salida)");
+            throw new SeminarioException("El mantenimiento no está terminado (sin fecha de salida)", HttpStatusCode.Conflict);
 
         if (mant.Suspendido)
-            throw new InvalidOperationException("El mantenimiento está suspendido");
+            throw new SeminarioException("El mantenimiento está suspendido", HttpStatusCode.Conflict);
+
+        if (mant.Tareas.Any(t => t.Costo == null || t.Costo <= 0))
+            throw new SeminarioException("Existe una tarea del mantenimiento sin precio", HttpStatusCode.Conflict);
 
         var yaFacturado = _ctx.FacturaRepo.Query()
             .Any(f => !f.Anulada && f.FacturasMantenimiento.Any(fm => fm.IdMantenimiento == idMantenimiento));
 
         if (yaFacturado)
-            throw new InvalidOperationException("El mantenimiento ya tiene una factura activa");
+            throw new SeminarioException("El mantenimiento ya tiene una factura activa", HttpStatusCode.Conflict);
 
-        var subtotal = mant.Importe ?? 0;
-        var ivaImporte = subtotal * (command.PorcentajeIva / 100m);
-        var total = subtotal + ivaImporte;
+        var numero = await _ctx.FacturaRepo.ObtenerProximoNumeroAsync(Factura.TipoFactura.Recibida, PuntoVentaRecibidas);
 
         var factura = new Factura
         {
             Tipo = Factura.TipoFactura.Recibida,
-            PuntoVenta = command.PuntoVenta!.Value,
-            Numero = command.Numero!.Value,
+            PuntoVenta = PuntoVentaRecibidas,
+            Numero = numero,
             FechaEmision = DateTime.Today,
             FechaVencimiento = command.FechaVencimiento,
-            Subtotal = subtotal,
             PorcentajeIva = command.PorcentajeIva,
-            Total = total,
             IdMoneda = command.IdMoneda,
             Estado = Factura.EstadoFactura.Pendiente,
             Observaciones = command.Observaciones,
             Anulada = false,
             Confirmada = false,
+            PuntoVentaReal = command.PtoVenta,
+            NumeroReal = command.NumeroFactura,
             IdTaller = mant.IdTaller
         };
 
-        factura.Detalles.Add(new FacturaDetalle
+        var orden = 1;
+        foreach (var tarea in mant.Tareas)
         {
-            Orden = 1,
-            Descripcion = $"Mantenimiento: {mant.Titulo}",
-            Cantidad = 1,
-            PrecioUnitario = subtotal,
-            PorcentajeIva = command.PorcentajeIva,
-            Subtotal = subtotal,
-            Total = total
-        });
+            var iva = tarea.Costo.GetValueOrDefault() * (command.PorcentajeIva / 100m);
 
+            var deta = new FacturaDetalle
+            {
+                Orden = orden++,
+                Descripcion = $"Mantenimiento: {tarea.Descripcion}",
+                Cantidad = 1,
+                PrecioUnitario = tarea.Costo.GetValueOrDefault(),
+                PorcentajeIva = command.PorcentajeIva,
+                Subtotal = tarea.Costo.GetValueOrDefault(),
+                Total = tarea.Costo.GetValueOrDefault() + iva
+            };
+            
+            factura.Detalles.Add(deta);
+        }
+
+        factura.Subtotal = factura.Detalles.Sum(d => d.Subtotal);
+        factura.Total = factura.Detalles.Sum(d => d.Total);
+        
         factura.FacturasMantenimiento.Add(new FacturaMantenimiento
         {
             IdMantenimiento = mant.IdMantenimiento,

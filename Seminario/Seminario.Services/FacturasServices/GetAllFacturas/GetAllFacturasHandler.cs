@@ -41,6 +41,12 @@ public class GetAllFacturasHandler
         if (command.FechaHasta.HasValue)
             query = query.Where(f => f.FechaEmision <= command.FechaHasta.Value);
 
+        if (command.Confirmada.HasValue)
+            query = query.Where(f => f.Confirmada == command.Confirmada.Value);
+
+        if (command.Anulada.HasValue)
+            query = query.Where(f => f.Anulada == command.Anulada.Value);
+
         var facturas = await query.ToListAsync();
 
         var result = facturas.Select(f =>

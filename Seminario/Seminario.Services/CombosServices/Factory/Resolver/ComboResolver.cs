@@ -49,6 +49,8 @@ public static class ComboResolver
                 return new ComboTipoEvento();
             case "ComboVehiculos":
                 return new ComboVehiculos();
+            case "ComboProveedores":
+                return new ComboProveedores();
             default:
                 throw new NotImplementedException($"El combo {type}, no se encuentra implementado");
         }

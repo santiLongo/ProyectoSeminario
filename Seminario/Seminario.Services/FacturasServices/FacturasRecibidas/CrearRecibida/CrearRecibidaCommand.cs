@@ -9,12 +9,6 @@ public class CrearRecibidaCommand
     public int? IdProveedor { get; set; }
     public int? IdTaller { get; set; }
 
-    [Required(ErrorMessage = "El punto de venta es requerido")]
-    public int? PuntoVenta { get; set; }
-
-    [Required(ErrorMessage = "El número de comprobante es requerido")]
-    public int? Numero { get; set; }
-
     [Required(ErrorMessage = "La fecha de emisión es requerida")]
     public DateTime? FechaEmision { get; set; }
 

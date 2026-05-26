@@ -47,6 +47,9 @@ public class Factura : IAuditable
 
     public string? UserAlta { get; set; }
     public DateTime? FechaAlta { get; set; }
+    
+    public int? PuntoVentaReal { get; set; }
+    public int? NumeroReal { get; set; }
 
     // Navigation Properties
     public virtual Moneda Moneda { get; set; }
