@@ -32,8 +32,6 @@ public abstract class BaseMigrations
 
             try
             {
-                await _session.BeginTransaction();
-
                 var sql = LeerSqlEmbebido(proximaVersion);
 
                 await _dbExecutor.ExecuteAsync<int>(sql);
@@ -43,21 +41,17 @@ public abstract class BaseMigrations
                     archivo,
                     true,
                     null);
-
-                await _session.Commit();
-
-                versionActual = proximaVersion;
             }
             catch (Exception ex)
             {
-                await _session.Rollback();
-
                 await RegistrarMigracionAsync(
                     proximaVersion,
                     archivo,
                     false,
                     ex.ToString());
             }
+            
+            versionActual = proximaVersion;
         }
     }
 
@@ -113,7 +107,7 @@ public abstract class BaseMigrations
         parametros.Add("version", version);
         parametros.Add("archivo", archivo);
         parametros.Add("ejecutado", ejecutado);
-        parametros.Add("error", error);
+        parametros.Add("error", error?.Substring(0, 1000));
 
         await _dbExecutor.ExecuteAsync<int>(sql, parametros);
     }

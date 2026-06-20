@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.ClientesServices.Commands.BajaAlta;
 using Seminario.Services.ClientesServices.Commands.Get;
 using Seminario.Services.ClientesServices.Commands.GetAll;
@@ -17,7 +17,7 @@ namespace Seminario.Api.Controllers.ClienteController.v1;
 public class ClienteController : ControllerBase
 {
     private readonly IAppDbContext _ctx;
-    
+
     public ClienteController(IAppDbContext ctx)
     {
         _ctx = ctx;
@@ -32,7 +32,7 @@ public class ClienteController : ControllerBase
         var response = await handler.HandleAsync(command);
         return response.ToDataSourceResult(request);
     }
-    
+
     [HttpGet("get")]
     [SeminarioResponse]
     public async Task<ClienteFormModel> Get([FromQuery] int idCliente)
@@ -40,7 +40,7 @@ public class ClienteController : ControllerBase
         var handler = new ClienteGetHandler(_ctx);
         return await handler.HandleAsync(idCliente);
     }
-    
+
     [HttpPost("upsert")]
     [SeminarioResponse]
     public async Task Upsert([FromBody] ClienteFormModel form)
@@ -48,7 +48,7 @@ public class ClienteController : ControllerBase
         var handler = new ClienteUpsertHandler(_ctx);
         await handler.HandleAsync(form);
     }
-    
+
     [HttpPost("baja-alta")]
     [SeminarioResponse]
     public async Task BajaAlta([FromBody] int idCliente)

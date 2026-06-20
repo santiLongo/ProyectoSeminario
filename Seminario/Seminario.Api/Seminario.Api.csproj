@@ -22,8 +22,17 @@
 			
 
   <ItemGroup>
+    <ProjectReference Include="..\Seminario.Core\Seminario.Core.csproj" />
     <ProjectReference Include="..\Seminario.Datos\Seminario.Datos.csproj" />
     <ProjectReference Include="..\Seminario.Services\Seminario.Services.csproj" />
+  </ItemGroup>
+	
+	
+			
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Controllers\Home\v1\json\schema.json" />
+    <_ContentIncludedByDefault Remove="Controllers\Home\v1\json\ventanas.json" />
   </ItemGroup>
 
 </Project>

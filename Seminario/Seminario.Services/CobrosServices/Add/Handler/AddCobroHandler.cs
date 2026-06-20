@@ -1,9 +1,10 @@
 ﻿using System.Net;
 using Microsoft.EntityFrameworkCore;
-using Seminario.Api.Middleware.ExceptionMiddleware;
+using Seminario.Core.Exceptions.SeminarioException;
 using Seminario.Datos;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
+using Seminario.Datos.Enums;
 using Seminario.Datos.Repositorios;
 using Seminario.Services.CobrosServices.Add.Command;
 

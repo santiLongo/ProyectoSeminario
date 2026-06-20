@@ -1,6 +1,6 @@
-﻿using Seminario.Datos.Contextos.AppDbContext;
+﻿using Seminario.Core.Type.ComboTypes.Interface;
+using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.Type.ComboTypes.Interface;
 using Seminario.Services.CombosServices.Factory.Interface;
 using Seminario.Services.CombosServices.Factory.Resolver;
 

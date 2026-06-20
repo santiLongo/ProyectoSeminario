@@ -1,4 +1,4 @@
-namespace Seminario.Datos;
+namespace Seminario.Datos.Enums;
 
 public enum EstadosViaje
 {

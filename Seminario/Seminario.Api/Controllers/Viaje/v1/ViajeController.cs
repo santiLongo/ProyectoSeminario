@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.ViajeServices.Add.Command;
 using Seminario.Services.ViajeServices.Add.Handler;
 using Seminario.Services.ViajeServices.CargarDescarga.Command;
@@ -27,12 +27,12 @@ namespace Seminario.Api.Controllers.Viaje.v1;
 public class ViajeController : ControllerBase
 {
     private readonly IAppDbContext _ctx;
-    
+
     public ViajeController(IAppDbContext ctx)
     {
         _ctx = ctx;
     }
-    
+
     [HttpPost]
     [Route("add")]
     [SeminarioResponse]
@@ -42,7 +42,7 @@ public class ViajeController : ControllerBase
         var response = await handler.Handle(command);
         return new { NroViaje = response };
     }
-    
+
     [HttpPost]
     [Route("update")]
     [SeminarioResponse]
@@ -51,7 +51,7 @@ public class ViajeController : ControllerBase
         var handler = new UpdateViajeHandler(_ctx);
         await handler.Handle(command);
     }
-    
+
     [HttpGet("get")]
     [SeminarioResponse]
     public async Task<GetViajeModel> Get([FromQuery] GetViajeCommand command)
@@ -59,17 +59,18 @@ public class ViajeController : ControllerBase
         var handler = new GetViajeHandler(_ctx);
         return await handler.Handle(command);
     }
-    
+
     [HttpGet("getAll")]
     [SeminarioResponse]
-    public async Task<DataSourceResult<GetAllViajeModel>> GetAll([FromQuery] GetAllViajeCommand command, [FromQuery] DataSourceRequest request,
+    public async Task<DataSourceResult<GetAllViajeModel>> GetAll([FromQuery] GetAllViajeCommand command,
+        [FromQuery] DataSourceRequest request,
         [FromServices] IDbSession session)
     {
         var handler = new GetAllViajeHandler(session);
-        var response= await handler.Handle(command);
+        var response = await handler.Handle(command);
         return response.ToDataSourceResult<GetAllViajeModel>(request);
     }
-    
+
     [HttpPost("forzar-estado")]
     [SeminarioResponse]
     public async Task ForzarEstado([FromBody] ForzarEstadoCommand command)
@@ -77,7 +78,7 @@ public class ViajeController : ControllerBase
         var handler = new ForzarEstadoHandler(_ctx);
         await handler.Handle(command);
     }
-    
+
     [HttpPost("cargar-descarga")]
     [SeminarioResponse]
     public async Task CargarDescarga([FromBody] CargarDescargaViajeCommand command)
@@ -88,7 +89,8 @@ public class ViajeController : ControllerBase
 
     [HttpGet("get-obs")]
     [SeminarioResponse]
-    public async Task<DataSourceResult<ViajeGetObservacionesResponse>> GetObs([FromQuery] ViajeGetObservacionesCommand command,
+    public async Task<DataSourceResult<ViajeGetObservacionesResponse>> GetObs(
+        [FromQuery] ViajeGetObservacionesCommand command,
         [FromQuery] DataSourceRequest request)
     {
         var handler = new ViajeGetObservacionesHandler(_ctx);

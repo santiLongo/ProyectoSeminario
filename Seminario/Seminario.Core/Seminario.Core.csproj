@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="MySqlConnector" Version="2.4.0" />
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.15.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Dashboard\json\dashboard.json" />
+      <EmbeddedResource Include="Dashboard\json\dashboard.json" />
+      <None Remove="Dashboard\json\schema.json" />
+      <EmbeddedResource Include="Dashboard\json\schema.json" />
+    </ItemGroup>
+
+
+</Project>

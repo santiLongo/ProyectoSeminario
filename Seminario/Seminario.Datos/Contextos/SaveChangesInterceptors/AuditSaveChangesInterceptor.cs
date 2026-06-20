@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Seminario.Core.Services.CurrentUserService;
 using Seminario.Datos.Entidades.Interfaces;
-using Seminario.Datos.Services.CurrentUserService;
 
 namespace Seminario.Datos.Contextos.SaveChangesInterceptors;
 

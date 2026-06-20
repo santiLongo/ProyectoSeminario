@@ -1,7 +1,7 @@
 using System.Net;
-using Seminario.Api.Middleware.ExceptionMiddleware;
+using Seminario.Core.Exceptions.SeminarioException;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.ExtensionMethods;
+using Seminario.Core.ExtensionMethods;
 
 namespace Seminario.Services.FacturasServices.DeleteFactura;
 

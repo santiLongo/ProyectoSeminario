@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tu-dominio/schemas/dashboard.json",
+  "title": "Dashboard",
+  "$ref": "#/$defs/dashboard",
+  "$defs": {
+    "dashboard": {
+      "type": "object",
+      "properties": {
+        "dashboard-name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/card"
+          }
+        }
+      },
+      "required": [
+        "dashboard-name",
+        "cards"
+      ],
+      "additionalProperties": false
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "href": {
+          "type": "string",
+          "minLength": 1
+        },
+        "icon": {
+          "$ref": "string"
+        },
+        "iconBg": {
+          "type": "string"
+        },
+        "iconColor": {
+          "type": "string"
+        },
+        "trend": {
+          "type": "string"
+        },
+        "trendUp": {
+          "type": "boolean"
+        },
+        "dashboard": {
+          "$ref": "#/$defs/dashboard"
+        }
+      },
+      "required": [
+        "title",
+        "href",
+        "icon"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

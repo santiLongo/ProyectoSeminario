@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Dapper;
-using Seminario.Api.Middleware.ExceptionMiddleware;
+using Seminario.Core.Exceptions.SeminarioException;
 using Seminario.Datos.Dapper;
 using Seminario.Services.Ubicacion.Get.Command;
 using Seminario.Services.Ubicacion.Get.Response;

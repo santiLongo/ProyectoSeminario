@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
 using Seminario.Services.EspecialidadServices.Upsert.Command;
 using Seminario.Services.EspecialidadServices.Upsert.Handler;
 
@@ -13,7 +13,7 @@ namespace Seminario.Api.Controllers.Especialidad.v1;
 public class EspecialidadController : ControllerBase
 {
     private readonly IAppDbContext _ctx;
-    
+
     public EspecialidadController(IAppDbContext ctx)
     {
         _ctx = ctx;

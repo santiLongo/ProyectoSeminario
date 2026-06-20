@@ -1,7 +1,5 @@
 ﻿using Dapper;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.Entidades;
 
 namespace Seminario.Services.ClientesServices.Commands.GetAll;
 

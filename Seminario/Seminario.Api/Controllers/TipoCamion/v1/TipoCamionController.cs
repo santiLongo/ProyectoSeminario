@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.TipoCamionCrud.Delete.Command;
 using Seminario.Services.TipoCamionCrud.Delete.Handler;
 using Seminario.Services.TipoCamionCrud.GetAll.Command;
@@ -23,7 +23,7 @@ public class TipoCamionController : ControllerBase
     {
         _ctx = ctx;
     }
-    
+
     [HttpGet]
     [Route("getAll")]
     [SeminarioResponse]
@@ -34,7 +34,7 @@ public class TipoCamionController : ControllerBase
         var response = await handler.Handle(command);
         return response.ToDataSourceResult(request);
     }
-    
+
     [HttpPost]
     [Route("upsert")]
     [SeminarioResponse]
@@ -43,7 +43,7 @@ public class TipoCamionController : ControllerBase
         var handler = new UpsertTipoCamionHandler(_ctx);
         await handler.Handle(command);
     }
-    
+
     [HttpPost]
     [Route("delete")]
     [SeminarioResponse]

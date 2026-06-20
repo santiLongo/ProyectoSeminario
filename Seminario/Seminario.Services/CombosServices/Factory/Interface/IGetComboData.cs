@@ -1,4 +1,4 @@
-﻿using Seminario.Datos.Type.ComboTypes.Interface;
+﻿using Seminario.Core.Type.ComboTypes.Interface;
 
 namespace Seminario.Services.CombosServices.Factory.Interface;
 

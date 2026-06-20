@@ -1,10 +1,7 @@
-﻿using System.Data;
-using Dapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Seminario.Core.Services.CurrentUserService;
 using Seminario.Datos.Entidades;
-using Seminario.Datos.Entidades.Interfaces;
 using Seminario.Datos.Repositorios;
-using Seminario.Datos.Services.CurrentUserService;
 
 namespace Seminario.Datos.Contextos.AppDbContext
 {

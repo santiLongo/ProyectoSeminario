@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Seminario.Api.Middleware.ExceptionMiddleware;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 

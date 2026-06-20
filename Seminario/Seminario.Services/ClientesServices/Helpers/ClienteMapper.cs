@@ -1,5 +1,5 @@
-﻿using Seminario.Datos.Entidades;
-using Seminario.Datos.ExtensionMethods;
+﻿using Seminario.Core.ExtensionMethods;
+using Seminario.Datos.Entidades;
 using Seminario.Services.ClientesServices.Models;
 
 namespace Seminario.Services.ClientesServices.Helpers;

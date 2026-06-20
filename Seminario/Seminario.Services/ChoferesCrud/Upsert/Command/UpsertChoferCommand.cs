@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Seminario.Api.Middleware.ExceptionMiddleware;
+using Seminario.Core.Exceptions.SeminarioException;
 
 namespace Seminario.Services.ChoferesCrud.Upsert.Command;
 

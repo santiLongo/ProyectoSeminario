@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Seminario.Datos;
 using Seminario.Datos.Dapper;
+using Seminario.Datos.Enums;
 using Seminario.Services.ViajeServices.GetAll.Command;
 using Seminario.Services.ViajeServices.GetAll.Model;
 

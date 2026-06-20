@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.TallerServices.Get.Command;
 using Seminario.Services.TallerServices.Get.Handler;
 using Seminario.Services.TallerServices.Get.Response;
@@ -20,7 +20,7 @@ namespace Seminario.Api.Controllers.TallerController.v1;
 public class TallerController : ControllerBase
 {
     private readonly IAppDbContext _ctx;
-    
+
     public TallerController(IAppDbContext ctx)
     {
         _ctx = ctx;
@@ -43,7 +43,7 @@ public class TallerController : ControllerBase
         var handler = new TalleresUpsertHandler(_ctx);
         await handler.HandleAsync(command);
     }
-    
+
     [HttpGet("get")]
     [SeminarioResponse]
     public async Task<TalleresGetResponse> Get([FromQuery] TalleresGetCommand command)

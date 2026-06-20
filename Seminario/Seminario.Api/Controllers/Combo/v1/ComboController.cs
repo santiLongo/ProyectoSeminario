@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.FilterResponse;
+using Seminario.Core.Type.ComboTypes.Interface;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.Type.ComboTypes.Interface;
 using Seminario.Services.CombosServices.Handler;
 
 namespace Seminario.Api.Controllers.Combo.v1;
@@ -11,7 +11,6 @@ namespace Seminario.Api.Controllers.Combo.v1;
 [Route("api/v1/combo")]
 public class ComboController : ControllerBase
 {
-    
     [HttpGet("get")]
     [SeminarioResponse]
     public List<ICombo> Get([FromQuery] string type,
@@ -19,7 +18,7 @@ public class ComboController : ControllerBase
     {
         var extraParams = HttpContext.Request.Query
             .ToDictionary(x => x.Key, x => x.Value.ToString());
-        
+
         var handler = new ComboHandler(context, session);
         var response = handler.Handle(type, extraParams);
         return response.ToList();

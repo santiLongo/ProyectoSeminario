@@ -1,8 +1,8 @@
 ﻿using System.Net;
-using Seminario.Api.Middleware.ExceptionMiddleware;
+using Seminario.Core.Exceptions.SeminarioException;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
-using Seminario.Datos.ExtensionMethods;
+using Seminario.Core.ExtensionMethods;
 using Seminario.Services.Mantenimiento.Upsert.Command;
 
 namespace Seminario.Services.Mantenimiento.Upsert.Handler;

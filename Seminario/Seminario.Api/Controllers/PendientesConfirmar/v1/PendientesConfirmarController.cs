@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
 using Seminario.Services.FacturasServices.DeleteFactura;
 using Seminario.Services.FacturasServices.GetAllFacturas;
 

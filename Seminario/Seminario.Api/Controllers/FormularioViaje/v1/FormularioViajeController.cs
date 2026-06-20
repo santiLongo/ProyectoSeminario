@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Dapper;
 using Seminario.Services.FormularioViaje.BuscoChofer;
 using Seminario.Services.FormularioViaje.BuscoChofer.Response;
@@ -31,7 +31,7 @@ public class FormularioViajeController : ControllerBase
         var response = await _executor.ExecuteFirstOrDefaultAsync<string>(sql, p);
         return new { Cuit = response };
     }
-    
+
     [HttpGet("busco-chofer")]
     [SeminarioResponse]
     public async Task<BuscoChoferResponse?> BuscoChofer([FromQuery] int idChofer)
@@ -39,7 +39,7 @@ public class FormularioViajeController : ControllerBase
         var handler = new BuscoChoferHandler(_executor);
         return await handler.HandleAsync(idChofer);
     }
-    
+
     [HttpGet("ultimo-mantenimiento")]
     [SeminarioResponse]
     public async Task<object> UltimoMantenimiento([FromQuery] int idCamion)
@@ -49,7 +49,7 @@ public class FormularioViajeController : ControllerBase
         //
         var sql = "SELECT fechaSalida FROM mantenimiento WHERE idVehiculo = @camion ORDER BY fechaSalida desc limit 1";
         //
-        var response =  await _executor.ExecuteFirstOrDefaultAsync<DateTime?>(sql, p);
+        var response = await _executor.ExecuteFirstOrDefaultAsync<DateTime?>(sql, p);
         return new { UltimoMantenimiento = response };
     }
 }

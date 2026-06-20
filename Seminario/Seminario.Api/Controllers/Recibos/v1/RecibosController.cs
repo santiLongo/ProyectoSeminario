@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
 using Seminario.Services.RecibosServices.AddRecibo;
 using Seminario.Services.RecibosServices.AnularRecibo;
 using Seminario.Services.RecibosServices.GetRecibo;

@@ -1,0 +1,145 @@
+{
+  "dashboard-name": "home",
+  "cards": [
+    {
+      "title": "",
+      "subtitle": "Viajes",
+      "href": "/viajes",
+      "icon": "truck",
+      "children": {
+        "dashboard-name": "viajes",
+        "cards": [
+          {
+            "icon": "truck",
+            "title": "Gestion",
+            "subtitle": "de Viajes",
+            "href": "./gestion-viajes"
+          },
+          {
+            "icon": "worker",
+            "title": "",
+            "subtitle": "Choferes",
+            "href": "./gestion-choferes"
+          },
+          {
+            "icon": "users",
+            "title": "",
+            "subtitle": "Clientes",
+            "href": "./gestion-clientes"
+          }
+        ]
+      }
+    },
+    {
+      "title": "",
+      "subtitle": "Mantenimiento",
+      "href": "/mantenimiento",
+      "icon": "caja_herr",
+      "children": {
+        "dashboard-name": "mantenimiento",
+        "cards": [
+          {
+            "icon": "caja_herr",
+            "title": "Gestion de",
+            "subtitle": "Mantenimiento",
+            "href": "./gestion-mantenimiento"
+          },
+          {
+            "icon": "engineering",
+            "title": "",
+            "subtitle": "Talleres",
+            "href": "./talleres"
+          },
+          {
+            "icon": "company",
+            "title": "",
+            "subtitle": "Proveedores",
+            "href": "./proveedores"
+          }
+        ]
+      }
+    },
+    {
+      "title": "",
+      "subtitle": "Finanzas",
+      "href": "/finanzas",
+      "icon": "dolar",
+      "hidden": true,
+      "children": {
+        "dashboard-name": "finanzas",
+        "cards": [
+          {
+            "icon": "inventory",
+            "title": "",
+            "subtitle": "Recibos",
+            "href": "./gestion-recibos"
+          },
+          {
+            "icon": "bank",
+            "title": "",
+            "subtitle": "Facturación",
+            "href": "./gestion-facturacion",
+            "children": {
+              "dashboard-name": "facturación",
+              "cards": [
+                {
+                  "icon": "truck",
+                  "title": "Viajes",
+                  "subtitle": "Pendientes de Facturar",
+                  "href": "./pendientes-viajes"
+                },
+                {
+                  "icon": "caja_herr",
+                  "title": "Mantenimientos",
+                  "subtitle": "Pendientes de Facturar",
+                  "href": "./pendientes-mantenimientos"
+                },
+                {
+                  "icon": "next",
+                  "title": "Pendientes",
+                  "subtitle": "de Confirmar",
+                  "href": "./pendientes-confirmar"
+                },
+                {
+                  "icon": "company",
+                  "title": "Facturas",
+                  "subtitle": "Emitidas",
+                  "href": "./facturas-emitidas"
+                },
+                {
+                  "icon": "inventory",
+                  "title": "Facturas",
+                  "subtitle": "Recibidas",
+                  "href": "./facturas-recibidas"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "",
+      "subtitle": "Generales",
+      "href": "/generales",
+      "icon": "settings",
+      "children": {
+        "dashboard-name": "generales",
+        "cards": [
+          {
+            "icon": "location",
+            "title": "Maestro de",
+            "subtitle": "Localidades",
+            "href": "./gestion-localidad"
+          },
+          {
+            "icon": "truck",
+            "title": "Maestro de",
+            "subtitle": "Camiones",
+            "href": "./gestion-camiones"
+          }
+        ]
+      }
+    }
+  ]
+}

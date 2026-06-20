@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.CamionCrud.DarDeAlta.Command;
 using Seminario.Services.CamionCrud.DarDeAlta.Handler;
 using Seminario.Services.CamionCrud.DarDeBaja.Command;
@@ -29,7 +29,7 @@ public class CamionController : ControllerBase
     {
         _ctx = ctx;
     }
-    
+
     [HttpPost]
     [Route("upsert")]
     [SeminarioResponse]
@@ -48,26 +48,26 @@ public class CamionController : ControllerBase
         var response = await handler.HandleAsync(command);
         return response.ToDataSourceResult(request);
     }
-    
+
     [HttpGet("get")]
     [SeminarioResponse]
-    public async Task<CamionGetResponse> GetAll( [FromQuery] CamionGetCommand command)
+    public async Task<CamionGetResponse> GetAll([FromQuery] CamionGetCommand command)
     {
         var handler = new CamionGetHandler(_ctx);
         return await handler.HandleAsync(command);
     }
-    
+
     [HttpPost("dar-baja")]
     [SeminarioResponse]
-    public async Task DarBaja( [FromBody] CamionBajaCommand command)
+    public async Task DarBaja([FromBody] CamionBajaCommand command)
     {
         var handler = new CamionBajaHandler(_ctx);
         await handler.HandleAsync(command);
     }
-    
+
     [HttpPost("dar-alta")]
     [SeminarioResponse]
-    public async Task DarAlta( [FromBody] CamionAltaCommand command)
+    public async Task DarAlta([FromBody] CamionAltaCommand command)
     {
         var handler = new CamionAltaHandler(_ctx);
         await handler.HandleAsync(command);

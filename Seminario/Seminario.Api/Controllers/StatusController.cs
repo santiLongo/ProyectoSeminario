@@ -5,37 +5,37 @@ using MySqlConnector;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 
-namespace Seminario.Api.Controllers
+namespace Seminario.Api.Controllers;
+
+[Route("api/status")]
+[ApiController]
+public class StatusController : ControllerBase
 {
-    [Route("api/status")]
-    [ApiController]
-    public class StatusController : ControllerBase
+    private readonly IAppDbContext _ctx;
+
+    public StatusController(IAppDbContext ctx)
     {
-        private readonly IAppDbContext _ctx;
+        _ctx = ctx;
+    }
 
-        public StatusController(IAppDbContext ctx)
+    [HttpGet("sayHello")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SayHello()
+    {
+        IEnumerable<Seminario.Datos.Entidades.Especialidad> especialidades;
+        //
+        try
         {
-            _ctx = ctx;
+            especialidades = await _ctx.EspecialidadRepo.GetAll();
+        }
+        catch (MySqlException ex)
+        {
+            return Ok(ex.Message);
         }
 
-        [HttpGet("sayHello")]
-        [AllowAnonymous]
-        public async Task<IActionResult> SayHello()
-        {
-            IEnumerable<Seminario.Datos.Entidades.Especialidad> especialidades;
-            //
-            try
-            {
-                especialidades = await _ctx.EspecialidadRepo.GetAll();
-            }
-            catch (MySqlException ex)
-            {
-                return Ok(ex.Message);
-            }
-            //
-            string especialidadesString = string.Join(", ", especialidades?.Select(e => e.Descripcion));
-            //
-            return Ok($"Hoy soy bueno en todo esto: {especialidadesString}");
-        }
+        //
+        var especialidadesString = string.Join(", ", especialidades?.Select(e => e.Descripcion));
+        //
+        return Ok($"Hoy soy bueno en todo esto: {especialidadesString}");
     }
 }

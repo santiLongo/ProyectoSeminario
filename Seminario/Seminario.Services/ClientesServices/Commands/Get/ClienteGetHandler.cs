@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Seminario.Api.Middleware.ExceptionMiddleware;
+using Seminario.Core.Exceptions.SeminarioException;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.ClientesServices.Helpers;
 using Seminario.Services.ClientesServices.Models;

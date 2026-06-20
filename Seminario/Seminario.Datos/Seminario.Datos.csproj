@@ -21,6 +21,8 @@
     <EmbeddedResource Include="Migrations\Migrations\migration_3.sql" />
     <None Remove="Migrations\Migrations\migration_4.sql" />
     <EmbeddedResource Include="Migrations\Migrations\migration_4.sql" />
+    <None Remove="Migrations\Migrations\migration_6.sql" />
+    <EmbeddedResource Include="Migrations\Migrations\migration_6.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +32,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.11" />
 	  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Seminario.Core\Seminario.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.CobrosServices.Add.Command;
 using Seminario.Services.CobrosServices.Add.Handler;
 using Seminario.Services.CobrosServices.Anular.Command;
@@ -47,7 +47,7 @@ public class CobrosController : ControllerBase
         var response = await handler.HandleAsync(command);
         return response.ToDataSourceResult(request);
     }
-    
+
     [HttpPost("update")]
     [SeminarioResponse]
     public async Task Update([FromBody] CobrosUpdateCommand command)

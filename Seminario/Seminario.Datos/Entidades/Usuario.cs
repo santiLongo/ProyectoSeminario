@@ -21,9 +21,16 @@ namespace Seminario.Datos.Entidades
         [Column("password")]
         public string? Password { get; set; }
 
-        [Required]
         [StringLength(10)]
         [Column("role")]
         public string? Role { get; set; }
+        
+        [MaxLength(50)]
+        [Column("email")]
+        public string Email { get; set; }
+        
+        [MaxLength(20)]
+        [Column("phoneNumber")]
+        public string PhoneNumber { get; set; }
     }
 }

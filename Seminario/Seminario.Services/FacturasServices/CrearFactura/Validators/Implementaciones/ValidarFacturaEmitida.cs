@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Seminario.Datos;
 using Seminario.Datos.Contextos.AppDbContext;
+using Seminario.Datos.Enums;
 
 namespace Seminario.Services.FacturasServices.CrearFactura;
 

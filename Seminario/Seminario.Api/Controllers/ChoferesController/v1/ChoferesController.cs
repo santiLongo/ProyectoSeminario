@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.DataSourceResult.Clases;
+using Seminario.Core.DataSourceResult.ExtesionMethods;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Dapper;
-using Seminario.Datos.DataSourceResult.Clases;
-using Seminario.Datos.DataSourceResult.ExtesionMethods;
 using Seminario.Services.ChoferesCrud.Alta.Command;
 using Seminario.Services.ChoferesCrud.Alta.Handler;
 using Seminario.Services.ChoferesCrud.Baja.Command;
@@ -24,7 +24,7 @@ namespace Seminario.Api.Controllers.ChoferesController.v1;
 public class ChoferesController : ControllerBase
 {
     private readonly IAppDbContext _ctx;
-    
+
     public ChoferesController(IAppDbContext ctx)
     {
         _ctx = ctx;
@@ -38,7 +38,7 @@ public class ChoferesController : ControllerBase
         var handler = new UpsertChoferHandler(_ctx);
         await handler.Handle(command);
     }
-    
+
     [HttpPost]
     [Route("baja")]
     [SeminarioResponse]
@@ -47,7 +47,7 @@ public class ChoferesController : ControllerBase
         var handler = new ChoferesBajaHandler(_ctx);
         await handler.HandleAsync(command);
     }
-    
+
     [HttpPost]
     [Route("alta")]
     [SeminarioResponse]
@@ -67,10 +67,10 @@ public class ChoferesController : ControllerBase
         var response = await handler.HandleAsync(command);
         return response.ToDataSourceResult<ChoferesGetAllResponse>(request);
     }
-    
+
     [HttpGet("get")]
     [SeminarioResponse]
-    public async Task<ChoferesGetResponse> Get( [FromQuery] ChoferesGetCommand command)
+    public async Task<ChoferesGetResponse> Get([FromQuery] ChoferesGetCommand command)
     {
         var handler = new ChoferesGetHandler(_ctx);
         return await handler.HandleAsync(command);

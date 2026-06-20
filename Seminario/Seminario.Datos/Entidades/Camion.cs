@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Core.ExtensionMethods;
 using Seminario.Datos.Entidades.Interfaces;
-using Seminario.Datos.ExtensionMethods;
-
 namespace Seminario.Datos.Entidades;
 
 [Table("camion")]

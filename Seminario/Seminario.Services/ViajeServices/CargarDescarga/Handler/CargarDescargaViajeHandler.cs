@@ -2,6 +2,7 @@
 using Seminario.Datos;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
+using Seminario.Datos.Enums;
 using Seminario.Services.ViajeServices.CargarDescarga.Command;
 
 namespace Seminario.Services.ViajeServices.CargarDescarga.Handler;

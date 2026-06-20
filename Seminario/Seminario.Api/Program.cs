@@ -5,13 +5,13 @@ using Microsoft.IdentityModel.Tokens;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Mapper;
 using System.Text;
-using Seminario.Api.Middleware.ExceptionMiddleware;
-using Seminario.Api.Services.CurrentUserService;
+using Seminario.Core.ControlGroupSingleton;
+using Seminario.Core.Dashboard;
+using Seminario.Core.Middleware.ExceptionMiddleware;
+using Seminario.Core.Services.CurrentUserService;
 using Seminario.Datos.Contextos.SaveChangesInterceptors;
-using Seminario.Datos.ControlGroupSingleton;
 using Seminario.Datos.Dapper;
 using Seminario.Datos.Migrations;
-using Seminario.Datos.Services.CurrentUserService;
 
 
 var builder = WebApplication.CreateBuilder(args);

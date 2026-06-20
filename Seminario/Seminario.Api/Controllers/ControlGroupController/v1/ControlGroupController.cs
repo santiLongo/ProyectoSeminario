@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
-using Seminario.Datos.ControlGroupSingleton;
-using Seminario.Datos.ControlGroupSingleton.Models;
+using Seminario.Core.ControlGroupSingleton;
+using Seminario.Core.ControlGroupSingleton.Models;
+using Seminario.Core.FilterResponse;
 
 namespace Seminario.Api.Controllers.ControlGroupController.v1;
 
@@ -10,7 +10,7 @@ namespace Seminario.Api.Controllers.ControlGroupController.v1;
 public class ControlGroupController
 {
     private readonly IControlConnection _controlConnection;
-    
+
     public ControlGroupController(IControlConnection controlConnection)
     {
         _controlConnection = controlConnection;
@@ -22,5 +22,4 @@ public class ControlGroupController
     {
         return await _controlConnection.GetPosicionUnidadesAsync();
     }
-    
 }

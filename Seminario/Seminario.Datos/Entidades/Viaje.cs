@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Entidades.Interfaces;
+using Seminario.Datos.Enums;
 
 namespace Seminario.Datos.Entidades;
 

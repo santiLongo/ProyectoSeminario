@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
+using Seminario.Datos.Enums;
 
 namespace Seminario.Datos.Repositorios;
 

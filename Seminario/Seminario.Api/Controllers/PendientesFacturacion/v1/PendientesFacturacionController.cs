@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Seminario.Api.FilterResponse;
+using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Services.FacturasServices.PendientesFacturacion.GenerarFacturaMantenimiento;
 using Seminario.Services.FacturasServices.PendientesFacturacion.GenerarFacturaViaje;
@@ -45,7 +45,8 @@ public class PendientesFacturacionController : ControllerBase
 
     [HttpPost("mantenimientos/{idMantenimiento:int}/generar")]
     [SeminarioResponse]
-    public async Task<int> GenerarFacturaMantenimiento(int idMantenimiento, [FromBody] GenerarFacturaMantenimientoCommand command)
+    public async Task<int> GenerarFacturaMantenimiento(int idMantenimiento,
+        [FromBody] GenerarFacturaMantenimientoCommand command)
     {
         var handler = new GenerarFacturaMantenimientoHandler(_ctx);
         return await handler.HandleAsync(idMantenimiento, command);
