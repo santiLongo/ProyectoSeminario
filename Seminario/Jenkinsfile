@@ -1,5 +1,11 @@
 // Pipeline del backend (Seminario.Api).
-// Va en la raiz del repo ProyectoSeminario. Job tipo "Pipeline" -> Script Path: Jenkinsfile.back
+// Vive en Seminario/Jenkinsfile dentro del repo ProyectoSeminario.
+// Job tipo "Pipeline" -> Script Path: Seminario/Jenkinsfile
+//
+// OJO con el build: el repo es un monorepo (EasyAfip + Seminario). El Dockerfile
+// esta en Seminario/Dockerfile pero referencia rutas desde la RAIZ del repo
+// (dotnet publish ./Seminario/Seminario.Api/...), asi que se buildea con el
+// contexto en la raiz y -f apuntando al Dockerfile. NO usar dir('Seminario').
 pipeline {
   agent any
 
@@ -39,7 +45,8 @@ pipeline {
 
     stage('Build imagen') {
       steps {
-        sh 'docker build -t ${IMAGE}:${DEPLOY_ENV} .'
+        // Contexto = raiz del repo; Dockerfile en la subcarpeta Seminario.
+        sh 'docker build -f Seminario/Dockerfile -t ${IMAGE}:${DEPLOY_ENV} .'
       }
     }
 
