@@ -1,0 +1,72 @@
+// Pipeline del backend (Seminario.Api).
+// Va en la raiz del repo ProyectoSeminario. Job tipo "Pipeline" -> Script Path: Jenkinsfile.back
+pipeline {
+  agent any
+
+  parameters {
+    choice(name: 'DEPLOY_ENV', choices: ['test', 'prod'],
+           description: 'Entorno a desplegar')
+  }
+
+  environment {
+    IMAGE = 'seminario-api'
+    // Red donde vive el contenedor 'mysql', para que 'Server=mysql' resuelva.
+    DOCKER_NETWORK = 'seminario-net'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+
+    stage('Resolver entorno') {
+      steps {
+        script {
+          if (params.DEPLOY_ENV == 'prod') {
+            env.DB_NAME   = 'sistemalogistica'
+            env.CONTAINER = 'seminario-api'
+            env.HOST_PORT = '5005'
+            env.ASPNET    = 'Production'
+          } else {
+            env.DB_NAME   = 'sistemalogistica_test'
+            env.CONTAINER = 'seminario-api-test'
+            env.HOST_PORT = '5007'
+            env.ASPNET    = 'Staging'
+          }
+        }
+      }
+    }
+
+    stage('Build imagen') {
+      steps {
+        sh 'docker build -t ${IMAGE}:${DEPLOY_ENV} .'
+      }
+    }
+
+    stage('Desplegar') {
+      // La password del usuario SeminarioBack vive en Jenkins (Secret text),
+      // credentialsId = 'mysql-back-password'. NO va en el repo.
+      steps {
+        withCredentials([string(credentialsId: 'mysql-back-password', variable: 'DB_PASS')]) {
+          sh '''
+            docker rm -f ${CONTAINER} || true
+            docker run -d \
+              --name ${CONTAINER} \
+              --network ${DOCKER_NETWORK} \
+              --restart unless-stopped \
+              -p 127.0.0.1:${HOST_PORT}:8080 \
+              -e ASPNETCORE_ENVIRONMENT=${ASPNET} \
+              -e ASPNETCORE_HTTP_PORTS=8080 \
+              -e ConnectionStrings__ConnectionMySql="Server=mysql;Port=3306;Database=${DB_NAME};User=SeminarioBack;Password=${DB_PASS};" \
+              ${IMAGE}:${DEPLOY_ENV}
+          '''
+        }
+      }
+    }
+  }
+
+  post {
+    success { echo "API ${params.DEPLOY_ENV} arriba en 127.0.0.1:${env.HOST_PORT}" }
+    failure { echo "Fallo el deploy de la API ${params.DEPLOY_ENV}" }
+  }
+}
