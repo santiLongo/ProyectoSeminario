@@ -19,7 +19,7 @@ public class Factura : IAuditable
     public DateTime? FechaVencimiento { get; set; }
 
     public decimal Subtotal { get; set; }
-    public decimal PorcentajeIva { get; set; } // 0, 10.5, 21, etc.
+    public decimal ImporteIva { get; set; }
     public decimal Total { get; set; } // Subtotal + IVA calculado
 
     public int IdMoneda { get; set; }
@@ -27,22 +27,13 @@ public class Factura : IAuditable
 
     public EstadoFactura Estado { get; set; } = EstadoFactura.Pendiente;
 
-    public string? Observaciones { get; set; }
+    public string Observaciones { get; set; }
     public bool Anulada { get; set; }
-
-    // Campos AFIP — se completan cuando se autoriza el comprobante
-    public int? TipoComprobante { get; set; } // 1=FA, 6=FB, 11=FC
-    public string? CAE { get; set; }
-    public string? CAEFchVto { get; set; } // formato YYYYMMDD
-
-    // Para emitidas: true cuando tiene CAE de AFIP o fue confirmada manualmente
-    public bool Confirmada { get; set; } = false;
-
     public int? IdCliente { get; set; }
     public int? IdProveedor { get; set; }
     public int? IdTaller { get; set; }
 
-    public string? UserName { get; set; }
+    public string UserName { get; set; }
     public DateTime? UserDateTime { get; set; }
 
     public string? UserAlta { get; set; }
@@ -51,17 +42,7 @@ public class Factura : IAuditable
     public int? PuntoVentaReal { get; set; }
     public int? NumeroReal { get; set; }
 
-    // Navigation Properties
-    public virtual Moneda Moneda { get; set; }
-    public virtual Cliente? Cliente { get; set; }
-    public virtual Proveedor? Proveedor { get; set; }
-    public virtual Taller? Taller { get; set; }
-
     public virtual ICollection<FacturaDetalle> Detalles { get; set; } = new List<FacturaDetalle>();
-    public virtual ICollection<FacturaViaje> FacturasViaje { get; set; } = new List<FacturaViaje>();
-    public virtual ICollection<FacturaMantenimiento> FacturasMantenimiento { get; set; } = new List<FacturaMantenimiento>();
-    public virtual ICollection<FacturaCompraRepuesto> FacturasCompraRepuesto { get; set; } = new List<FacturaCompraRepuesto>();
-    public virtual ICollection<ReciboFactura> ReciboFacturas { get; set; } = new List<ReciboFactura>();
 
     public void CreatedAt(DateTime date, string user)
     {
@@ -95,6 +76,13 @@ public class Factura : IAuditable
             Estado = EstadoFactura.PagoParcial;
     }
 
-    public enum TipoFactura { Emitida = 1, Recibida = 2 }
+    public enum TipoFactura { Emitida, Recibida }
     public enum EstadoFactura { Pendiente = 1, PagoParcial = 2, Cancelada = 3, Anulada = 4 }
+
+    public void RecalculoCabecera()
+    {
+        Subtotal = Detalles.Select(o => o.Subtotal).Sum();
+        ImporteIva = Detalles.Select(o => o.PrecioIva).Sum();
+        Total = Detalles.Select(o => o.Total).Sum();
+    }
 }

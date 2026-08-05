@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
-using Seminario.Datos.Dapper;
+using Seminario.Core.Dapper;
 using Seminario.Core.Type.ComboTypes;
 using Seminario.Core.Type.ComboTypes.Interface;
 using Seminario.Services.CombosServices.Factory.Interface;

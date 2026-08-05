@@ -1,6 +1,6 @@
 ﻿using Dapper;
+using Seminario.Core.Dapper;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
 using Seminario.Services.CobrosServices.GetAll.Command;
 using Seminario.Services.CobrosServices.GetAll.Response;
 

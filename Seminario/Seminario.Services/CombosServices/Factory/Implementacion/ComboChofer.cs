@@ -1,5 +1,5 @@
-﻿using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
+﻿using Seminario.Core.Dapper;
+using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Core.Type.ComboTypes;
 using Seminario.Core.Type.ComboTypes.Interface;
 using Seminario.Services.CombosServices.Factory.Interface;

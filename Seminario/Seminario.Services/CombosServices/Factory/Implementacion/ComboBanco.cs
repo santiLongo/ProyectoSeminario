@@ -1,6 +1,6 @@
-﻿using Seminario.Core.Type.ComboTypes;
+﻿using Seminario.Core.Dapper;
+using Seminario.Core.Type.ComboTypes;
 using Seminario.Core.Type.ComboTypes.Interface;
-using Seminario.Datos.Dapper;
 using Seminario.Services.CombosServices.Factory.Interface;
 
 namespace Seminario.Services.CombosServices.Factory.Implementacion;

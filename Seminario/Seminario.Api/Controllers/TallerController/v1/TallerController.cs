@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Seminario.Core.Dapper;
 using Seminario.Core.DataSourceResult.Clases;
 using Seminario.Core.DataSourceResult.ExtesionMethods;
 using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
 using Seminario.Services.TallerServices.Get.Command;
 using Seminario.Services.TallerServices.Get.Handler;
 using Seminario.Services.TallerServices.Get.Response;

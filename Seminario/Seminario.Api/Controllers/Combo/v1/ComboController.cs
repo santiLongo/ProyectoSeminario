@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Seminario.Core.Dapper;
 using Seminario.Core.FilterResponse;
 using Seminario.Core.Type.ComboTypes.Interface;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
 using Seminario.Services.CombosServices.Handler;
 
 namespace Seminario.Api.Controllers.Combo.v1;

@@ -21,10 +21,14 @@ public class FacturaDetalle
 
     public decimal PorcentajeIva { get; set; }
 
+    public decimal PrecioIva { get; set; }
     public decimal Subtotal { get; set; }
 
     public decimal Total { get; set; }
 
-    // Navigation Property
+    public int? IdViaje { get; set; }
+    public int? IdMantenimiento { get; set; }
+    public int? IdCompraRepuesto { get; set; }
+
     public virtual Factura Factura { get; set; }
 }

@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using Seminario.Datos.Dapper;
+using Seminario.Core.Dapper;
 using Seminario.Services.FormularioViaje.BuscoChofer.Response;
 
 namespace Seminario.Services.FormularioViaje.BuscoChofer;

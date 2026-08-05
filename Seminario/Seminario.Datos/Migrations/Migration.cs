@@ -1,10 +1,11 @@
-using Seminario.Datos.Dapper;
+using Seminario.Core.Dapper;
+using Seminario.Core.Migrations.BaseMigrations;
 
 namespace Seminario.Datos.Migrations;
 
-public class Migration : BaseMigrations.BaseMigrations
+public class Migration : BaseMigrations
 {
-    protected override int Version => 6;
+    protected override int Version => 7;
     protected override string Modulo => "SeminarioMain";
     protected override string ResourcePath => "Seminario.Datos.Migrations.Migrations";
     

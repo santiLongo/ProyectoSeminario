@@ -34,5 +34,49 @@
     <_ContentIncludedByDefault Remove="Controllers\Home\v1\json\schema.json" />
     <_ContentIncludedByDefault Remove="Controllers\Home\v1\json\ventanas.json" />
   </ItemGroup>
+	
+	
+			
+
+  <ItemGroup>
+    <Compile Remove="Controllers\FacturasEmitidas\**" />
+    <Compile Remove="Controllers\FacturasRecibidas\**" />
+    <Compile Remove="Controllers\PendientesConfirmar\**" />
+    <Compile Remove="Controllers\PendientesFacturacion\**" />
+    <Compile Remove="Controllers\Recibos\**" />
+  </ItemGroup>
+	
+	
+			
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Controllers\FacturasEmitidas\**" />
+    <EmbeddedResource Remove="Controllers\FacturasRecibidas\**" />
+    <EmbeddedResource Remove="Controllers\PendientesConfirmar\**" />
+    <EmbeddedResource Remove="Controllers\PendientesFacturacion\**" />
+    <EmbeddedResource Remove="Controllers\Recibos\**" />
+  </ItemGroup>
+	
+	
+			
+
+  <ItemGroup>
+    <Content Remove="Controllers\FacturasEmitidas\**" />
+    <Content Remove="Controllers\FacturasRecibidas\**" />
+    <Content Remove="Controllers\PendientesConfirmar\**" />
+    <Content Remove="Controllers\PendientesFacturacion\**" />
+    <Content Remove="Controllers\Recibos\**" />
+  </ItemGroup>
+	
+	
+			
+
+  <ItemGroup>
+    <None Remove="Controllers\FacturasEmitidas\**" />
+    <None Remove="Controllers\FacturasRecibidas\**" />
+    <None Remove="Controllers\PendientesConfirmar\**" />
+    <None Remove="Controllers\PendientesFacturacion\**" />
+    <None Remove="Controllers\Recibos\**" />
+  </ItemGroup>
 
 </Project>

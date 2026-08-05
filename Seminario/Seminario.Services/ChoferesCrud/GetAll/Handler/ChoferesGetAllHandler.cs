@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Seminario.Core.Dapper;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
 using Seminario.Datos.Repositorios;
 using Seminario.Services.ChoferesCrud.GetAll.Response;
 

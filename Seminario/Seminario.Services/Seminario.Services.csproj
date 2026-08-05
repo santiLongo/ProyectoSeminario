@@ -26,4 +26,16 @@
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="RecibosServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="RecibosServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="RecibosServices\**" />
+  </ItemGroup>
+
 </Project>

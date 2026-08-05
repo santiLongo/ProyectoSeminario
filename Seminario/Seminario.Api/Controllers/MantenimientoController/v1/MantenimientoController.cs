@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
 using Seminario.Core.DataSourceResult.ExtesionMethods;
 using Seminario.Services.Mantenimiento.Get.Command;
 using Seminario.Services.Mantenimiento.Get.Handler;
@@ -19,6 +18,7 @@ using Seminario.Services.Mantenimiento.InformarSalida.Handler;
 using Seminario.Services.Mantenimiento.Upsert.Command;
 using Seminario.Services.Mantenimiento.Upsert.Handler;
 using System.Net;
+using Seminario.Core.Dapper;
 using Seminario.Core.DataSourceResult.Clases;
 using Seminario.Core.Exceptions.SeminarioException;
 

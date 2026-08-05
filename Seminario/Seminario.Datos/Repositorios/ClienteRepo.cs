@@ -13,6 +13,7 @@ public interface IClienteRepo
     void Add(Cliente cliente);
 
     void RemoveById(Cliente cliente);
+    bool Existe(int idCliente);
 }
 public class ClienteRepo : IClienteRepo
 {
@@ -51,5 +52,10 @@ public class ClienteRepo : IClienteRepo
     public void RemoveById(Cliente cliente)
     {
         _db.Clientes.Remove(cliente);
+    }
+
+    public bool Existe(int idCliente)
+    {
+        return _db.Clientes.Any(c => c.IdCliente == idCliente);
     }
 }

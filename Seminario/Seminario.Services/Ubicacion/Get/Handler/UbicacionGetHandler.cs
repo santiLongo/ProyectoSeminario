@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Dapper;
+using Seminario.Core.Dapper;
 using Seminario.Core.Exceptions.SeminarioException;
-using Seminario.Datos.Dapper;
 using Seminario.Services.Ubicacion.Get.Command;
 using Seminario.Services.Ubicacion.Get.Response;
 

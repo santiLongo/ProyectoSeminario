@@ -27,6 +27,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
         IEventoRepo EventoRepo { get; }
         IFacturaRepo FacturaRepo { get; }
         IReciboRepo ReciboRepo { get; }
+        IConfiguracionRepo ConfiguracionRepo { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         int SaveChanges();
     }
@@ -106,12 +107,10 @@ namespace Seminario.Datos.Contextos.AppDbContext
 
         public DbSet<Factura> Facturas { get; set; }
         public DbSet<FacturaDetalle> FacturaDetalles { get; set; }
-        public DbSet<FacturaViaje> FacturasViaje { get; set; }
-        public DbSet<FacturaMantenimiento> FacturasMantenimiento { get; set; }
-        public DbSet<FacturaCompraRepuesto> FacturasCompraRepuesto { get; set; }
         public DbSet<Recibo> Recibos { get; set; }
         public DbSet<ReciboFormaPago> ReciboFormasPago { get; set; }
         public DbSet<ReciboFactura> ReciboFacturas { get; set; }
+        public DbSet<ArchivosCamiones> ArchivosCamiones { get; set; }
 
         #endregion
 
@@ -136,6 +135,8 @@ namespace Seminario.Datos.Contextos.AppDbContext
         public IEventoRepo EventoRepo => new EventoRepo(this);
         public IFacturaRepo FacturaRepo => new FacturaRepo(this);
         public IReciboRepo ReciboRepo => new ReciboRepo(this);
+        public IConfiguracionRepo ConfiguracionRepo => new ConfiguracionRepo(this);
+
         #endregion
 
         #region ModelCreating
@@ -539,30 +540,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
                 entity.HasIndex(e => new { e.Tipo, e.PuntoVenta, e.Numero })
                     .IsUnique()
                     .HasDatabaseName("UQ_FACTURA_TIPO_PV_NRO");
-
-                entity.HasOne(d => d.Moneda)
-                    .WithMany()
-                    .HasForeignKey(f => f.IdMoneda)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FACTURA_MONEDA");
-
-                entity.HasOne(d => d.Cliente)
-                    .WithMany()
-                    .HasForeignKey(f => f.IdCliente)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FACTURA_CLIENTE");
-
-                entity.HasOne(d => d.Proveedor)
-                    .WithMany()
-                    .HasForeignKey(f => f.IdProveedor)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FACTURA_PROVEEDOR");
-
-                entity.HasOne(d => d.Taller)
-                    .WithMany()
-                    .HasForeignKey(f => f.IdTaller)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FACTURA_TALLER");
             });
 
             modelBuilder.Entity<FacturaDetalle>(entity =>
@@ -575,64 +552,7 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .HasConstraintName("FK_FACTURADETALLE_FACTURA")
                     .OnDelete(DeleteBehavior.Cascade);
             });
-
-            modelBuilder.Entity<FacturaViaje>(entity =>
-            {
-                entity.HasKey(e => e.IdFacturaViaje).HasName("PRIMARY");
-
-                entity.HasIndex(e => e.IdViaje)
-                    .IsUnique()
-                    .HasDatabaseName("UQ_FACTURAVIAJE_IDVIAJE");
-
-                entity.HasOne(d => d.Factura)
-                    .WithMany(f => f.FacturasViaje)
-                    .HasForeignKey(fk => fk.IdFactura)
-                    .HasConstraintName("FK_FACTURAVIAJE_FACTURA");
-
-                entity.HasOne(d => d.Viaje)
-                    .WithMany()
-                    .HasForeignKey(fk => fk.IdViaje)
-                    .HasConstraintName("FK_FACTURAVIAJE_VIAJE");
-            });
-
-            modelBuilder.Entity<FacturaMantenimiento>(entity =>
-            {
-                entity.HasKey(e => e.IdFacturaMantenimiento).HasName("PRIMARY");
-
-                entity.HasIndex(e => new { e.IdFactura, e.IdMantenimiento })
-                    .IsUnique()
-                    .HasDatabaseName("UQ_FACTURAMANTENIMIENTO");
-
-                entity.HasOne(d => d.Factura)
-                    .WithMany(f => f.FacturasMantenimiento)
-                    .HasForeignKey(fk => fk.IdFactura)
-                    .HasConstraintName("FK_FACTURAMANTENIMIENTO_FACTURA");
-
-                entity.HasOne(d => d.Mantenimiento)
-                    .WithMany()
-                    .HasForeignKey(fk => fk.IdMantenimiento)
-                    .HasConstraintName("FK_FACTURAMANTENIMIENTO_MANTENIMIENTO");
-            });
-
-            modelBuilder.Entity<FacturaCompraRepuesto>(entity =>
-            {
-                entity.HasKey(e => e.IdFacturaCompraRepuesto).HasName("PRIMARY");
-
-                entity.HasIndex(e => new { e.IdFactura, e.IdCompraRepuesto })
-                    .IsUnique()
-                    .HasDatabaseName("UQ_FACTURACOMPRAREPUESTO");
-
-                entity.HasOne(d => d.Factura)
-                    .WithMany(f => f.FacturasCompraRepuesto)
-                    .HasForeignKey(fk => fk.IdFactura)
-                    .HasConstraintName("FK_FACTURACOMPRAREPUESTO_FACTURA");
-
-                entity.HasOne(d => d.CompraRepuesto)
-                    .WithMany()
-                    .HasForeignKey(fk => fk.IdCompraRepuesto)
-                    .HasConstraintName("FK_FACTURACOMPRAREPUESTO_COMPRAREPUESTO");
-            });
-
+            
             modelBuilder.Entity<Recibo>(entity =>
             {
                 entity.HasKey(e => e.IdRecibo).HasName("PRIMARY");
@@ -696,11 +616,6 @@ namespace Seminario.Datos.Contextos.AppDbContext
                     .WithMany(r => r.ReciboFacturas)
                     .HasForeignKey(fk => fk.IdRecibo)
                     .HasConstraintName("FK_RECIBOFACTURA_RECIBO");
-
-                entity.HasOne(d => d.Factura)
-                    .WithMany(f => f.ReciboFacturas)
-                    .HasForeignKey(fk => fk.IdFactura)
-                    .HasConstraintName("FK_RECIBOFACTURA_FACTURA");
             });
 
             OnModelCreatingPartial(modelBuilder);

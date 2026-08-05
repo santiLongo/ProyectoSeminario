@@ -1,6 +1,6 @@
 ﻿using Dapper;
+using Seminario.Core.Dapper;
 using Seminario.Core.ExtensionMethods;
-using Seminario.Datos.Dapper;
 using Seminario.Datos.StoredProcedures;
 
 namespace Seminario.Services.ChequesServices.Commands.GetAll

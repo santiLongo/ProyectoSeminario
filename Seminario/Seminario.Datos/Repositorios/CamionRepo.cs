@@ -12,17 +12,19 @@ public interface ICamionRepo
     Task<bool> TieneMantenimetoActualAsync(Camion camion);
     Task<bool> EstaEnViajesAsync(Camion camion);    
     void Add(Camion camion);
+    void Add(ArchivosCamiones archivo);
     void Remove(Camion camion);
+    void Remove(ArchivosCamiones archivo);
     Task<Camion?> GetAsync(
         Func<IQueryable<Camion>, IQueryable<Camion>> querys
     );
+    ArchivosCamiones GetArchivo(int idCamion, string fileName);
+    ArchivosCamiones GetArchivo(int idArchivo);
 }
 
 public class CamionRepo : ICamionRepo
 {
     private readonly  AppDbContext _ctx;
-    private ICamionRepo _camionRepoImplementation;
-
     public CamionRepo(AppDbContext ctx)
     {
         _ctx = ctx;
@@ -66,9 +68,19 @@ public class CamionRepo : ICamionRepo
         _ctx.Add(camion);
     }
 
+    public void Add(ArchivosCamiones archivo)
+    {
+        _ctx.ArchivosCamiones.Add(archivo);
+    }
+
     public void Remove(Camion camion)
     {
         _ctx.Remove(camion);
+    }
+
+    public void Remove(ArchivosCamiones archivo)
+    {
+        _ctx.ArchivosCamiones.Remove(archivo);
     }
 
     public async Task<Camion?> GetAsync(Func<IQueryable<Camion>, IQueryable<Camion>> querys)
@@ -79,6 +91,16 @@ public class CamionRepo : ICamionRepo
             query = querys(query);
         
         return await query.FirstOrDefaultAsync();
+    }
+
+    public ArchivosCamiones GetArchivo(int idCamion, string fileName)
+    {
+        return _ctx.ArchivosCamiones.FirstOrDefault(o => o.IdCamion == idCamion && fileName.Trim() == o.Archivo.Trim());
+    }
+
+    public ArchivosCamiones GetArchivo(int idArchivo)
+    {
+        return _ctx.ArchivosCamiones.FirstOrDefault(o => o.Id == idArchivo);
     }
 }
 

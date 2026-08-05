@@ -1,4 +1,4 @@
-﻿using Seminario.Datos.Dapper;
+﻿using Seminario.Core.Dapper;
 
 namespace Seminario.Services.CombosServices.Factory.Interface;
 

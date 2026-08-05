@@ -18,6 +18,7 @@ pipeline {
     IMAGE = 'seminario-api'
     // Red donde vive el contenedor 'mysql', para que 'Server=mysql' resuelva.
     DOCKER_NETWORK = 'seminario-net'
+    SECRETS_PATH = '/opt/seminario/secrets'
   }
 
   stages {
@@ -33,11 +34,13 @@ pipeline {
             env.CONTAINER = 'seminario-api'
             env.HOST_PORT = '5005'
             env.ASPNET    = 'Production'
+            env.DRIVE_FOLDER = 'PROD'
           } else {
             env.DB_NAME   = 'sistemalogistica_test'
             env.CONTAINER = 'seminario-api-test'
             env.HOST_PORT = '5007'
             env.ASPNET    = 'Staging'
+            env.DRIVE_FOLDER = 'TEST'
           }
         }
       }
@@ -54,7 +57,11 @@ pipeline {
       // La password del usuario SeminarioBack vive en Jenkins (Secret text),
       // credentialsId = 'mysql-back-password'. NO va en el repo.
       steps {
-        withCredentials([string(credentialsId: 'mysql-back-password', variable: 'DB_PASS')]) {
+        withCredentials([
+          string(credentialsId: 'mysql-back-user', variable: 'DB_USER'),
+          string(credentialsId: 'mysql-back-password', variable: 'DB_PASS'),
+          string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET')
+          ]) {
           sh '''
             docker rm -f ${CONTAINER} || true
             docker run -d \
@@ -62,9 +69,13 @@ pipeline {
               --network ${DOCKER_NETWORK} \
               --restart unless-stopped \
               -p 127.0.0.1:${HOST_PORT}:8080 \
+              -e ConnectionStrings__ConnectionMySql="Server=mysql;Port=3306;Database=${DB_NAME};User=${DB_USER};Password=${DB_PASS};" \
               -e ASPNETCORE_ENVIRONMENT=${ASPNET} \
+              -v ${SECRETS_PATH}:/app/secrets:ro \
+              -e ApiSettings__Secreta="${JWT_SECRET}" \
+              -e GoogleDrive__CredentialsPath="/app/secrets/google-drive.json" \
+              -e GoogleDrive__RootFolder="${DRIVE_FOLDER}" \
               -e ASPNETCORE_HTTP_PORTS=8080 \
-              -e ConnectionStrings__ConnectionMySql="Server=mysql;Port=3306;Database=${DB_NAME};User=SeminarioBack;Password=${DB_PASS};" \
               ${IMAGE}:${DEPLOY_ENV}
           '''
         }

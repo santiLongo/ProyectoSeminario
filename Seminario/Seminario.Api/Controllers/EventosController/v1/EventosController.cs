@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Seminario.Core.Dapper;
 using Seminario.Core.FilterResponse;
 using Seminario.Core.DataSourceResult.Clases;
 using Seminario.Datos.Contextos.AppDbContext;
-using Seminario.Datos.Dapper;
 using Seminario.Core.DataSourceResult.ExtesionMethods;
 using Seminario.Core.Exceptions.SeminarioException;
 using Seminario.Datos.Entidades;

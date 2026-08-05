@@ -14,6 +14,7 @@ public interface IViajeRepo
     void Remove(Viaje viaje);
     void ForzarModifiedTrigger(Viaje viaje);
     Task ActualizarEstadoAsync(int idViaje);
+    bool Existe(int idViaje);
 }
 
 public class ViajeRepo : IViajeRepo
@@ -61,6 +62,11 @@ public class ViajeRepo : IViajeRepo
         await _ctx.Database.ExecuteSqlRawAsync(
             "CALL ReCalcularEstadoViaje({0})",
             idViaje);
+    }
+
+    public bool Existe(int idViaje)
+    {
+        return _ctx.Viajes.Any(v => v.IdViaje == idViaje);
     }
 
     public async Task<IEnumerable<ViajeObservacion>> FindObsByIdAsync(int id)

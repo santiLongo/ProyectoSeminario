@@ -1,123 +1,48 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Mapper;
-using System.Text;
+using Seminario.Core.ArchivoManager.GoogleDrive;
+using Seminario.Core.ConfigurationManager;
 using Seminario.Core.ControlGroupSingleton;
-using Seminario.Core.Dashboard;
-using Seminario.Core.Middleware.ExceptionMiddleware;
+using Seminario.Core.Dapper;
+using Seminario.Core.Migrations.BaseMigrations;
 using Seminario.Core.Services.CurrentUserService;
 using Seminario.Datos.Contextos.SaveChangesInterceptors;
-using Seminario.Datos.Dapper;
 using Seminario.Datos.Migrations;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agrego los servicios que utiliza la app
-// Agrego los controllers 
-builder.Services.AddControllers();
-
-// Agrego el context del Ef
-builder.Services.AddDbContext<IAppDbContext, AppDbContext>((sp, options) =>
+builder.Services.AddCommonServices(builder.Configuration, (services, configuration) =>
 {
-    var auditService = sp.GetRequiredService<AuditSaveChangesInterceptor>();
-    options.AddInterceptors(auditService);
-    
-    options.UseMySql(builder.Configuration.GetConnectionString("ConnectionMySql"),
-        new MySqlServerVersion(new Version(9, 3, 0)));
-});
-
-//Agrego el AutoMapper
-builder.Services.AddAutoMapper(typeof(MapperProfile));
-
-//Agrego los Cors junto con sus variables de configuracion
-var MiPoliticaCors = "_miPoliticaDeCors";
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MiPoliticaCors,
-        policy =>
-        {
-            policy.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});
-//Agrego Autorizacion con el JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters()
+    services.AddDbContext<IAppDbContext, AppDbContext>((sp, options) =>
     {
-        ValidateIssuer =  false,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("ApiSettings:Secreta").Value!))
-    };
-});
-//Agrego el Autorization
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-});
-//El Swagger seguro despues lo borro
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-//Implemento esto para poder acceder al header de la request
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-//Agrego en el Service las auditorias para el SaveChanges del Ef 
-builder.Services.AddScoped<AuditSaveChangesInterceptor>();
-//Agrego el IDbSession para el Dapper
-builder.Services.AddScoped<IDbSession, DbSession>();
-//Agrego singleton para las consultas a control group
-builder.Services.AddSingleton<IControlConnection, ControlGroupConnection>();
-//Registro el DbExecutor como servicio, no se porque no lo hice antes.
-//Tiene mas sentido implementar la interfaz en vez de estar llamando DbSession para pasarlo por el ctor
-builder.Services.AddScoped<IDbExecutor, DbExecutor>();
-//
-builder.Services.AddTransient<Migration>();
-// HttpClient para comunicarse con EasyAfip
-builder.Services.AddHttpClient("easyafip", c =>
-{
-    c.BaseAddress = new Uri(builder.Configuration["EasyAfip:BaseUrl"]!);
-    c.Timeout = TimeSpan.FromSeconds(90);
+        var auditService = sp.GetRequiredService<AuditSaveChangesInterceptor>();
+        options.AddInterceptors(auditService);
+        
+        options.UseMySql(builder.Configuration.GetConnectionString("ConnectionMySql"),
+            new MySqlServerVersion(new Version(9, 3, 0)));
+    });
+    //
+    services.AddAutoMapper(typeof(MapperProfile));
+    services.AddGoogleDrive(configuration);
+
+    services.AddScoped<ICurrentUserService, CurrentUserService>();
+    services.AddScoped<AuditSaveChangesInterceptor>();
+    services.AddScoped<IDbSession, DbSession>();
+    services.AddScoped<IDbExecutor, DbExecutor>();
+
+    services.AddSingleton<IControlConnection, ControlGroupConnection>();
+
+    services.AddTransient<BaseMigrations, Migration>();
+
+    services.AddHttpClient("easyafip", c =>
+    {
+        c.BaseAddress = new Uri(configuration["EasyAfip:BaseUrl"]!);
+        c.Timeout = TimeSpan.FromSeconds(90);
+    });
 });
 
 var app = builder.Build();
 
-using (var  scope = app.Services.CreateScope())
-{
-    var migration = scope.ServiceProvider.GetRequiredService<Migration>();
-
-    await migration.MigrarAsync();
-}
-
-app.UseMiddleware<ExceptionMiddleware>();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseCors(MiPoliticaCors);
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+await app.RunAplication();

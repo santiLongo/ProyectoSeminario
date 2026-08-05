@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using Seminario.Datos.Dapper;
+using Seminario.Core.Dapper;
 using Seminario.Services.ProveedorServices.GetAll.Command;
 using Seminario.Services.ProveedorServices.GetAll.Response;
 

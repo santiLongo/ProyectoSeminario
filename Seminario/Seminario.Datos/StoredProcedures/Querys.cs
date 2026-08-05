@@ -5,6 +5,7 @@ namespace Seminario.Datos.StoredProcedures
     public static class Querys
     {
         public static string GetAllCheques => GetQuery("GetAllCheques");
+        public static string GetAllViajes => GetQuery("GetAllViajes");
 
         private static string GetQuery(string query)
         {

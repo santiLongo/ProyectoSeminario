@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Seminario.Core.Dapper;
 using Seminario.Core.FilterResponse;
-using Seminario.Datos.Dapper;
 using Seminario.Services.FormularioViaje.BuscoChofer;
 using Seminario.Services.FormularioViaje.BuscoChofer.Response;
 using Seminario.Services.ViajeServices.Add.Command;
