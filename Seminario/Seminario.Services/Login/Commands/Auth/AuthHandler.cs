@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Seminario.Core.Exceptions.SeminarioException;
+using Seminario.Core.ExtensionMethods;
 using Seminario.Services.Login.Response;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
@@ -37,7 +38,12 @@ namespace Seminario.Services.Login.Handler
             }
 
             //string claveJWT = _config.GetValue<string>("ApiSettings:Secreta");
-            string claveJWT = _config.GetSection("ApiSettings:Secreta").Value!;
+            string claveJWT = _config.GetSection("ApiSettings:Secreta").Value;
+
+            if (claveJWT.IsNullOrEmpty())
+            {
+                throw new InvalidOperationException("Error al intentar logearse");
+            }
 
             var handlerToken = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(claveJWT);

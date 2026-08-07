@@ -1,14 +1,17 @@
 using Google.Apis.Drive.v3;
+using Microsoft.Extensions.Options;
 
 namespace Seminario.Core.ArchivoManager.GoogleDrive;
 
 public class ArchivoGoogleDrive : IArchivosManager
 {
     private readonly DriveService _driveService;
+    private readonly GoogleDriveOptions _options;
 
-    public ArchivoGoogleDrive(DriveService driveService)
+    public ArchivoGoogleDrive(DriveService driveService, IOptions<GoogleDriveOptions> options)
     {
         _driveService = driveService;
+        _options = options.Value;
     }
 
     public async Task<string> GuardarAsync(string directorio, string nombreArchivo, byte[] bytes)
@@ -65,10 +68,32 @@ public class ArchivoGoogleDrive : IArchivosManager
     }
 
     #region Privados
+    private async Task<string> ObtenerRootFolderAsync()
+    {
+        var rootFolder = _options.RootFolder;
+        var id = await ObtenerCarpetaAsync(rootFolder, null);
 
+        if (id != null)
+            return id;
+
+        var folder = new Google.Apis.Drive.v3.Data.File
+        {
+            Name = _options.RootFolder,
+            MimeType = "application/vnd.google-apps.folder"
+        };
+
+        var request = _driveService.Files.Create(folder);
+        request.Fields = "id";
+
+        var response = await request.ExecuteAsync();
+
+        return response.Id;
+    }
     private async Task<string?> BuscarArchivoAsync(string directorio, string nombreArchivo)
     {
-        var folderId = await ObtenerCarpetaAsync(directorio);
+        var rootId = await ObtenerRootFolderAsync();
+        
+        var folderId = await ObtenerCarpetaAsync(directorio, rootId);
 
         if (folderId == null)
             return null;
@@ -84,11 +109,16 @@ public class ArchivoGoogleDrive : IArchivosManager
         return response.Files.FirstOrDefault()?.Id;
     }
 
-    private async Task<string?> ObtenerCarpetaAsync(string nombre)
+    private async Task<string?> ObtenerCarpetaAsync(string nombre, string? parentId)
     {
         var request = _driveService.Files.List();
-        request.Q =
-            $"mimeType='application/vnd.google-apps.folder' and name='{nombre.Replace("'", "\\'")}' and trashed=false";
+
+        var q = $"mimeType='application/vnd.google-apps.folder' and name='{nombre.Replace("'", "\\'")}' and trashed=false";
+
+        if (!string.IsNullOrEmpty(parentId))
+            q += $" and '{parentId}' in parents";
+
+        request.Q = q;
         request.Fields = "files(id)";
         request.PageSize = 1;
 
@@ -99,7 +129,9 @@ public class ArchivoGoogleDrive : IArchivosManager
 
     private async Task<string> ObtenerOCrearCarpetaAsync(string nombre)
     {
-        var id = await ObtenerCarpetaAsync(nombre);
+        var rootId = await ObtenerRootFolderAsync();
+
+        var id = await ObtenerCarpetaAsync(nombre, rootId);
 
         if (id != null)
             return id;
@@ -107,7 +139,8 @@ public class ArchivoGoogleDrive : IArchivosManager
         var folder = new Google.Apis.Drive.v3.Data.File
         {
             Name = nombre,
-            MimeType = "application/vnd.google-apps.folder"
+            MimeType = "application/vnd.google-apps.folder",
+            Parents = new[] { rootId }
         };
 
         var request = _driveService.Files.Create(folder);

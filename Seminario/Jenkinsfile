@@ -60,7 +60,8 @@ pipeline {
         withCredentials([
           string(credentialsId: 'mysql-back-user', variable: 'DB_USER'),
           string(credentialsId: 'mysql-back-password', variable: 'DB_PASS'),
-          string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET')
+          string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET'),
+          string(credentialsId: 'drive-token', variable: 'DRIVE_TOKEN')
           ]) {
           sh '''
             docker rm -f ${CONTAINER} || true
@@ -75,6 +76,7 @@ pipeline {
               -e ApiSettings__Secreta="${JWT_SECRET}" \
               -e GoogleDrive__CredentialsPath="/app/secrets/google-drive.json" \
               -e GoogleDrive__RootFolder="${DRIVE_FOLDER}" \
+              -e GoogleDrive__RefreshToken="${DRIVE_TOKEN}" \
               -e ASPNETCORE_HTTP_PORTS=8080 \
               ${IMAGE}:${DEPLOY_ENV}
           '''

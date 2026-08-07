@@ -38,7 +38,7 @@ public class ArchivosCamionesController : ControllerBase
 
     [HttpPost("save")]
     [SeminarioResponse]
-    public async Task Guardar([FromBody] SubirArchivosCamionesCommand command)
+    public async Task Guardar([FromForm] SubirArchivosCamionesCommand command)
     {
         var handler = new SubirArchivosCamionesHandler(_ctx, _archivosManager);
         await handler.HandleAsync(command);

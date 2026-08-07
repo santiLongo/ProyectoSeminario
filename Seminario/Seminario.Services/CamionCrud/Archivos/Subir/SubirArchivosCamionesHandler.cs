@@ -29,8 +29,14 @@ public class SubirArchivosCamionesHandler
 
         var directory = _ctx.ConfiguracionRepo.GetCamionesDirectory();
 
-        var fileName = command.NombreArchivo;
-        var bytes = command.Bytes;
+        var fileName = command.File.FileName;
+        
+        await using var stream = command.File.OpenReadStream();
+        using var memory = new MemoryStream();
+
+        await stream.CopyToAsync(memory);
+
+        var bytes = memory.ToArray();
 
         var fileId = await _archivosManager.GuardarAsync(directory, fileName, bytes);
 
