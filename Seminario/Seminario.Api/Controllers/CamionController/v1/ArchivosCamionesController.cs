@@ -7,6 +7,7 @@ using Seminario.Core.FilterResponse;
 using Seminario.Datos.Contextos.AppDbContext;
 using Seminario.Datos.Entidades;
 using Seminario.Services.CamionCrud.Archivos.Borrar;
+using Seminario.Services.CamionCrud.Archivos.Download;
 using Seminario.Services.CamionCrud.Archivos.GetAll;
 using Seminario.Services.CamionCrud.Archivos.Subir;
 
@@ -50,5 +51,17 @@ public class ArchivosCamionesController : ControllerBase
     {
         var handler = new DeleteArchivoCamionHandler(_ctx, _archivosManager);
         await handler.HandleAsync(command);
+    }
+    
+    [HttpGet("download")]
+    public async Task<IActionResult> Download([FromQuery] DownloadArchivosCamionesCommand command)
+    {
+        var handler = new DownloadArchivosCamionesHandler(_ctx, _archivosManager);
+        var result = await handler.HandleAsync(command);
+        return File(
+            result.Bytes,
+            result.ContentType,
+            result.FileName
+        );
     }
 }

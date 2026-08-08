@@ -16,6 +16,12 @@ public class ArchivoGoogleDrive : IArchivosManager
 
     public async Task<string> GuardarAsync(string directorio, string nombreArchivo, byte[] bytes)
     {
+        var existe = await ExisteAsync(directorio, nombreArchivo);
+        if (existe)
+        {
+            await EliminarAsync(directorio, nombreArchivo);
+        }
+        
         var folderId = await ObtenerOCrearCarpetaAsync(directorio);
 
         var file = new Google.Apis.Drive.v3.Data.File
